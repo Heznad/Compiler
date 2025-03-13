@@ -1,6 +1,6 @@
 ﻿namespace Compiler
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             menuStrip1 = new MenuStrip();
             файлToolStripMenuItem = new ToolStripMenuItem();
             создатьToolStripMenuItem = new ToolStripMenuItem();
@@ -65,8 +65,9 @@
             toolStripStatusLabelText = new ToolStripStatusLabel();
             toolStripStatusLabelTime = new ToolStripStatusLabel();
             toolStripStatusLabelDate = new ToolStripStatusLabel();
+            datelabel = new ToolStripStatusLabel();
+            timelabel = new ToolStripStatusLabel();
             panel_Buttons = new Panel();
-            panel1 = new Panel();
             btn_Info = new Button();
             btn_Help = new Button();
             btn_Start = new Button();
@@ -79,21 +80,24 @@
             btn_Folder = new Button();
             btn_File = new Button();
             timer1 = new System.Windows.Forms.Timer(components);
+            tabControl = new TabControl();
             tabPage1 = new TabPage();
             splitContainer1 = new SplitContainer();
-            richTextBox1 = new RichTextBox();
-            richTextBox2 = new RichTextBox();
-            tabControl1 = new TabControl();
+            richTextBox3 = new RichTextBox();
+            dataGridView1 = new DataGridView();
             toolTip1 = new ToolTip(components);
+            richTextBox2 = new RichTextBox();
+            richTextBox1 = new RichTextBox();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             panel_Buttons.SuspendLayout();
+            tabControl.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
-            tabControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -117,32 +121,37 @@
             // создатьToolStripMenuItem
             // 
             создатьToolStripMenuItem.Name = "создатьToolStripMenuItem";
-            создатьToolStripMenuItem.Size = new Size(192, 26);
+            создатьToolStripMenuItem.Size = new Size(224, 26);
             создатьToolStripMenuItem.Text = "Создать";
+            создатьToolStripMenuItem.Click += btn_File_Click;
             // 
             // открытьToolStripMenuItem
             // 
             открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            открытьToolStripMenuItem.Size = new Size(192, 26);
+            открытьToolStripMenuItem.Size = new Size(224, 26);
             открытьToolStripMenuItem.Text = "Открыть";
+            открытьToolStripMenuItem.Click += btn_Folder_Click;
             // 
             // сохранитьToolStripMenuItem
             // 
             сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            сохранитьToolStripMenuItem.Size = new Size(192, 26);
+            сохранитьToolStripMenuItem.Size = new Size(224, 26);
             сохранитьToolStripMenuItem.Text = "Сохранить";
+            сохранитьToolStripMenuItem.Click += btn_Save_Click;
             // 
             // сохранитьКакToolStripMenuItem
             // 
             сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
-            сохранитьКакToolStripMenuItem.Size = new Size(192, 26);
+            сохранитьКакToolStripMenuItem.Size = new Size(224, 26);
             сохранитьКакToolStripMenuItem.Text = "Сохранить как";
+            сохранитьКакToolStripMenuItem.Click += btn_SaveAs_Click;
             // 
             // выходToolStripMenuItem
             // 
             выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            выходToolStripMenuItem.Size = new Size(192, 26);
+            выходToolStripMenuItem.Size = new Size(224, 26);
             выходToolStripMenuItem.Text = "Выход";
+            выходToolStripMenuItem.Click += btn_Exit_Click;
             // 
             // правкаToolStripMenuItem
             // 
@@ -300,7 +309,7 @@
             // statusStrip1
             // 
             statusStrip1.ImageScalingSize = new Size(20, 20);
-            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabelText, toolStripStatusLabelTime, toolStripStatusLabelDate });
+            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabelText, toolStripStatusLabelTime, toolStripStatusLabelDate, datelabel, timelabel });
             statusStrip1.Location = new Point(0, 424);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new Size(800, 26);
@@ -318,19 +327,29 @@
             // 
             toolStripStatusLabelTime.ForeColor = Color.Black;
             toolStripStatusLabelTime.Name = "toolStripStatusLabelTime";
-            toolStripStatusLabelTime.Size = new Size(137, 20);
-            toolStripStatusLabelTime.Text = "28 февраля 2025 г.";
+            toolStripStatusLabelTime.Size = new Size(0, 20);
             // 
             // toolStripStatusLabelDate
             // 
             toolStripStatusLabelDate.ForeColor = Color.Black;
             toolStripStatusLabelDate.Name = "toolStripStatusLabelDate";
-            toolStripStatusLabelDate.Size = new Size(55, 20);
-            toolStripStatusLabelDate.Text = "0:08:05";
+            toolStripStatusLabelDate.Size = new Size(0, 20);
+            // 
+            // datelabel
+            // 
+            datelabel.ForeColor = Color.Black;
+            datelabel.Name = "datelabel";
+            datelabel.Size = new Size(0, 20);
+            // 
+            // timelabel
+            // 
+            timelabel.ForeColor = Color.Black;
+            timelabel.Name = "timelabel";
+            timelabel.Size = new Size(0, 20);
             // 
             // panel_Buttons
             // 
-            panel_Buttons.Controls.Add(panel1);
+            panel_Buttons.BackColor = SystemColors.Control;
             panel_Buttons.Controls.Add(btn_Info);
             panel_Buttons.Controls.Add(btn_Help);
             panel_Buttons.Controls.Add(btn_Start);
@@ -342,20 +361,13 @@
             panel_Buttons.Controls.Add(btn_Save);
             panel_Buttons.Controls.Add(btn_Folder);
             panel_Buttons.Controls.Add(btn_File);
+            panel_Buttons.ForeColor = Color.Silver;
             panel_Buttons.Location = new Point(0, 28);
             panel_Buttons.Margin = new Padding(0, 0, 0, 5);
             panel_Buttons.Name = "panel_Buttons";
             panel_Buttons.Padding = new Padding(5);
             panel_Buttons.Size = new Size(800, 58);
             panel_Buttons.TabIndex = 2;
-            // 
-            // panel1
-            // 
-            panel1.ForeColor = SystemColors.ActiveCaptionText;
-            panel1.Location = new Point(0, 61);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(800, 332);
-            panel1.TabIndex = 3;
             // 
             // btn_Info
             // 
@@ -473,6 +485,7 @@
             btn_Save.TabIndex = 2;
             toolTip1.SetToolTip(btn_Save, "Сохранить");
             btn_Save.UseVisualStyleBackColor = true;
+            btn_Save.Click += btn_Save_Click;
             // 
             // btn_Folder
             // 
@@ -486,6 +499,7 @@
             btn_Folder.TabIndex = 1;
             toolTip1.SetToolTip(btn_Folder, "Открыть");
             btn_Folder.UseVisualStyleBackColor = true;
+            btn_Folder.Click += btn_Folder_Click;
             // 
             // btn_File
             // 
@@ -499,11 +513,24 @@
             btn_File.TabIndex = 0;
             toolTip1.SetToolTip(btn_File, "Создать");
             btn_File.UseVisualStyleBackColor = true;
+            btn_File.Click += btn_File_Click;
             // 
             // timer1
             // 
             timer1.Interval = 1000;
             timer1.Tick += timer1_Tick;
+            // 
+            // tabControl
+            // 
+            tabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tabControl.Controls.Add(tabPage1);
+            tabControl.Location = new Point(0, 88);
+            tabControl.Margin = new Padding(1);
+            tabControl.Name = "tabControl";
+            tabControl.SelectedIndex = 0;
+            tabControl.Size = new Size(800, 336);
+            tabControl.TabIndex = 3;
+            tabControl.MouseClick += TabControl_MouseClick;
             // 
             // tabPage1
             // 
@@ -511,42 +538,54 @@
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(791, 303);
+            tabPage1.Size = new Size(792, 303);
             tabPage1.TabIndex = 0;
-            tabPage1.Text = "Новый документ";
+            tabPage1.Text = "NewFile";
             tabPage1.UseVisualStyleBackColor = true;
             // 
             // splitContainer1
             // 
-            splitContainer1.BackColor = SystemColors.Control;
-            splitContainer1.BorderStyle = BorderStyle.FixedSingle;
             splitContainer1.Dock = DockStyle.Fill;
-            splitContainer1.ForeColor = SystemColors.ActiveCaptionText;
             splitContainer1.Location = new Point(3, 3);
             splitContainer1.Name = "splitContainer1";
             splitContainer1.Orientation = Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
-            splitContainer1.Panel1.Controls.Add(richTextBox1);
+            splitContainer1.Panel1.Controls.Add(richTextBox3);
             // 
             // splitContainer1.Panel2
             // 
-            splitContainer1.Panel2.Controls.Add(richTextBox2);
-            splitContainer1.Size = new Size(785, 297);
-            splitContainer1.SplitterDistance = 148;
+            splitContainer1.Panel2.Controls.Add(dataGridView1);
+            splitContainer1.Size = new Size(786, 297);
+            splitContainer1.SplitterDistance = 150;
             splitContainer1.SplitterWidth = 10;
             splitContainer1.TabIndex = 0;
             // 
-            // richTextBox1
+            // richTextBox3
             // 
-            richTextBox1.Dock = DockStyle.Fill;
-            richTextBox1.Location = new Point(0, 0);
-            richTextBox1.Margin = new Padding(0);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(783, 146);
-            richTextBox1.TabIndex = 0;
-            richTextBox1.Text = "";
+            richTextBox3.AcceptsTab = true;
+            richTextBox3.BackColor = Color.White;
+            richTextBox3.Dock = DockStyle.Fill;
+            richTextBox3.Location = new Point(0, 0);
+            richTextBox3.Name = "richTextBox3";
+            richTextBox3.Size = new Size(786, 150);
+            richTextBox3.TabIndex = 0;
+            richTextBox3.Text = "";
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.BackgroundColor = Color.White;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Dock = DockStyle.Fill;
+            dataGridView1.Location = new Point(0, 0);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(786, 137);
+            dataGridView1.TabIndex = 0;
             // 
             // richTextBox2
             // 
@@ -560,23 +599,22 @@
             richTextBox2.TabIndex = 0;
             richTextBox2.Text = "";
             // 
-            // tabControl1
+            // richTextBox1
             // 
-            tabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            tabControl1.Controls.Add(tabPage1);
-            tabControl1.Location = new Point(1, 87);
-            tabControl1.Margin = new Padding(1);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(799, 336);
-            tabControl1.TabIndex = 3;
+            richTextBox1.Dock = DockStyle.Fill;
+            richTextBox1.Location = new Point(0, 0);
+            richTextBox1.Margin = new Padding(0);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(783, 146);
+            richTextBox1.TabIndex = 0;
+            richTextBox1.Text = "";
             // 
-            // Form1
+            // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(tabControl1);
+            Controls.Add(tabControl);
             Controls.Add(panel_Buttons);
             Controls.Add(statusStrip1);
             Controls.Add(menuStrip1);
@@ -584,7 +622,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             MinimumSize = new Size(680, 300);
-            Name = "Form1";
+            Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Компилятор";
             menuStrip1.ResumeLayout(false);
@@ -592,12 +630,13 @@
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
             panel_Buttons.ResumeLayout(false);
+            tabControl.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
-            tabControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -627,7 +666,6 @@
         private ToolStripStatusLabel toolStripStatusLabelText;
         private ToolStripStatusLabel toolStripStatusLabelDate;
         private ToolStripStatusLabel toolStripStatusLabelTime;
-        private Panel panel1;
         private ToolStripMenuItem создатьToolStripMenuItem;
         private ToolStripMenuItem открытьToolStripMenuItem;
         private ToolStripMenuItem сохранитьToolStripMenuItem;
@@ -653,11 +691,15 @@
         private ToolStripMenuItem локализацияToolStripMenuItem;
         private ToolStripMenuItem русскийToolStripMenuItem;
         private ToolStripMenuItem английскийToolStripMenuItem;
+        private TabControl tabControl;
+        private ToolTip toolTip1;
+        private RichTextBox richTextBox2;
+        private RichTextBox richTextBox1;
+        private ToolStripStatusLabel datelabel;
+        private ToolStripStatusLabel timelabel;
         private TabPage tabPage1;
         private SplitContainer splitContainer1;
-        private RichTextBox richTextBox1;
-        private TabControl tabControl1;
-        private RichTextBox richTextBox2;
-        private ToolTip toolTip1;
+        private RichTextBox richTextBox3;
+        private DataGridView dataGridView1;
     }
 }
