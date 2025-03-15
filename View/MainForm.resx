@@ -259,7 +259,7 @@
         EUJ1nvDv/GdUK6uGiDDjVZzy77wg/Cui6A1Lkz5EgIKu+AAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="btn_Forward.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btn_Redo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
         DAAACwwBP0AiyAAAAgJJREFUaEPtmM1OGlEYhrmF+sNAogNo/S+i3Xbj1nghbaKL3oVKF4Y0BIWYiijS
@@ -274,7 +274,7 @@
         SUVORK5CYII=
 </value>
   </data>
-  <data name="btn_Back.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btn_Undo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
         DAAACwwBP0AiyAAAAr5JREFUaEPtmEtPGlEYhv0H1bQUcFGQ26iA6HbYdNn+Et22f0G7Jk1tYaCLxrao
@@ -317,7 +317,7 @@
         32AwbF+GlLWsZe3/ZTk5/wBmjGWoJS+GfAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="btn_Folder.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btn_Open.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
         DAAACwwBP0AiyAAAAU5JREFUaEPtkj1KA1EYRV/hEsQmksr5wdY1uC93koA2Euy0E9I5mUA2IdgZMC5g
@@ -329,7 +329,7 @@
         SUVORK5CYII=
 </value>
   </data>
-  <data name="btn_File.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btn_Create.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
         DAAACwwBP0AiyAAAAiBJREFUaEPtlr9LW1EYhs/WRZfqYpcS0L+g+A8E3KxgsSYtohKLFEuxRuuiOISQ

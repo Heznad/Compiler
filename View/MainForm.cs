@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
 using Compiler.Presenter;
+using Compiler.View;
 
 namespace Compiler
 {
@@ -10,8 +11,10 @@ namespace Compiler
         public MainForm()
         {
             InitializeComponent();
-            presenter = new(this, tabControl);
+            presenter = new(tabControl, btn_Undo, btn_Redo);
             timer1.Start();
+            presenter.AddTabPage("NewFile");
+            presenter.UpdateUndoRedoButtonStates();
         }
 
         private void btn_File_Click(object sender, EventArgs e)
@@ -24,7 +27,7 @@ namespace Compiler
             presenter.OpenFile();
         }
 
-        private void btn_Save_Click(object sender,EventArgs e)
+        private void btn_Save_Click(object sender, EventArgs e)
         {
             presenter.SaveFile();
         }
@@ -54,7 +57,7 @@ namespace Compiler
                         contextMenu.Items.Add(closeTabItem);
                         contextMenu.Show(tabControl, e.Location);
 
-                        break; 
+                        break;
                     }
                 }
             }
@@ -66,8 +69,85 @@ namespace Compiler
             timelabel.Text = DateTime.Now.ToLongTimeString();
         }
 
+        private void btn_Info_Click(object sender, EventArgs e)
+        {
+            if (sender is Button)
+            {
+                Button b = (Button)sender;
+                string name = b.Name;
+                AuxiliaryForm af = new(name);
+                af.ShowDialog();
+            }
+            else
+            {
+                ToolStripMenuItem t = (ToolStripMenuItem)sender;
+                string name = t.Name;
+                AuxiliaryForm af = new(name);
+                af.ShowDialog();
+            }
+        }
+
+        private void tsmi_Font_Click(object sender, EventArgs e)
+        {
+            presenter.SettingsFont();
+        }
+
+        private void tsmi_ColorFont_Click(object sender, EventArgs e)
+        {
+            presenter.SettingsColorFont();
+        }
+
+        private void MainForm_DragEnter(object sender, DragEventArgs e)
+        {
+            // Проверяем, что перетаскиваемые данные - файлы
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                // Разрешаем перетаскивание (курсор изменится)
+                e.Effect = DragDropEffects.Copy;
+            }
+            else
+            {
+                // Запрещаем перетаскивание (курсор останется обычным)
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        private void MainForm_DragDrop(object sender, DragEventArgs e)
+        {
+            // Получаем список перетаскиваемых файлов
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+            // Обрабатываем каждый файл
+            foreach (string file in files)
+            {
+                presenter.IncludeTextFromFile(file);
+            }
+
+        }
+
+        private void btn_Undo_Click(object sender, EventArgs e)
+        {
+            presenter.UndoButton_Click();
+        }
+
+        private void btn_Redo_Click(object sender, EventArgs e)
+        {
+            presenter.RedoButton_Click();
+        }
+
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl.TabPages.Count > 0) presenter.UpdateUndoRedoButtonStates();
+            else
+            {
+                btn_Undo.Enabled = false;
+                btn_Redo.Enabled = false;
+            }
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            presenter.CLoseCompilyator();
+        }
     }
 }
-
-
-

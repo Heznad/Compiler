@@ -31,21 +31,21 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             menuStrip1 = new MenuStrip();
-            файлToolStripMenuItem = new ToolStripMenuItem();
-            создатьToolStripMenuItem = new ToolStripMenuItem();
-            открытьToolStripMenuItem = new ToolStripMenuItem();
-            сохранитьToolStripMenuItem = new ToolStripMenuItem();
-            сохранитьКакToolStripMenuItem = new ToolStripMenuItem();
-            выходToolStripMenuItem = new ToolStripMenuItem();
-            правкаToolStripMenuItem = new ToolStripMenuItem();
-            отменитьToolStripMenuItem = new ToolStripMenuItem();
-            повторитьToolStripMenuItem = new ToolStripMenuItem();
-            вырезатьToolStripMenuItem = new ToolStripMenuItem();
-            копироватьToolStripMenuItem = new ToolStripMenuItem();
-            вставитьToolStripMenuItem = new ToolStripMenuItem();
-            удалитьToolStripMenuItem = new ToolStripMenuItem();
-            выделитьВсеToolStripMenuItem = new ToolStripMenuItem();
-            текстToolStripMenuItem = new ToolStripMenuItem();
+            tsmi_File = new ToolStripMenuItem();
+            tsmi_Create = new ToolStripMenuItem();
+            tsmi_Open = new ToolStripMenuItem();
+            tsmi_Save = new ToolStripMenuItem();
+            tsmi_SaveAs = new ToolStripMenuItem();
+            tsmi_Exit = new ToolStripMenuItem();
+            tsmi_Correction = new ToolStripMenuItem();
+            tsmi_Undo = new ToolStripMenuItem();
+            tsmi_Redo = new ToolStripMenuItem();
+            tsmi_Cut = new ToolStripMenuItem();
+            tsmi_Copy = new ToolStripMenuItem();
+            tsmi_Paste = new ToolStripMenuItem();
+            tsmi_Delete = new ToolStripMenuItem();
+            tsmi_SelectAll = new ToolStripMenuItem();
+            tsmi_Text = new ToolStripMenuItem();
             постановкаЗадачиToolStripMenuItem = new ToolStripMenuItem();
             грамматикаToolStripMenuItem = new ToolStripMenuItem();
             классификацияГрамматикиToolStripMenuItem = new ToolStripMenuItem();
@@ -55,12 +55,15 @@
             списокЛитературыToolStripMenuItem = new ToolStripMenuItem();
             исходныйКодПрограммыToolStripMenuItem = new ToolStripMenuItem();
             пускToolStripMenuItem = new ToolStripMenuItem();
-            справкаToolStripMenuItem = new ToolStripMenuItem();
-            вызовСправкиToolStripMenuItem = new ToolStripMenuItem();
-            оПрограммеToolStripMenuItem = new ToolStripMenuItem();
-            локализацияToolStripMenuItem = new ToolStripMenuItem();
-            русскийToolStripMenuItem = new ToolStripMenuItem();
-            английскийToolStripMenuItem = new ToolStripMenuItem();
+            tsmi_Reference = new ToolStripMenuItem();
+            tsmi_Help = new ToolStripMenuItem();
+            tsmi_Info = new ToolStripMenuItem();
+            tsmi_Localization = new ToolStripMenuItem();
+            tsmi_Russian = new ToolStripMenuItem();
+            tsmi_English = new ToolStripMenuItem();
+            tsmi_View = new ToolStripMenuItem();
+            tsmi_Font = new ToolStripMenuItem();
+            tsmi_ColorFont = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
             toolStripStatusLabelText = new ToolStripStatusLabel();
             toolStripStatusLabelTime = new ToolStripStatusLabel();
@@ -74,142 +77,133 @@
             btn_Put = new Button();
             btn_Cut = new Button();
             btn_Copy = new Button();
-            btn_Forward = new Button();
-            btn_Back = new Button();
+            btn_Redo = new Button();
+            btn_Undo = new Button();
             btn_Save = new Button();
-            btn_Folder = new Button();
-            btn_File = new Button();
+            btn_Open = new Button();
+            btn_Create = new Button();
             timer1 = new System.Windows.Forms.Timer(components);
             tabControl = new TabControl();
-            tabPage1 = new TabPage();
-            splitContainer1 = new SplitContainer();
-            richTextBox3 = new RichTextBox();
-            dataGridView1 = new DataGridView();
             toolTip1 = new ToolTip(components);
             richTextBox2 = new RichTextBox();
             richTextBox1 = new RichTextBox();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             panel_Buttons.SuspendLayout();
-            tabControl.SuspendLayout();
-            tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
-            splitContainer1.Panel1.SuspendLayout();
-            splitContainer1.Panel2.SuspendLayout();
-            splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { файлToolStripMenuItem, правкаToolStripMenuItem, текстToolStripMenuItem, пускToolStripMenuItem, справкаToolStripMenuItem, локализацияToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { tsmi_File, tsmi_Correction, tsmi_Text, пускToolStripMenuItem, tsmi_Reference, tsmi_Localization, tsmi_View });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 28);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
-            // файлToolStripMenuItem
+            // tsmi_File
             // 
-            файлToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { создатьToolStripMenuItem, открытьToolStripMenuItem, сохранитьToolStripMenuItem, сохранитьКакToolStripMenuItem, выходToolStripMenuItem });
-            файлToolStripMenuItem.ForeColor = Color.Black;
-            файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            файлToolStripMenuItem.Size = new Size(59, 24);
-            файлToolStripMenuItem.Text = "Файл";
+            tsmi_File.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Create, tsmi_Open, tsmi_Save, tsmi_SaveAs, tsmi_Exit });
+            tsmi_File.ForeColor = Color.Black;
+            tsmi_File.Name = "tsmi_File";
+            tsmi_File.Size = new Size(59, 24);
+            tsmi_File.Text = "Файл";
             // 
-            // создатьToolStripMenuItem
+            // tsmi_Create
             // 
-            создатьToolStripMenuItem.Name = "создатьToolStripMenuItem";
-            создатьToolStripMenuItem.Size = new Size(224, 26);
-            создатьToolStripMenuItem.Text = "Создать";
-            создатьToolStripMenuItem.Click += btn_File_Click;
+            tsmi_Create.Name = "tsmi_Create";
+            tsmi_Create.Size = new Size(192, 26);
+            tsmi_Create.Text = "Создать";
+            tsmi_Create.Click += btn_File_Click;
             // 
-            // открытьToolStripMenuItem
+            // tsmi_Open
             // 
-            открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
-            открытьToolStripMenuItem.Size = new Size(224, 26);
-            открытьToolStripMenuItem.Text = "Открыть";
-            открытьToolStripMenuItem.Click += btn_Folder_Click;
+            tsmi_Open.Name = "tsmi_Open";
+            tsmi_Open.Size = new Size(192, 26);
+            tsmi_Open.Text = "Открыть";
+            tsmi_Open.Click += btn_Folder_Click;
             // 
-            // сохранитьToolStripMenuItem
+            // tsmi_Save
             // 
-            сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            сохранитьToolStripMenuItem.Size = new Size(224, 26);
-            сохранитьToolStripMenuItem.Text = "Сохранить";
-            сохранитьToolStripMenuItem.Click += btn_Save_Click;
+            tsmi_Save.Name = "tsmi_Save";
+            tsmi_Save.Size = new Size(192, 26);
+            tsmi_Save.Text = "Сохранить";
+            tsmi_Save.Click += btn_Save_Click;
             // 
-            // сохранитьКакToolStripMenuItem
+            // tsmi_SaveAs
             // 
-            сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
-            сохранитьКакToolStripMenuItem.Size = new Size(224, 26);
-            сохранитьКакToolStripMenuItem.Text = "Сохранить как";
-            сохранитьКакToolStripMenuItem.Click += btn_SaveAs_Click;
+            tsmi_SaveAs.Name = "tsmi_SaveAs";
+            tsmi_SaveAs.Size = new Size(192, 26);
+            tsmi_SaveAs.Text = "Сохранить как";
+            tsmi_SaveAs.Click += btn_SaveAs_Click;
             // 
-            // выходToolStripMenuItem
+            // tsmi_Exit
             // 
-            выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            выходToolStripMenuItem.Size = new Size(224, 26);
-            выходToolStripMenuItem.Text = "Выход";
-            выходToolStripMenuItem.Click += btn_Exit_Click;
+            tsmi_Exit.Name = "tsmi_Exit";
+            tsmi_Exit.Size = new Size(192, 26);
+            tsmi_Exit.Text = "Выход";
+            tsmi_Exit.Click += btn_Exit_Click;
             // 
-            // правкаToolStripMenuItem
+            // tsmi_Correction
             // 
-            правкаToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { отменитьToolStripMenuItem, повторитьToolStripMenuItem, вырезатьToolStripMenuItem, копироватьToolStripMenuItem, вставитьToolStripMenuItem, удалитьToolStripMenuItem, выделитьВсеToolStripMenuItem });
-            правкаToolStripMenuItem.ForeColor = Color.Black;
-            правкаToolStripMenuItem.Name = "правкаToolStripMenuItem";
-            правкаToolStripMenuItem.Size = new Size(74, 24);
-            правкаToolStripMenuItem.Text = "Правка";
+            tsmi_Correction.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Undo, tsmi_Redo, tsmi_Cut, tsmi_Copy, tsmi_Paste, tsmi_Delete, tsmi_SelectAll });
+            tsmi_Correction.ForeColor = Color.Black;
+            tsmi_Correction.Name = "tsmi_Correction";
+            tsmi_Correction.Size = new Size(74, 24);
+            tsmi_Correction.Text = "Правка";
             // 
-            // отменитьToolStripMenuItem
+            // tsmi_Undo
             // 
-            отменитьToolStripMenuItem.Name = "отменитьToolStripMenuItem";
-            отменитьToolStripMenuItem.Size = new Size(186, 26);
-            отменитьToolStripMenuItem.Text = "Отменить";
+            tsmi_Undo.Name = "tsmi_Undo";
+            tsmi_Undo.Size = new Size(186, 26);
+            tsmi_Undo.Text = "Отменить";
+            tsmi_Undo.Click += btn_Undo_Click;
             // 
-            // повторитьToolStripMenuItem
+            // tsmi_Redo
             // 
-            повторитьToolStripMenuItem.Name = "повторитьToolStripMenuItem";
-            повторитьToolStripMenuItem.Size = new Size(186, 26);
-            повторитьToolStripMenuItem.Text = "Повторить";
+            tsmi_Redo.Name = "tsmi_Redo";
+            tsmi_Redo.Size = new Size(186, 26);
+            tsmi_Redo.Text = "Повторить";
+            tsmi_Redo.Click += btn_Redo_Click;
             // 
-            // вырезатьToolStripMenuItem
+            // tsmi_Cut
             // 
-            вырезатьToolStripMenuItem.Name = "вырезатьToolStripMenuItem";
-            вырезатьToolStripMenuItem.Size = new Size(186, 26);
-            вырезатьToolStripMenuItem.Text = "Вырезать";
+            tsmi_Cut.Name = "tsmi_Cut";
+            tsmi_Cut.Size = new Size(186, 26);
+            tsmi_Cut.Text = "Вырезать";
             // 
-            // копироватьToolStripMenuItem
+            // tsmi_Copy
             // 
-            копироватьToolStripMenuItem.Name = "копироватьToolStripMenuItem";
-            копироватьToolStripMenuItem.Size = new Size(186, 26);
-            копироватьToolStripMenuItem.Text = "Копировать";
+            tsmi_Copy.Name = "tsmi_Copy";
+            tsmi_Copy.Size = new Size(186, 26);
+            tsmi_Copy.Text = "Копировать";
             // 
-            // вставитьToolStripMenuItem
+            // tsmi_Paste
             // 
-            вставитьToolStripMenuItem.Name = "вставитьToolStripMenuItem";
-            вставитьToolStripMenuItem.Size = new Size(186, 26);
-            вставитьToolStripMenuItem.Text = "Вставить";
+            tsmi_Paste.Name = "tsmi_Paste";
+            tsmi_Paste.Size = new Size(186, 26);
+            tsmi_Paste.Text = "Вставить";
             // 
-            // удалитьToolStripMenuItem
+            // tsmi_Delete
             // 
-            удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
-            удалитьToolStripMenuItem.Size = new Size(186, 26);
-            удалитьToolStripMenuItem.Text = "Удалить";
+            tsmi_Delete.Name = "tsmi_Delete";
+            tsmi_Delete.Size = new Size(186, 26);
+            tsmi_Delete.Text = "Удалить";
             // 
-            // выделитьВсеToolStripMenuItem
+            // tsmi_SelectAll
             // 
-            выделитьВсеToolStripMenuItem.Name = "выделитьВсеToolStripMenuItem";
-            выделитьВсеToolStripMenuItem.Size = new Size(186, 26);
-            выделитьВсеToolStripMenuItem.Text = "Выделить все";
+            tsmi_SelectAll.Name = "tsmi_SelectAll";
+            tsmi_SelectAll.Size = new Size(186, 26);
+            tsmi_SelectAll.Text = "Выделить все";
             // 
-            // текстToolStripMenuItem
+            // tsmi_Text
             // 
-            текстToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { постановкаЗадачиToolStripMenuItem, грамматикаToolStripMenuItem, классификацияГрамматикиToolStripMenuItem, методАнализаToolStripMenuItem, диагностикаИToolStripMenuItem, тестовыйПримерToolStripMenuItem, списокЛитературыToolStripMenuItem, исходныйКодПрограммыToolStripMenuItem });
-            текстToolStripMenuItem.ForeColor = Color.Black;
-            текстToolStripMenuItem.Name = "текстToolStripMenuItem";
-            текстToolStripMenuItem.Size = new Size(59, 24);
-            текстToolStripMenuItem.Text = "Текст";
+            tsmi_Text.DropDownItems.AddRange(new ToolStripItem[] { постановкаЗадачиToolStripMenuItem, грамматикаToolStripMenuItem, классификацияГрамматикиToolStripMenuItem, методАнализаToolStripMenuItem, диагностикаИToolStripMenuItem, тестовыйПримерToolStripMenuItem, списокЛитературыToolStripMenuItem, исходныйКодПрограммыToolStripMenuItem });
+            tsmi_Text.ForeColor = Color.Black;
+            tsmi_Text.Name = "tsmi_Text";
+            tsmi_Text.Size = new Size(59, 24);
+            tsmi_Text.Text = "Текст";
             // 
             // постановкаЗадачиToolStripMenuItem
             // 
@@ -266,45 +260,69 @@
             пускToolStripMenuItem.Size = new Size(55, 24);
             пускToolStripMenuItem.Text = "Пуск";
             // 
-            // справкаToolStripMenuItem
+            // tsmi_Reference
             // 
-            справкаToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { вызовСправкиToolStripMenuItem, оПрограммеToolStripMenuItem });
-            справкаToolStripMenuItem.ForeColor = Color.Black;
-            справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
-            справкаToolStripMenuItem.Size = new Size(81, 24);
-            справкаToolStripMenuItem.Text = "Справка";
+            tsmi_Reference.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Help, tsmi_Info });
+            tsmi_Reference.ForeColor = Color.Black;
+            tsmi_Reference.Name = "tsmi_Reference";
+            tsmi_Reference.Size = new Size(81, 24);
+            tsmi_Reference.Text = "Справка";
             // 
-            // вызовСправкиToolStripMenuItem
+            // tsmi_Help
             // 
-            вызовСправкиToolStripMenuItem.Name = "вызовСправкиToolStripMenuItem";
-            вызовСправкиToolStripMenuItem.Size = new Size(197, 26);
-            вызовСправкиToolStripMenuItem.Text = "Вызов справки";
+            tsmi_Help.Name = "tsmi_Help";
+            tsmi_Help.Size = new Size(197, 26);
+            tsmi_Help.Text = "Вызов справки";
+            tsmi_Help.Click += btn_Info_Click;
             // 
-            // оПрограммеToolStripMenuItem
+            // tsmi_Info
             // 
-            оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            оПрограммеToolStripMenuItem.Size = new Size(197, 26);
-            оПрограммеToolStripMenuItem.Text = "О программе";
+            tsmi_Info.Name = "tsmi_Info";
+            tsmi_Info.Size = new Size(197, 26);
+            tsmi_Info.Text = "О программе";
+            tsmi_Info.Click += btn_Info_Click;
             // 
-            // локализацияToolStripMenuItem
+            // tsmi_Localization
             // 
-            локализацияToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { русскийToolStripMenuItem, английскийToolStripMenuItem });
-            локализацияToolStripMenuItem.ForeColor = Color.Black;
-            локализацияToolStripMenuItem.Name = "локализацияToolStripMenuItem";
-            локализацияToolStripMenuItem.Size = new Size(115, 24);
-            локализацияToolStripMenuItem.Text = "Локализация";
+            tsmi_Localization.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Russian, tsmi_English });
+            tsmi_Localization.ForeColor = Color.Black;
+            tsmi_Localization.Name = "tsmi_Localization";
+            tsmi_Localization.Size = new Size(115, 24);
+            tsmi_Localization.Text = "Локализация";
             // 
-            // русскийToolStripMenuItem
+            // tsmi_Russian
             // 
-            русскийToolStripMenuItem.Name = "русскийToolStripMenuItem";
-            русскийToolStripMenuItem.Size = new Size(146, 26);
-            русскийToolStripMenuItem.Text = "Русский";
+            tsmi_Russian.Name = "tsmi_Russian";
+            tsmi_Russian.Size = new Size(146, 26);
+            tsmi_Russian.Text = "Русский";
             // 
-            // английскийToolStripMenuItem
+            // tsmi_English
             // 
-            английскийToolStripMenuItem.Name = "английскийToolStripMenuItem";
-            английскийToolStripMenuItem.Size = new Size(146, 26);
-            английскийToolStripMenuItem.Text = "English";
+            tsmi_English.Name = "tsmi_English";
+            tsmi_English.Size = new Size(146, 26);
+            tsmi_English.Text = "English";
+            // 
+            // tsmi_View
+            // 
+            tsmi_View.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Font, tsmi_ColorFont });
+            tsmi_View.ForeColor = Color.Black;
+            tsmi_View.Name = "tsmi_View";
+            tsmi_View.Size = new Size(49, 24);
+            tsmi_View.Text = "Вид";
+            // 
+            // tsmi_Font
+            // 
+            tsmi_Font.Name = "tsmi_Font";
+            tsmi_Font.Size = new Size(183, 26);
+            tsmi_Font.Text = "Шрифт";
+            tsmi_Font.Click += tsmi_Font_Click;
+            // 
+            // tsmi_ColorFont
+            // 
+            tsmi_ColorFont.Name = "tsmi_ColorFont";
+            tsmi_ColorFont.Size = new Size(183, 26);
+            tsmi_ColorFont.Text = "Цвет шрифта";
+            tsmi_ColorFont.Click += tsmi_ColorFont_Click;
             // 
             // statusStrip1
             // 
@@ -356,11 +374,11 @@
             panel_Buttons.Controls.Add(btn_Put);
             panel_Buttons.Controls.Add(btn_Cut);
             panel_Buttons.Controls.Add(btn_Copy);
-            panel_Buttons.Controls.Add(btn_Forward);
-            panel_Buttons.Controls.Add(btn_Back);
+            panel_Buttons.Controls.Add(btn_Redo);
+            panel_Buttons.Controls.Add(btn_Undo);
             panel_Buttons.Controls.Add(btn_Save);
-            panel_Buttons.Controls.Add(btn_Folder);
-            panel_Buttons.Controls.Add(btn_File);
+            panel_Buttons.Controls.Add(btn_Open);
+            panel_Buttons.Controls.Add(btn_Create);
             panel_Buttons.ForeColor = Color.Silver;
             panel_Buttons.Location = new Point(0, 28);
             panel_Buttons.Margin = new Padding(0, 0, 0, 5);
@@ -381,6 +399,7 @@
             btn_Info.TabIndex = 10;
             toolTip1.SetToolTip(btn_Info, "О программе");
             btn_Info.UseVisualStyleBackColor = true;
+            btn_Info.Click += btn_Info_Click;
             // 
             // btn_Help
             // 
@@ -394,6 +413,7 @@
             btn_Help.TabIndex = 9;
             toolTip1.SetToolTip(btn_Help, "Вызов справки");
             btn_Help.UseVisualStyleBackColor = true;
+            btn_Help.Click += btn_Info_Click;
             // 
             // btn_Start
             // 
@@ -447,31 +467,33 @@
             toolTip1.SetToolTip(btn_Copy, "Копировать");
             btn_Copy.UseVisualStyleBackColor = true;
             // 
-            // btn_Forward
+            // btn_Redo
             // 
-            btn_Forward.FlatStyle = FlatStyle.Flat;
-            btn_Forward.ForeColor = Color.Gainsboro;
-            btn_Forward.Image = (Image)resources.GetObject("btn_Forward.Image");
-            btn_Forward.Location = new Point(258, 5);
-            btn_Forward.Margin = new Padding(5);
-            btn_Forward.Name = "btn_Forward";
-            btn_Forward.Size = new Size(48, 48);
-            btn_Forward.TabIndex = 4;
-            toolTip1.SetToolTip(btn_Forward, "Повторить");
-            btn_Forward.UseVisualStyleBackColor = true;
+            btn_Redo.FlatStyle = FlatStyle.Flat;
+            btn_Redo.ForeColor = Color.Gainsboro;
+            btn_Redo.Image = (Image)resources.GetObject("btn_Redo.Image");
+            btn_Redo.Location = new Point(258, 5);
+            btn_Redo.Margin = new Padding(5);
+            btn_Redo.Name = "btn_Redo";
+            btn_Redo.Size = new Size(48, 48);
+            btn_Redo.TabIndex = 4;
+            toolTip1.SetToolTip(btn_Redo, "Повторить");
+            btn_Redo.UseVisualStyleBackColor = true;
+            btn_Redo.Click += btn_Redo_Click;
             // 
-            // btn_Back
+            // btn_Undo
             // 
-            btn_Back.FlatStyle = FlatStyle.Flat;
-            btn_Back.ForeColor = Color.Gainsboro;
-            btn_Back.Image = (Image)resources.GetObject("btn_Back.Image");
-            btn_Back.Location = new Point(200, 5);
-            btn_Back.Margin = new Padding(5);
-            btn_Back.Name = "btn_Back";
-            btn_Back.Size = new Size(48, 48);
-            btn_Back.TabIndex = 3;
-            toolTip1.SetToolTip(btn_Back, "Отменить");
-            btn_Back.UseVisualStyleBackColor = true;
+            btn_Undo.FlatStyle = FlatStyle.Flat;
+            btn_Undo.ForeColor = Color.Gainsboro;
+            btn_Undo.Image = (Image)resources.GetObject("btn_Undo.Image");
+            btn_Undo.Location = new Point(200, 5);
+            btn_Undo.Margin = new Padding(5);
+            btn_Undo.Name = "btn_Undo";
+            btn_Undo.Size = new Size(48, 48);
+            btn_Undo.TabIndex = 3;
+            toolTip1.SetToolTip(btn_Undo, "Отменить");
+            btn_Undo.UseVisualStyleBackColor = true;
+            btn_Undo.Click += btn_Undo_Click;
             // 
             // btn_Save
             // 
@@ -487,33 +509,33 @@
             btn_Save.UseVisualStyleBackColor = true;
             btn_Save.Click += btn_Save_Click;
             // 
-            // btn_Folder
+            // btn_Open
             // 
-            btn_Folder.FlatStyle = FlatStyle.Flat;
-            btn_Folder.ForeColor = Color.Gainsboro;
-            btn_Folder.Image = (Image)resources.GetObject("btn_Folder.Image");
-            btn_Folder.Location = new Point(68, 5);
-            btn_Folder.Margin = new Padding(5);
-            btn_Folder.Name = "btn_Folder";
-            btn_Folder.Size = new Size(48, 48);
-            btn_Folder.TabIndex = 1;
-            toolTip1.SetToolTip(btn_Folder, "Открыть");
-            btn_Folder.UseVisualStyleBackColor = true;
-            btn_Folder.Click += btn_Folder_Click;
+            btn_Open.FlatStyle = FlatStyle.Flat;
+            btn_Open.ForeColor = Color.Gainsboro;
+            btn_Open.Image = (Image)resources.GetObject("btn_Open.Image");
+            btn_Open.Location = new Point(68, 5);
+            btn_Open.Margin = new Padding(5);
+            btn_Open.Name = "btn_Open";
+            btn_Open.Size = new Size(48, 48);
+            btn_Open.TabIndex = 1;
+            toolTip1.SetToolTip(btn_Open, "Открыть");
+            btn_Open.UseVisualStyleBackColor = true;
+            btn_Open.Click += btn_Folder_Click;
             // 
-            // btn_File
+            // btn_Create
             // 
-            btn_File.FlatStyle = FlatStyle.Flat;
-            btn_File.ForeColor = Color.Gainsboro;
-            btn_File.Image = (Image)resources.GetObject("btn_File.Image");
-            btn_File.Location = new Point(10, 5);
-            btn_File.Margin = new Padding(5);
-            btn_File.Name = "btn_File";
-            btn_File.Size = new Size(48, 48);
-            btn_File.TabIndex = 0;
-            toolTip1.SetToolTip(btn_File, "Создать");
-            btn_File.UseVisualStyleBackColor = true;
-            btn_File.Click += btn_File_Click;
+            btn_Create.FlatStyle = FlatStyle.Flat;
+            btn_Create.ForeColor = Color.Gainsboro;
+            btn_Create.Image = (Image)resources.GetObject("btn_Create.Image");
+            btn_Create.Location = new Point(10, 5);
+            btn_Create.Margin = new Padding(5);
+            btn_Create.Name = "btn_Create";
+            btn_Create.Size = new Size(48, 48);
+            btn_Create.TabIndex = 0;
+            toolTip1.SetToolTip(btn_Create, "Создать");
+            btn_Create.UseVisualStyleBackColor = true;
+            btn_Create.Click += btn_File_Click;
             // 
             // timer1
             // 
@@ -523,69 +545,14 @@
             // tabControl
             // 
             tabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            tabControl.Controls.Add(tabPage1);
             tabControl.Location = new Point(0, 88);
             tabControl.Margin = new Padding(1);
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
             tabControl.Size = new Size(800, 336);
             tabControl.TabIndex = 3;
+            tabControl.SelectedIndexChanged += tabControl_SelectedIndexChanged;
             tabControl.MouseClick += TabControl_MouseClick;
-            // 
-            // tabPage1
-            // 
-            tabPage1.Controls.Add(splitContainer1);
-            tabPage1.Location = new Point(4, 29);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(792, 303);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "NewFile";
-            tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // splitContainer1
-            // 
-            splitContainer1.Dock = DockStyle.Fill;
-            splitContainer1.Location = new Point(3, 3);
-            splitContainer1.Name = "splitContainer1";
-            splitContainer1.Orientation = Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            splitContainer1.Panel1.Controls.Add(richTextBox3);
-            // 
-            // splitContainer1.Panel2
-            // 
-            splitContainer1.Panel2.Controls.Add(dataGridView1);
-            splitContainer1.Size = new Size(786, 297);
-            splitContainer1.SplitterDistance = 150;
-            splitContainer1.SplitterWidth = 10;
-            splitContainer1.TabIndex = 0;
-            // 
-            // richTextBox3
-            // 
-            richTextBox3.AcceptsTab = true;
-            richTextBox3.BackColor = Color.White;
-            richTextBox3.Dock = DockStyle.Fill;
-            richTextBox3.Location = new Point(0, 0);
-            richTextBox3.Name = "richTextBox3";
-            richTextBox3.Size = new Size(786, 150);
-            richTextBox3.TabIndex = 0;
-            richTextBox3.Text = "";
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.BackgroundColor = Color.White;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(0, 0);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(786, 137);
-            dataGridView1.TabIndex = 0;
             // 
             // richTextBox2
             // 
@@ -611,6 +578,7 @@
             // 
             // MainForm
             // 
+            AllowDrop = true;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
@@ -625,18 +593,14 @@
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Компилятор";
+            FormClosed += MainForm_FormClosed;
+            DragDrop += MainForm_DragDrop;
+            DragEnter += MainForm_DragEnter;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
             panel_Buttons.ResumeLayout(false);
-            tabControl.ResumeLayout(false);
-            tabPage1.ResumeLayout(false);
-            splitContainer1.Panel1.ResumeLayout(false);
-            splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
-            splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -645,17 +609,17 @@
 
         private MenuStrip menuStrip1;
         private StatusStrip statusStrip1;
-        private ToolStripMenuItem файлToolStripMenuItem;
-        private ToolStripMenuItem правкаToolStripMenuItem;
-        private ToolStripMenuItem текстToolStripMenuItem;
+        private ToolStripMenuItem tsmi_File;
+        private ToolStripMenuItem tsmi_Correction;
+        private ToolStripMenuItem tsmi_Text;
         private ToolStripMenuItem пускToolStripMenuItem;
-        private ToolStripMenuItem справкаToolStripMenuItem;
+        private ToolStripMenuItem tsmi_Reference;
         private Panel panel_Buttons;
-        private Button btn_File;
-        private Button btn_Folder;
+        private Button btn_Create;
+        private Button btn_Open;
         private Button btn_Save;
-        private Button btn_Back;
-        private Button btn_Forward;
+        private Button btn_Undo;
+        private Button btn_Redo;
         private Button btn_Copy;
         private Button btn_Cut;
         private Button btn_Info;
@@ -666,18 +630,18 @@
         private ToolStripStatusLabel toolStripStatusLabelText;
         private ToolStripStatusLabel toolStripStatusLabelDate;
         private ToolStripStatusLabel toolStripStatusLabelTime;
-        private ToolStripMenuItem создатьToolStripMenuItem;
-        private ToolStripMenuItem открытьToolStripMenuItem;
-        private ToolStripMenuItem сохранитьToolStripMenuItem;
-        private ToolStripMenuItem сохранитьКакToolStripMenuItem;
-        private ToolStripMenuItem выходToolStripMenuItem;
-        private ToolStripMenuItem отменитьToolStripMenuItem;
-        private ToolStripMenuItem повторитьToolStripMenuItem;
-        private ToolStripMenuItem вырезатьToolStripMenuItem;
-        private ToolStripMenuItem копироватьToolStripMenuItem;
-        private ToolStripMenuItem вставитьToolStripMenuItem;
-        private ToolStripMenuItem удалитьToolStripMenuItem;
-        private ToolStripMenuItem выделитьВсеToolStripMenuItem;
+        private ToolStripMenuItem tsmi_Create;
+        private ToolStripMenuItem tsmi_Open;
+        private ToolStripMenuItem tsmi_Save;
+        private ToolStripMenuItem tsmi_SaveAs;
+        private ToolStripMenuItem tsmi_Exit;
+        private ToolStripMenuItem tsmi_Undo;
+        private ToolStripMenuItem tsmi_Redo;
+        private ToolStripMenuItem tsmi_Cut;
+        private ToolStripMenuItem tsmi_Copy;
+        private ToolStripMenuItem tsmi_Paste;
+        private ToolStripMenuItem tsmi_Delete;
+        private ToolStripMenuItem tsmi_SelectAll;
         private ToolStripMenuItem постановкаЗадачиToolStripMenuItem;
         private ToolStripMenuItem грамматикаToolStripMenuItem;
         private ToolStripMenuItem классификацияГрамматикиToolStripMenuItem;
@@ -686,20 +650,19 @@
         private ToolStripMenuItem тестовыйПримерToolStripMenuItem;
         private ToolStripMenuItem списокЛитературыToolStripMenuItem;
         private ToolStripMenuItem исходныйКодПрограммыToolStripMenuItem;
-        private ToolStripMenuItem вызовСправкиToolStripMenuItem;
-        private ToolStripMenuItem оПрограммеToolStripMenuItem;
-        private ToolStripMenuItem локализацияToolStripMenuItem;
-        private ToolStripMenuItem русскийToolStripMenuItem;
-        private ToolStripMenuItem английскийToolStripMenuItem;
+        private ToolStripMenuItem tsmi_Help;
+        private ToolStripMenuItem tsmi_Info;
+        private ToolStripMenuItem tsmi_Localization;
+        private ToolStripMenuItem tsmi_Russian;
+        private ToolStripMenuItem tsmi_English;
         private TabControl tabControl;
         private ToolTip toolTip1;
         private RichTextBox richTextBox2;
         private RichTextBox richTextBox1;
         private ToolStripStatusLabel datelabel;
         private ToolStripStatusLabel timelabel;
-        private TabPage tabPage1;
-        private SplitContainer splitContainer1;
-        private RichTextBox richTextBox3;
-        private DataGridView dataGridView1;
+        private ToolStripMenuItem tsmi_View;
+        private ToolStripMenuItem tsmi_Font;
+        private ToolStripMenuItem tsmi_ColorFont;
     }
 }
