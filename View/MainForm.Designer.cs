@@ -36,6 +36,7 @@
             tsmi_Open = new ToolStripMenuItem();
             tsmi_Save = new ToolStripMenuItem();
             tsmi_SaveAs = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
             tsmi_Exit = new ToolStripMenuItem();
             tsmi_Correction = new ToolStripMenuItem();
             tsmi_Undo = new ToolStripMenuItem();
@@ -104,7 +105,7 @@
             // 
             // tsmi_File
             // 
-            tsmi_File.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Create, tsmi_Open, tsmi_Save, tsmi_SaveAs, tsmi_Exit });
+            tsmi_File.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Create, tsmi_Open, tsmi_Save, tsmi_SaveAs, toolStripSeparator1, tsmi_Exit });
             tsmi_File.ForeColor = Color.Black;
             tsmi_File.Name = "tsmi_File";
             tsmi_File.Size = new Size(59, 24);
@@ -113,35 +114,40 @@
             // tsmi_Create
             // 
             tsmi_Create.Name = "tsmi_Create";
-            tsmi_Create.Size = new Size(192, 26);
+            tsmi_Create.Size = new Size(224, 26);
             tsmi_Create.Text = "Создать";
             tsmi_Create.Click += btn_File_Click;
             // 
             // tsmi_Open
             // 
             tsmi_Open.Name = "tsmi_Open";
-            tsmi_Open.Size = new Size(192, 26);
+            tsmi_Open.Size = new Size(224, 26);
             tsmi_Open.Text = "Открыть";
             tsmi_Open.Click += btn_Folder_Click;
             // 
             // tsmi_Save
             // 
             tsmi_Save.Name = "tsmi_Save";
-            tsmi_Save.Size = new Size(192, 26);
+            tsmi_Save.Size = new Size(224, 26);
             tsmi_Save.Text = "Сохранить";
             tsmi_Save.Click += btn_Save_Click;
             // 
             // tsmi_SaveAs
             // 
             tsmi_SaveAs.Name = "tsmi_SaveAs";
-            tsmi_SaveAs.Size = new Size(192, 26);
+            tsmi_SaveAs.Size = new Size(224, 26);
             tsmi_SaveAs.Text = "Сохранить как";
             tsmi_SaveAs.Click += btn_SaveAs_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(221, 6);
             // 
             // tsmi_Exit
             // 
             tsmi_Exit.Name = "tsmi_Exit";
-            tsmi_Exit.Size = new Size(192, 26);
+            tsmi_Exit.Size = new Size(224, 26);
             tsmi_Exit.Text = "Выход";
             tsmi_Exit.Click += btn_Exit_Click;
             // 
@@ -172,30 +178,35 @@
             tsmi_Cut.Name = "tsmi_Cut";
             tsmi_Cut.Size = new Size(186, 26);
             tsmi_Cut.Text = "Вырезать";
+            tsmi_Cut.Click += btn_Cut_Click;
             // 
             // tsmi_Copy
             // 
             tsmi_Copy.Name = "tsmi_Copy";
             tsmi_Copy.Size = new Size(186, 26);
             tsmi_Copy.Text = "Копировать";
+            tsmi_Copy.Click += btn_Copy_Click;
             // 
             // tsmi_Paste
             // 
             tsmi_Paste.Name = "tsmi_Paste";
             tsmi_Paste.Size = new Size(186, 26);
             tsmi_Paste.Text = "Вставить";
+            tsmi_Paste.Click += btn_Put_Click;
             // 
             // tsmi_Delete
             // 
             tsmi_Delete.Name = "tsmi_Delete";
             tsmi_Delete.Size = new Size(186, 26);
             tsmi_Delete.Text = "Удалить";
+            tsmi_Delete.Click += tsmi_Delete_Click;
             // 
             // tsmi_SelectAll
             // 
             tsmi_SelectAll.Name = "tsmi_SelectAll";
             tsmi_SelectAll.Size = new Size(186, 26);
             tsmi_SelectAll.Text = "Выделить все";
+            tsmi_SelectAll.Click += tsmi_SelectAll_Click;
             // 
             // tsmi_Text
             // 
@@ -440,6 +451,7 @@
             btn_Put.TabIndex = 7;
             toolTip1.SetToolTip(btn_Put, "Вставить");
             btn_Put.UseVisualStyleBackColor = true;
+            btn_Put.Click += btn_Put_Click;
             // 
             // btn_Cut
             // 
@@ -453,6 +465,7 @@
             btn_Cut.TabIndex = 6;
             toolTip1.SetToolTip(btn_Cut, "Вырезать");
             btn_Cut.UseVisualStyleBackColor = true;
+            btn_Cut.Click += btn_Cut_Click;
             // 
             // btn_Copy
             // 
@@ -466,6 +479,7 @@
             btn_Copy.TabIndex = 5;
             toolTip1.SetToolTip(btn_Copy, "Копировать");
             btn_Copy.UseVisualStyleBackColor = true;
+            btn_Copy.Click += btn_Copy_Click;
             // 
             // btn_Redo
             // 
@@ -589,7 +603,7 @@
             ForeColor = SystemColors.Control;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
-            MinimumSize = new Size(680, 300);
+            MinimumSize = new Size(680, 400);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Компилятор";
@@ -664,5 +678,6 @@
         private ToolStripMenuItem tsmi_View;
         private ToolStripMenuItem tsmi_Font;
         private ToolStripMenuItem tsmi_ColorFont;
+        private ToolStripSeparator toolStripSeparator1;
     }
 }

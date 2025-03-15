@@ -149,5 +149,30 @@ namespace Compiler
         {
             presenter.CLoseCompilyator();
         }
+
+        private void btn_Cut_Click(object sender, EventArgs e)
+        {
+            presenter.RichTextBox_Cut();
+        }
+
+        private void btn_Put_Click(object sender, EventArgs e)
+        {
+            presenter.RichTextBox_Paste();
+        }
+
+        private void btn_Copy_Click(object sender, EventArgs e)
+        {
+            presenter.RichTextBox_Copy();
+        }
+
+        private void tsmi_Delete_Click(object sender, EventArgs e)
+        {
+            presenter.RichTextBox_Delete();
+        }
+
+        private void tsmi_SelectAll_Click(object sender, EventArgs e)
+        {
+            presenter.RichTextBox_SelectAll();
+        }
     }
 }

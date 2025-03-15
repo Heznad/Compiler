@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using static System.Windows.Forms.AxHost;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace Compiler.Presenter
@@ -15,15 +16,16 @@ namespace Compiler.Presenter
         // Словарь для хранения стеков undo/redo для каждого RichTextBox
         private Dictionary<RichTextBox, Stack<string>> undoStacks = new Dictionary<RichTextBox, Stack<string>>();
         private Dictionary<RichTextBox, Stack<string>> redoStacks = new Dictionary<RichTextBox, Stack<string>>();
-        private int maxUndoLevels = 50;
+        private int maxUndoLevels = 100;
         // Флаг для предотвращения гонки потоков при быстром вводе
         private bool isProcessingText = false;
+        private bool isUndoRedoInProgress = false; // Добавляем флаг для блокировки TextChanged во время Undo/Redo
         private Dictionary<TabPage, string> tabPageFilePaths = new Dictionary<TabPage, string>();
         string[] keywords = { "int", "if", "while", "void", "return", "bool", "char", "double", "float" };
         TabControl tabControl;
         Button btn_Undo;
         Button btn_Redo;
-        private Font selectedFont = new Font("Times New Roman", 11F); // Значение по умолчанию
+        private Font selectedFont = new Font("Verdana", 12F); // Значение по умолчанию
         private Color selectedColor = Color.Black;
         public PresenterForm(TabControl tabControl, Button btn_Undo, Button btn_Redo)
         {
@@ -78,7 +80,7 @@ namespace Compiler.Presenter
                     Font = selectedFont,
                     AllowDrop = true
                 };
-                richTextBox.TextChanged += RichTextBox_TextChanged;
+                richTextBox.TextChanged += RichTextBox_TextChangedAsync;
                 richTextBox.VScroll += RichTextBox_VScroll;
                 richTextBox.DragEnter += RichTextBox_DragEnter;
                 richTextBox.DragDrop += RichTextBox_DragDrop;
@@ -202,13 +204,11 @@ namespace Compiler.Presenter
                 tabControl.SelectedIndex = i;
 
                 TabPage tabPageToClose = tabControl.TabPages[i];
-                SplitContainer splitContainer = (SplitContainer)tabPageToClose.Controls[0];
-                SplitContainer splitContainerP1 = (SplitContainer)splitContainer.Panel1.Controls[0];
-                RichTextBox richTextBox = (RichTextBox)splitContainerP1.Panel2.Controls[0];
+                RichTextBox richTextBox = GetSelectedRichTextBox(tabPageToClose);
 
                 if (richTextBox.Modified)
                 {
-                    DialogResult result = MessageBox.Show($"Сохранить изменения в файле \"{tabPageToClose.Text}\" перед выходом?", "Сохранение", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    DialogResult result = MessageBox.Show($"Сохранить изменения в файле \"{tabPageToClose.Text}\" перед выходом?", "Сохранение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                     if (result == DialogResult.Yes)
                     {
@@ -224,7 +224,7 @@ namespace Compiler.Presenter
             }
             Application.Exit();
         }
-        public void UndoButton_Click()
+        public async void UndoButton_Click()
         {
             RichTextBox currentTextBox = GetSelectedRichTextBox();
             if (currentTextBox == null) return;
@@ -235,16 +235,24 @@ namespace Compiler.Presenter
 
             if (undoStack.Count > 1)
             {
-                redoStack.Push(undoStack.Pop());
-                string previousState = undoStack.Pop();
-                currentTextBox.Text = previousState;
-                currentTextBox.SelectionStart = currentTextBox.TextLength;
-                currentTextBox.ScrollToCaret();
-                UpdateUndoRedoButtonStates();
+                isUndoRedoInProgress = true; // Блокируем TextChanged
+                try
+                {
+                    if (redoStack.Count == 0 && undoStack.Peek() == currentTextBox.Text) redoStack.Push(undoStack.Pop());
+                    else redoStack.Push(currentTextBox.Text);
+                    string previousState = undoStack.Pop();
+                    currentTextBox.Text = previousState;
+                    currentTextBox.SelectionStart = currentTextBox.TextLength;
+                    currentTextBox.ScrollToCaret();
+                    UpdateUndoRedoButtonStates();
+                }
+                finally
+                {
+                    isUndoRedoInProgress = false; // Разблокируем TextChanged
+                }
             }
-            
         }
-        public void RedoButton_Click()
+        public async void RedoButton_Click()
         {
             RichTextBox currentTextBox = GetSelectedRichTextBox();
             if (currentTextBox == null) return;
@@ -254,17 +262,24 @@ namespace Compiler.Presenter
             Stack<string> redoStack = redoStacks[currentTextBox];
 
 
-            if (redoStack.Count > 1)
+            if (redoStack.Count > 0)
             {
-                undoStack.Push(redoStack.Pop());
+                isUndoRedoInProgress = true; // Блокируем TextChanged
+                try
+                {
+                    undoStack.Push(currentTextBox.Text);
 
-                string nextState = redoStack.Pop();
-                currentTextBox.Text = nextState;
-                currentTextBox.SelectionStart = currentTextBox.TextLength;
-                currentTextBox.ScrollToCaret();
-                UpdateUndoRedoButtonStates();
+                    string nextState = redoStack.Pop();
+                    currentTextBox.Text = nextState;
+                    currentTextBox.SelectionStart = currentTextBox.TextLength;
+                    currentTextBox.ScrollToCaret();
+                    UpdateUndoRedoButtonStates();
+                }
+                finally
+                {
+                    isUndoRedoInProgress = false; // Разблокируем TextChanged
+                }
             }
-            
         }
 
         public void UpdateUndoRedoButtonStates()
@@ -276,6 +291,60 @@ namespace Compiler.Presenter
                 btn_Undo.Enabled = undoStacks[currentTextBox].Count > 1;
                 btn_Redo.Enabled = redoStacks[currentTextBox].Count > 0;
             }
+        }
+
+        public void RichTextBox_Copy()
+        {
+            RichTextBox richTextBox = GetSelectedRichTextBox();
+            // Проверяем, выделен ли текст
+            if (richTextBox.SelectionLength > 0)
+            {
+                // Копируем выделенный текст в буфер обмена
+                richTextBox.Copy();
+            }
+        }
+
+        public void RichTextBox_Cut()
+        {
+            RichTextBox richTextBox = GetSelectedRichTextBox();
+            // Проверяем, выделен ли текст
+            if (richTextBox.SelectionLength > 0)
+            {
+                // Вырезаем выделенный текст в буфер обмена
+                richTextBox.Cut();
+            }
+        }
+
+        public void RichTextBox_Paste()
+        {
+            RichTextBox richTextBox = GetSelectedRichTextBox();
+            richTextBox.Paste();
+        }
+
+        public void RichTextBox_Delete()
+        {
+            RichTextBox richTextBox = GetSelectedRichTextBox();
+            // Проверяем, выделен ли текст
+            if (richTextBox.SelectionLength > 0)
+            {
+                // Удаляем выделенный текст
+                richTextBox.SelectedText = "";
+            }
+            else
+            {
+                // Если текст не выделен, удаляем символ справа от курсора
+                if (richTextBox.SelectionStart < richTextBox.TextLength)
+                {
+                    richTextBox.SelectionLength = 1;
+                    richTextBox.SelectedText = "";
+                }
+            }
+        }
+
+        public void RichTextBox_SelectAll()
+        {
+            RichTextBox richTextBox = GetSelectedRichTextBox();
+            richTextBox.SelectAll();
         }
 
         #region Выбор Шрифта и Цвета
@@ -351,60 +420,77 @@ namespace Compiler.Presenter
 
             return prompt.ShowDialog() == DialogResult.OK ? textBox.Text : "";
         }
-        private void RichTextBox_TextChanged(object sender, EventArgs e)
+        private async void RichTextBox_TextChangedAsync(object sender, EventArgs e)
         {
-            RichTextBox richTextBox = (RichTextBox)sender;
-            richTextBox.Modified = true;  // Устанавливаем флаг Modified при изменении текста
-            UndoRedoStacksWork(richTextBox);
-            UpdateLineNumbers(); // Обновляет номера строк в вспомогательном richtextbox
-            HighlightKeywords(richTextBox, keywords, Color.DarkRed); // Подсвечиваем тёмно-красным
-            
+            // Предотвращаем гонку потоков
+            if (isProcessingText)
+            {
+                return;
+            }
+
+            isProcessingText = true;
+            try
+            {
+                RichTextBox currentRichTextBox = (RichTextBox)sender;
+                string currentText = currentRichTextBox.Text; // Получаем текст
+
+                // Все операции в фоне
+                await Task.Run(() => ProcessRichTextBoxChanges(currentRichTextBox));
+            }
+            finally
+            {
+                isProcessingText = false;
+            }
+        }
+
+        private async void ProcessRichTextBoxChanges(RichTextBox currentRichTextBox)
+        {
+            // Выполняем операции, которые ранее были в RichTextBox_TextChanged
+            // Все изменения UI нужно выполнять через Invoke
+
+            // 1. Работа со стеками undo/redo (вызываем через Invoke)
+            if (!isUndoRedoInProgress)
+            {
+               currentRichTextBox.Invoke((MethodInvoker)delegate { UndoRedoStacksWork(currentRichTextBox); });// Передаем текст, а не RichTextBox
+            }      
+
+            // 2. Обновление номеров строк (вызываем через Invoke)
+            currentRichTextBox.Invoke((MethodInvoker)delegate { UpdateLineNumbers(); }); // Не передаем richtextbox, используем член класса lineNumberRichTextBox
+
+            // 3. Подсветка ключевых слов (вызываем через Invoke)
+            currentRichTextBox.Invoke((MethodInvoker)delegate { HighlightKeywords(currentRichTextBox, keywords, Color.DarkRed); });
+
+            // 4. Установка флага Modified (вызываем через Invoke)
+            currentRichTextBox.Invoke((MethodInvoker)delegate { currentRichTextBox.Modified = true; }); // Используем currentRichTextBox, а не this.richTextBox
         }
 
         private void UndoRedoStacksWork(RichTextBox richTextBox)
         {
             Stack<string> undoStack = undoStacks[richTextBox];
             Stack<string> redoStack = redoStacks[richTextBox];
+
+            // 1. Проверка на изменение текста
             if (undoStack.Count == 0 || richTextBox.Text != undoStack.Peek())
             {
-
+                // 2. Добавляем новое состояние в undoStack
                 undoStack.Push(richTextBox.Text);
                 UpdateUndoRedoButtonStates();
-            }
-            if (undoStack.Count == maxUndoLevels)
-            {
-                // Создаем новый стек
-                //Stack<string> newUndoStack = new Stack<string>();
 
-                // Получаем элементы из старого стека в обратном порядке (от старых к новым)
+                // 3. Очищаем redoStack, так как произошло новое изменение
+                redoStack.Clear();
+            }
+
+            // 4. Обрезка undoStack (после добавления нового состояния)
+            if (undoStack.Count >= maxUndoLevels) // Используем > вместо >=, так как уже добавили элемент
+            {
+                // Получаем элементы из старого стека в прямом порядке (от старых к новым)
                 string[] undoArray = undoStack.ToArray();
-                Array.Reverse(undoArray);  // Важно: меняем порядок массива на месте
                 undoStack.Clear();
-                // Копируем элементы в новый стек, начиная с самых старых, но не более maxUndoLevels - 1 (оставляем место для текущего)
-                for (int i = 0; i < maxUndoLevels - 1 && i < undoArray.Length; i++)
+                // Копируем только последние maxUndoLevels состояний в новый стек
+                for (int i = undoArray.Length-2; i>-1; i--)
                 {
                     undoStack.Push(undoArray[i]);
                 }
-
-                // Заменяем старый стек новым
-                // Очищаем старый стек
-                /*foreach (string state in newUndoStack.ToArray())
-                { // Копируем newUndoStack в undoStack
-                    undoStack.Push(state);
-                }*/
-            }
-            // Очищаем redoStack, если произошло новое изменение текста, отменяющее "повтор"
-            if (undoStack.Count > 1)
-            {
-                string previousState = undoStack.Peek(); // Получаем предыдущее состояние
-                if (richTextBox.Text != previousState)
-                {
-                    redoStack.Clear();
-                }
-            }
-            else if (undoStack.Count == 1 && richTextBox.Text != "")
-            {
-                redoStack.Clear();
             }
         }
 
