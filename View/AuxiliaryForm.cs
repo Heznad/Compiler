@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Reflection;
 
 namespace Compiler.View
 {
@@ -31,13 +33,23 @@ namespace Compiler.View
         }
         private void HelpForm()
         {
-            richTextBox.Text = "\tСправка";
+            richTextBox.Text = GetTextFromResource("Compiler.TXT.Help.txt");
         }
         private void InfoForm()
         {
-            richTextBox.Text = "\tТема: Разработка пользовательского интерфейса (GUI) для языкового процессора.\r\n" +
-                "\r\nДанная лабораторная работа является практической частью курсовой работы по дисциплине \"Теория формальных языков и компиляторов\"." +
-                "\r\n\r\nЦель работы: Разработать приложение – текстовый редактор. ";
+            richTextBox.Text = GetTextFromResource("Compiler.TXT.Info.txt");
+        }
+        private static string GetTextFromResource(string resourceName)
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            {
+                if (stream == null) return null;
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
         }
     }
 }

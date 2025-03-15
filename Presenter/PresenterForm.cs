@@ -293,6 +293,7 @@ namespace Compiler.Presenter
             }
         }
 
+        #region Копировать  Вырезать    Вставить    Удалить Выделить всё
         public void RichTextBox_Copy()
         {
             RichTextBox richTextBox = GetSelectedRichTextBox();
@@ -346,6 +347,7 @@ namespace Compiler.Presenter
             RichTextBox richTextBox = GetSelectedRichTextBox();
             richTextBox.SelectAll();
         }
+        #endregion
 
         #region Выбор Шрифта и Цвета
         public void SettingsFont()
@@ -445,23 +447,15 @@ namespace Compiler.Presenter
 
         private async void ProcessRichTextBoxChanges(RichTextBox currentRichTextBox)
         {
-            // Выполняем операции, которые ранее были в RichTextBox_TextChanged
-            // Все изменения UI нужно выполнять через Invoke
-
-            // 1. Работа со стеками undo/redo (вызываем через Invoke)
             if (!isUndoRedoInProgress)
             {
-               currentRichTextBox.Invoke((MethodInvoker)delegate { UndoRedoStacksWork(currentRichTextBox); });// Передаем текст, а не RichTextBox
+               currentRichTextBox.Invoke((MethodInvoker)delegate { UndoRedoStacksWork(currentRichTextBox); });
             }      
+            currentRichTextBox.Invoke((MethodInvoker)delegate { UpdateLineNumbers(); }); 
 
-            // 2. Обновление номеров строк (вызываем через Invoke)
-            currentRichTextBox.Invoke((MethodInvoker)delegate { UpdateLineNumbers(); }); // Не передаем richtextbox, используем член класса lineNumberRichTextBox
-
-            // 3. Подсветка ключевых слов (вызываем через Invoke)
             currentRichTextBox.Invoke((MethodInvoker)delegate { HighlightKeywords(currentRichTextBox, keywords, Color.DarkRed); });
 
-            // 4. Установка флага Modified (вызываем через Invoke)
-            currentRichTextBox.Invoke((MethodInvoker)delegate { currentRichTextBox.Modified = true; }); // Используем currentRichTextBox, а не this.richTextBox
+            currentRichTextBox.Invoke((MethodInvoker)delegate { currentRichTextBox.Modified = true; }); 
         }
 
         private void UndoRedoStacksWork(RichTextBox richTextBox)
@@ -634,7 +628,6 @@ namespace Compiler.Presenter
             }
         }
         #endregion
-
 
         private void RichTextBox_DragEnter(object sender, DragEventArgs e)
         {

@@ -42,7 +42,7 @@
             richTextBox.Name = "richTextBox";
             richTextBox.ReadOnly = true;
             richTextBox.ScrollBars = RichTextBoxScrollBars.Vertical;
-            richTextBox.Size = new Size(412, 233);
+            richTextBox.Size = new Size(562, 333);
             richTextBox.TabIndex = 0;
             richTextBox.Text = "";
             // 
@@ -50,10 +50,12 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
             BackColor = Color.White;
-            ClientSize = new Size(432, 253);
+            ClientSize = new Size(582, 353);
             Controls.Add(richTextBox);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MinimumSize = new Size(400, 200);
             Name = "AuxiliaryForm";
             Padding = new Padding(10);
             StartPosition = FormStartPosition.CenterParent;
