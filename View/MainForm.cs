@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using Compiler.Presenter;
 using Compiler.View;
 
@@ -17,16 +16,15 @@ namespace Compiler
             presenter.UpdateUndoRedoButtonStates();
         }
 
+        #region [ Файл ]
         private void btn_File_Click(object sender, EventArgs e)
         {
             presenter.AddTabPage();
         }
-
         private void btn_Folder_Click(object sender, EventArgs e)
         {
             presenter.OpenFile();
         }
-
         private void btn_Save_Click(object sender, EventArgs e)
         {
             presenter.SaveFile();
@@ -35,11 +33,120 @@ namespace Compiler
         {
             presenter.SaveFileAs();
         }
-
         private void btn_Exit_Click(object sender, EventArgs e)
         {
             presenter.CLoseCompilyator();
         }
+        #endregion
+
+        #region [ Правка ]
+        private void btn_Undo_Click(object sender, EventArgs e)
+        {
+            presenter.UndoButton_Click();
+        }
+        private void btn_Redo_Click(object sender, EventArgs e)
+        {
+            presenter.RedoButton_Click();
+        }
+        private void btn_Cut_Click(object sender, EventArgs e)
+        {
+            presenter.RichTextBox_Cut();
+        }
+        private void btn_Put_Click(object sender, EventArgs e)
+        {
+            presenter.RichTextBox_Paste();
+        }
+        private void btn_Copy_Click(object sender, EventArgs e)
+        {
+            presenter.RichTextBox_Copy();
+        }
+        private void tsmi_Delete_Click(object sender, EventArgs e)
+        {
+            presenter.RichTextBox_Delete();
+        }
+        private void tsmi_SelectAll_Click(object sender, EventArgs e)
+        {
+            presenter.RichTextBox_SelectAll();
+        }
+        #endregion
+
+        #region [ Справка ]
+        private void btn_Info_Click(object sender, EventArgs e)
+        {
+            if (sender is Button)
+            {
+                Button b = (Button)sender;
+                string name = b.Name;
+                AuxiliaryForm af = new(name);
+                af.ShowDialog();
+            }
+            else
+            {
+                ToolStripMenuItem t = (ToolStripMenuItem)sender;
+                string name = t.Name;
+                AuxiliaryForm af = new(name);
+                af.ShowDialog();
+            }
+        }
+        #endregion
+
+        #region [ Вид ]
+        private void tsmi_Font_Click(object sender, EventArgs e)
+        {
+            presenter.SetFont();
+        }
+        private void tsmi_ColorFont_Click(object sender, EventArgs e)
+        {
+            presenter.SettingsColorFont();
+        }
+        private void tsmi_ColorKeywords_Click(object sender, EventArgs e)
+        {
+            presenter.SettingsColorKeywords();
+        }
+        #endregion
+
+        #region [ Таймер ]
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            datelabel.Text = DateTime.Now.ToLongDateString();
+            timelabel.Text = DateTime.Now.ToLongTimeString();
+        }
+        #endregion
+
+        #region [ Свойства Form ]
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            presenter.CLoseCompilyator();
+        }
+        private void MainForm_DragEnter(object sender, DragEventArgs e)
+        {
+            // Проверяем, что перетаскиваемые данные - файлы
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                // Разрешаем перетаскивание (курсор изменится)
+                e.Effect = DragDropEffects.Copy;
+            }
+            else
+            {
+                // Запрещаем перетаскивание (курсор останется обычным)
+                e.Effect = DragDropEffects.None;
+            }
+        }
+        private void MainForm_DragDrop(object sender, DragEventArgs e)
+        {
+            // Получаем список перетаскиваемых файлов
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+            // Обрабатываем каждый файл
+            foreach (string file in files)
+            {
+                presenter.IncludeTextFromFile(file);
+            }
+
+        }
+        #endregion
+
+        #region [ Нажатие правой кнопкой мыши на вкладку ]
         private void TabControl_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -62,79 +169,9 @@ namespace Compiler
                 }
             }
         }
+        #endregion
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            datelabel.Text = DateTime.Now.ToLongDateString();
-            timelabel.Text = DateTime.Now.ToLongTimeString();
-        }
-
-        private void btn_Info_Click(object sender, EventArgs e)
-        {
-            if (sender is Button)
-            {
-                Button b = (Button)sender;
-                string name = b.Name;
-                AuxiliaryForm af = new(name);
-                af.ShowDialog();
-            }
-            else
-            {
-                ToolStripMenuItem t = (ToolStripMenuItem)sender;
-                string name = t.Name;
-                AuxiliaryForm af = new(name);
-                af.ShowDialog();
-            }
-        }
-
-        private void tsmi_Font_Click(object sender, EventArgs e)
-        {
-            presenter.SettingsFont();
-        }
-
-        private void tsmi_ColorFont_Click(object sender, EventArgs e)
-        {
-            presenter.SettingsColorFont();
-        }
-
-        private void MainForm_DragEnter(object sender, DragEventArgs e)
-        {
-            // Проверяем, что перетаскиваемые данные - файлы
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                // Разрешаем перетаскивание (курсор изменится)
-                e.Effect = DragDropEffects.Copy;
-            }
-            else
-            {
-                // Запрещаем перетаскивание (курсор останется обычным)
-                e.Effect = DragDropEffects.None;
-            }
-        }
-
-        private void MainForm_DragDrop(object sender, DragEventArgs e)
-        {
-            // Получаем список перетаскиваемых файлов
-            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-
-            // Обрабатываем каждый файл
-            foreach (string file in files)
-            {
-                presenter.IncludeTextFromFile(file);
-            }
-
-        }
-
-        private void btn_Undo_Click(object sender, EventArgs e)
-        {
-            presenter.UndoButton_Click();
-        }
-
-        private void btn_Redo_Click(object sender, EventArgs e)
-        {
-            presenter.RedoButton_Click();
-        }
-
+        #region [ Выбор вкладки ]
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl.TabPages.Count > 0) presenter.UpdateUndoRedoButtonStates();
@@ -144,35 +181,7 @@ namespace Compiler
                 btn_Redo.Enabled = false;
             }
         }
+        #endregion       
 
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            presenter.CLoseCompilyator();
-        }
-
-        private void btn_Cut_Click(object sender, EventArgs e)
-        {
-            presenter.RichTextBox_Cut();
-        }
-
-        private void btn_Put_Click(object sender, EventArgs e)
-        {
-            presenter.RichTextBox_Paste();
-        }
-
-        private void btn_Copy_Click(object sender, EventArgs e)
-        {
-            presenter.RichTextBox_Copy();
-        }
-
-        private void tsmi_Delete_Click(object sender, EventArgs e)
-        {
-            presenter.RichTextBox_Delete();
-        }
-
-        private void tsmi_SelectAll_Click(object sender, EventArgs e)
-        {
-            presenter.RichTextBox_SelectAll();
-        }
     }
 }

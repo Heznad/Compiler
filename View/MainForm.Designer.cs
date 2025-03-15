@@ -65,6 +65,7 @@
             tsmi_View = new ToolStripMenuItem();
             tsmi_Font = new ToolStripMenuItem();
             tsmi_ColorFont = new ToolStripMenuItem();
+            tsmi_ColorKeywords = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
             toolStripStatusLabelText = new ToolStripStatusLabel();
             toolStripStatusLabelTime = new ToolStripStatusLabel();
@@ -114,40 +115,40 @@
             // tsmi_Create
             // 
             tsmi_Create.Name = "tsmi_Create";
-            tsmi_Create.Size = new Size(224, 26);
+            tsmi_Create.Size = new Size(192, 26);
             tsmi_Create.Text = "Создать";
             tsmi_Create.Click += btn_File_Click;
             // 
             // tsmi_Open
             // 
             tsmi_Open.Name = "tsmi_Open";
-            tsmi_Open.Size = new Size(224, 26);
+            tsmi_Open.Size = new Size(192, 26);
             tsmi_Open.Text = "Открыть";
             tsmi_Open.Click += btn_Folder_Click;
             // 
             // tsmi_Save
             // 
             tsmi_Save.Name = "tsmi_Save";
-            tsmi_Save.Size = new Size(224, 26);
+            tsmi_Save.Size = new Size(192, 26);
             tsmi_Save.Text = "Сохранить";
             tsmi_Save.Click += btn_Save_Click;
             // 
             // tsmi_SaveAs
             // 
             tsmi_SaveAs.Name = "tsmi_SaveAs";
-            tsmi_SaveAs.Size = new Size(224, 26);
+            tsmi_SaveAs.Size = new Size(192, 26);
             tsmi_SaveAs.Text = "Сохранить как";
             tsmi_SaveAs.Click += btn_SaveAs_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(221, 6);
+            toolStripSeparator1.Size = new Size(189, 6);
             // 
             // tsmi_Exit
             // 
             tsmi_Exit.Name = "tsmi_Exit";
-            tsmi_Exit.Size = new Size(224, 26);
+            tsmi_Exit.Size = new Size(192, 26);
             tsmi_Exit.Text = "Выход";
             tsmi_Exit.Click += btn_Exit_Click;
             // 
@@ -315,7 +316,7 @@
             // 
             // tsmi_View
             // 
-            tsmi_View.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Font, tsmi_ColorFont });
+            tsmi_View.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Font, tsmi_ColorFont, tsmi_ColorKeywords });
             tsmi_View.ForeColor = Color.Black;
             tsmi_View.Name = "tsmi_View";
             tsmi_View.Size = new Size(49, 24);
@@ -324,16 +325,23 @@
             // tsmi_Font
             // 
             tsmi_Font.Name = "tsmi_Font";
-            tsmi_Font.Size = new Size(183, 26);
+            tsmi_Font.Size = new Size(234, 26);
             tsmi_Font.Text = "Шрифт";
             tsmi_Font.Click += tsmi_Font_Click;
             // 
             // tsmi_ColorFont
             // 
             tsmi_ColorFont.Name = "tsmi_ColorFont";
-            tsmi_ColorFont.Size = new Size(183, 26);
+            tsmi_ColorFont.Size = new Size(234, 26);
             tsmi_ColorFont.Text = "Цвет шрифта";
             tsmi_ColorFont.Click += tsmi_ColorFont_Click;
+            // 
+            // tsmi_ColorKeywords
+            // 
+            tsmi_ColorKeywords.Name = "tsmi_ColorKeywords";
+            tsmi_ColorKeywords.Size = new Size(234, 26);
+            tsmi_ColorKeywords.Text = "Цвет ключевых слов";
+            tsmi_ColorKeywords.Click += tsmi_ColorKeywords_Click;
             // 
             // statusStrip1
             // 
@@ -402,7 +410,7 @@
             // 
             btn_Info.FlatStyle = FlatStyle.Flat;
             btn_Info.ForeColor = Color.Gainsboro;
-            btn_Info.Image = (Image)resources.GetObject("btn_Info.Image");
+            btn_Info.Image = Properties.Resources.info;
             btn_Info.Location = new Point(606, 5);
             btn_Info.Margin = new Padding(5);
             btn_Info.Name = "btn_Info";
@@ -416,7 +424,7 @@
             // 
             btn_Help.FlatStyle = FlatStyle.Flat;
             btn_Help.ForeColor = Color.Gainsboro;
-            btn_Help.Image = (Image)resources.GetObject("btn_Help.Image");
+            btn_Help.Image = Properties.Resources.help;
             btn_Help.Location = new Point(548, 5);
             btn_Help.Margin = new Padding(5);
             btn_Help.Name = "btn_Help";
@@ -430,7 +438,7 @@
             // 
             btn_Start.FlatStyle = FlatStyle.Flat;
             btn_Start.ForeColor = Color.Gainsboro;
-            btn_Start.Image = (Image)resources.GetObject("btn_Start.Image");
+            btn_Start.Image = Properties.Resources.start;
             btn_Start.Location = new Point(490, 5);
             btn_Start.Margin = new Padding(5);
             btn_Start.Name = "btn_Start";
@@ -443,7 +451,7 @@
             // 
             btn_Put.FlatStyle = FlatStyle.Flat;
             btn_Put.ForeColor = Color.Gainsboro;
-            btn_Put.Image = (Image)resources.GetObject("btn_Put.Image");
+            btn_Put.Image = Properties.Resources.put;
             btn_Put.Location = new Point(432, 5);
             btn_Put.Margin = new Padding(5);
             btn_Put.Name = "btn_Put";
@@ -457,7 +465,7 @@
             // 
             btn_Cut.FlatStyle = FlatStyle.Flat;
             btn_Cut.ForeColor = Color.Gainsboro;
-            btn_Cut.Image = (Image)resources.GetObject("btn_Cut.Image");
+            btn_Cut.Image = Properties.Resources.cut;
             btn_Cut.Location = new Point(374, 5);
             btn_Cut.Margin = new Padding(5);
             btn_Cut.Name = "btn_Cut";
@@ -471,7 +479,7 @@
             // 
             btn_Copy.FlatStyle = FlatStyle.Flat;
             btn_Copy.ForeColor = Color.Gainsboro;
-            btn_Copy.Image = (Image)resources.GetObject("btn_Copy.Image");
+            btn_Copy.Image = Properties.Resources.copy;
             btn_Copy.Location = new Point(316, 5);
             btn_Copy.Margin = new Padding(5);
             btn_Copy.Name = "btn_Copy";
@@ -485,7 +493,7 @@
             // 
             btn_Redo.FlatStyle = FlatStyle.Flat;
             btn_Redo.ForeColor = Color.Gainsboro;
-            btn_Redo.Image = (Image)resources.GetObject("btn_Redo.Image");
+            btn_Redo.Image = Properties.Resources.forward;
             btn_Redo.Location = new Point(258, 5);
             btn_Redo.Margin = new Padding(5);
             btn_Redo.Name = "btn_Redo";
@@ -499,7 +507,7 @@
             // 
             btn_Undo.FlatStyle = FlatStyle.Flat;
             btn_Undo.ForeColor = Color.Gainsboro;
-            btn_Undo.Image = (Image)resources.GetObject("btn_Undo.Image");
+            btn_Undo.Image = Properties.Resources.back;
             btn_Undo.Location = new Point(200, 5);
             btn_Undo.Margin = new Padding(5);
             btn_Undo.Name = "btn_Undo";
@@ -513,7 +521,7 @@
             // 
             btn_Save.FlatStyle = FlatStyle.Flat;
             btn_Save.ForeColor = Color.Gainsboro;
-            btn_Save.Image = (Image)resources.GetObject("btn_Save.Image");
+            btn_Save.Image = Properties.Resources.save;
             btn_Save.Location = new Point(126, 5);
             btn_Save.Margin = new Padding(5);
             btn_Save.Name = "btn_Save";
@@ -527,7 +535,7 @@
             // 
             btn_Open.FlatStyle = FlatStyle.Flat;
             btn_Open.ForeColor = Color.Gainsboro;
-            btn_Open.Image = (Image)resources.GetObject("btn_Open.Image");
+            btn_Open.Image = Properties.Resources.folder;
             btn_Open.Location = new Point(68, 5);
             btn_Open.Margin = new Padding(5);
             btn_Open.Name = "btn_Open";
@@ -541,7 +549,7 @@
             // 
             btn_Create.FlatStyle = FlatStyle.Flat;
             btn_Create.ForeColor = Color.Gainsboro;
-            btn_Create.Image = (Image)resources.GetObject("btn_Create.Image");
+            btn_Create.Image = Properties.Resources.file;
             btn_Create.Location = new Point(10, 5);
             btn_Create.Margin = new Padding(5);
             btn_Create.Name = "btn_Create";
@@ -679,5 +687,6 @@
         private ToolStripMenuItem tsmi_Font;
         private ToolStripMenuItem tsmi_ColorFont;
         private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem tsmi_ColorKeywords;
     }
 }

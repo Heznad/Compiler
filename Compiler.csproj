@@ -9,13 +9,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="TXT\Help.txt" />
-    <None Remove="TXT\Info.txt" />
+    <Compile Remove="View\MDIParent1.cs" />
+    <Compile Remove="View\MDIParent1.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="TXT\Help.txt" />
-    <EmbeddedResource Include="TXT\Info.txt" />
+    <EmbeddedResource Remove="View\MDIParent1.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="TextFiles\Help.txt" />
+    <None Remove="TextFiles\Info.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="TextFiles\Help.txt" />
+    <EmbeddedResource Include="TextFiles\Info.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,10 +40,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Model\" />
   </ItemGroup>
 
 </Project>

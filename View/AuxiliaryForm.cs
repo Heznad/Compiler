@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.IO;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace Compiler.View
 {
@@ -33,22 +23,34 @@ namespace Compiler.View
         }
         private void HelpForm()
         {
-            richTextBox.Text = GetTextFromResource("Compiler.TXT.Help.txt");
+            GetText("Compiler.TextFiles.Help.txt");
         }
         private void InfoForm()
         {
-            richTextBox.Text = GetTextFromResource("Compiler.TXT.Info.txt");
+            GetText("Compiler.TextFiles.Info.txt");
         }
-        private static string GetTextFromResource(string resourceName)
+        private void GetText(string path)
         {
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            try
             {
-                if (stream == null) return null;
-                using (StreamReader reader = new StreamReader(stream))
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                string resourceName = path;
+                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
                 {
-                    return reader.ReadToEnd();
+                    if (stream == null)
+                    {
+                        MessageBox.Show($"Ресурс '{resourceName}' не найден.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        richTextBox.Text = reader.ReadToEnd();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при загрузке ресурса: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
