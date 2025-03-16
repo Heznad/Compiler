@@ -11,10 +11,12 @@ namespace Compiler.View
             {
                 case "btn_Help":
                 case "tsmi_Help":
+                    this.Text = MyString.Help;
                     HelpForm();
                     break;
                 case "btn_Info":
                 case "tsmi_Info":
+                    this.Text = MyString.AboutProgram;
                     InfoForm();
                     break;
                 default:
@@ -39,7 +41,7 @@ namespace Compiler.View
                 {
                     if (stream == null)
                     {
-                        MessageBox.Show($"Ресурс '{resourceName}' не найден.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(MyString.ResourceNotFound + resourceName, MyString.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     using (StreamReader reader = new StreamReader(stream))
@@ -50,7 +52,7 @@ namespace Compiler.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при загрузке ресурса: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(MyString.ErrorDownloadResource + ex.Message, MyString.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

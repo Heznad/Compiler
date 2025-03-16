@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="TextFiles\Help.txt" />
+    <None Remove="App.config" />
     <None Remove="TextFiles\Info.txt" />
   </ItemGroup>
 
@@ -28,17 +28,39 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="MyString.en-US.Designer.cs">
+      <DependentUpon>MyString.en-US.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="MyString.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MyString.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="MyString.en-US.resx">
+      <LastGenOutput>MyString.en-US.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="MyString.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MyString.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

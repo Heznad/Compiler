@@ -1,5 +1,6 @@
+using System.Windows.Forms;
 using Compiler.Model;
-
+using System.Text.RegularExpressions;
 namespace Compiler.Presenter
 {
     public class PresenterForm
@@ -10,6 +11,7 @@ namespace Compiler.Presenter
         // Словарь для хранения стеков undo/redo для каждого RichTextBox
         private Dictionary<RichTextBox, Stack<string>> _undoStacks = new Dictionary<RichTextBox, Stack<string>>();
         private Dictionary<RichTextBox, Stack<string>> _redoStacks = new Dictionary<RichTextBox, Stack<string>>();
+        string previousState;
         private int _maxUndoLevels = 100; // Объём стэков Undo, Redo
         private bool isProcessingText = false; // Флаг для предотвращения гонки потоков при быстром вводе
         private bool isUndoRedoInProgress = false; // Добавляем флаг для блокировки TextChanged во время Undo/Redo
@@ -25,10 +27,11 @@ namespace Compiler.Presenter
             _btnRedo = btn_Redo;
         }
 
+
         #region [ Отслеживание изменения состояния текстового редактора ]
 
         // Проверяем текстовое поле, запуская дочерний поток
-        private async void RichTextBox_TextChangedAsync(object sender, EventArgs e)
+        public async void RichTextBox_TextChangedAsync(object sender, EventArgs e)
         {
             if (isProcessingText)
             {
@@ -49,23 +52,23 @@ namespace Compiler.Presenter
         // Стэки, прокрутка, подсветка, статутус rtb
         private async void ProcessRichTextBoxChanges(RichTextBox currentRichTextBox)
         {
-            // Изменяем стэки Undo и Redo
-            if (!isUndoRedoInProgress)
-            {
-                currentRichTextBox.Invoke((MethodInvoker)delegate { UndoRedoStacksWork(currentRichTextBox); });
-            }
 
-            // Прокрутка rtb для нумерации строк
+            if (!isUndoRedoInProgress) currentRichTextBox.Invoke((MethodInvoker)delegate { UndoRedoStacksWork(currentRichTextBox); });
             currentRichTextBox.Invoke((MethodInvoker)delegate { UpdateLineNumbers(); });
-
-            // Подсветка ключевых слов
             currentRichTextBox.Invoke((MethodInvoker)delegate { HighlightAllKeywords(currentRichTextBox); });
-
-            // Изменение статуса текстового поля
             currentRichTextBox.Invoke((MethodInvoker)delegate { currentRichTextBox.Modified = true; });
         }
 
+        // Запрет на прокрутку с помощью колёсика мыши
+        private void RichTextBox_MouseWheel(object? sender, MouseEventArgs e)
+        {
+            if (Control.ModifierKeys == Keys.Control)
+            {
+                ((HandledMouseEventArgs)e).Handled = true;
+            }
+        }
         #endregion
+
 
         #region [ Создание вкладки ]
 
@@ -127,18 +130,14 @@ namespace Compiler.Presenter
             richTextBox.VScroll += RichTextBox_VScroll;
             richTextBox.DragEnter += RichTextBox_DragEnter;
             richTextBox.DragDrop += RichTextBox_DragDrop;
+            richTextBox.MouseWheel += RichTextBox_MouseWheel;
             _undoStacks[richTextBox] = new Stack<string>();
             _redoStacks[richTextBox] = new Stack<string>();
-
+            _undoStacks[richTextBox].Push("");
             splitContainerP1.Panel1.Controls.Add(lineNumberRichTextBox);
             splitContainerP1.Panel2.Controls.Add(richTextBox);
 
-            DataGridView dataGridView = new DataGridView
-            {
-                Dock = DockStyle.Fill,
-                BackgroundColor = Color.White,
-                ReadOnly = true
-            };
+            DataGridView dataGridView = InitializeDataGridView();
 
             splitContainer.Panel1.Controls.Add(splitContainerP1);
             splitContainer.Panel2.Controls.Add(dataGridView);
@@ -146,6 +145,62 @@ namespace Compiler.Presenter
             tabPage.Controls.Add(splitContainer);
 
             _tabControl.TabPages.Add(tabPage);
+        }
+
+        private DataGridView InitializeDataGridView()
+        {
+            DataGridView dataGridView = new DataGridView
+            {
+                Dock = DockStyle.Fill,
+                Font = text_manager.SelectedFontOutput,
+                ForeColor = text_manager.SelectedColor,
+                BackgroundColor = Color.White,
+                BorderStyle = BorderStyle.Fixed3D,
+                ReadOnly = true,
+                EnableHeadersVisualStyles = false,
+                RowHeadersVisible = false,
+                AllowUserToAddRows = false,
+                AllowUserToDeleteRows = false,
+                AllowUserToResizeRows = false,
+            };
+            // Отключаем автоматическое создание колонок.
+            dataGridView.AutoGenerateColumns = false;
+
+            // Добавление колонок
+            DataGridViewTextBoxColumn lineNumberColumn = new DataGridViewTextBoxColumn();
+            lineNumberColumn.HeaderText = ""; // № строк, который вы добавляете сами, без заголовка
+            lineNumberColumn.Width = 30; // Задайте нужную ширину
+            lineNumberColumn.ReadOnly = true; // Чтобы нельзя было редактировать столбец с номером строки.
+            dataGridView.Columns.Add(lineNumberColumn);
+
+            DataGridViewTextBoxColumn filePathColumn = new DataGridViewTextBoxColumn();
+            filePathColumn.HeaderText = MyString.dgvFilePath;
+            filePathColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView.Columns.Add(filePathColumn);
+
+            DataGridViewTextBoxColumn lineColumn = new DataGridViewTextBoxColumn();
+            lineColumn.HeaderText = MyString.dgvLine;
+            lineColumn.Width = 50; // Задайте нужную ширину
+            dataGridView.Columns.Add(lineColumn);
+
+            DataGridViewTextBoxColumn columnColumn = new DataGridViewTextBoxColumn();
+            columnColumn.HeaderText = MyString.dgvColumn;
+            columnColumn.Width = 60; // Задайте нужную ширину
+            dataGridView.Columns.Add(columnColumn);
+
+            DataGridViewTextBoxColumn messageColumn = new DataGridViewTextBoxColumn();
+            messageColumn.HeaderText = MyString.dgvMessage;
+            messageColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView.Columns.Add(messageColumn);
+
+            dataGridView.Rows.Add("1", @"D:\clang\project\StaticAnalyzer\StaticAnalyzer\codeTests.cpp", "28", "27", "Possible null pointer dereference: file");
+            dataGridView.Rows.Add("2", @"D:\clang\project\StaticAnalyzer\StaticAnalyzer\codeTests.cpp", "28", "27", "Uninitialized pointer: file");
+
+            dataGridView.AlternatingRowsDefaultCellStyle.BackColor = System.Drawing.Color.LightGray; // Чередование цветов строк
+            dataGridView.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.WhiteSmoke; // Цвет фона заголовков
+            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            filePathColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            return dataGridView;
         }
 
         // Появление диалогового окна для задания имени файла
@@ -160,10 +215,10 @@ namespace Compiler.Presenter
                 StartPosition = FormStartPosition.CenterParent
             };
 
-            Label textLabel = new Label() { Left = 50, Top = 20, Text = "Название файла:" };
+            Label textLabel = new Label() { Left = 50, Top = 20, Text = MyString.NameFile };
             TextBox textBox = new TextBox() { Text = "NewFile", Left = 50, Top = 50, Width = 200 };
-            Button confirmation = new Button() { Text = "OK", Left = 50, Width = 100, Height = 30, Top = 90, DialogResult = DialogResult.OK };
-            Button cancel = new Button() { Text = "Отмена", Left = 150, Width = 100, Height = 30, Top = 90, DialogResult = DialogResult.Cancel };
+            Button confirmation = new Button() { Text = MyString.OK, Left = 50, Width = 100, Height = 30, Top = 90, DialogResult = DialogResult.OK };
+            Button cancel = new Button() { Text = MyString.Cancel, Left = 150, Width = 100, Height = 30, Top = 90, DialogResult = DialogResult.Cancel };
 
             confirmation.Click += (sender, e) => { prompt.Close(); };
             cancel.Click += (sender, e) => { prompt.Close(); };
@@ -180,6 +235,7 @@ namespace Compiler.Presenter
         }
         #endregion
 
+
         #region [ Открытие файла ]
 
         // Методы для открытия файла с считыванием его содержимого
@@ -188,7 +244,7 @@ namespace Compiler.Presenter
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
             openFileDialog.Filter = "Текстовые файлы (*.txt)|*.txt|Все файлы (*.*)|*.*";
-            openFileDialog.Title = "Выберите текстовый файл";
+            openFileDialog.Title = MyString.ChooseFile;
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -199,7 +255,7 @@ namespace Compiler.Presenter
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Ошибка при открытии файла: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(MyString.ErrorOpenFile + ex.Message, MyString.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -239,7 +295,9 @@ namespace Compiler.Presenter
                 IncludeTextFromFile(file);
             }
         }
+
         #endregion
+
 
         #region [ Сохранение файлов ]
 
@@ -251,7 +309,7 @@ namespace Compiler.Presenter
                 TabPage currentTabPage = _tabControl.SelectedTab;
                 if (!tabPageFilePaths.ContainsKey(currentTabPage) || string.IsNullOrEmpty(tabPageFilePaths[currentTabPage]))
                 {
-                    SaveFileAs(); // Если файл еще не был сохранен, показываем "Сохранить как..."
+                    SaveFileAs(); 
                 }
                 else
                 {
@@ -270,7 +328,7 @@ namespace Compiler.Presenter
                 TabPage currentTabPage = _tabControl.SelectedTab;
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 saveFileDialog.Filter = "Текстовые файлы (*.txt)|*.txt|Rich Text Format (*.rtf)|*.rtf|Все файлы (*.*)|*.*";
-                saveFileDialog.Title = "Сохранить как";
+                saveFileDialog.Title = MyString.SaveAs;
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
@@ -290,16 +348,17 @@ namespace Compiler.Presenter
             {
                 RichTextBox richTextBox = GetSelectedRichTextBox();
                 File.WriteAllText(filePath, richTextBox.Text);
-                MessageBox.Show("Файл успешно сохранен.", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(MyString.SuccessFileSave, MyString.Saving, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 richTextBox.Modified = false;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при сохранении файла: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(MyString.ErrorSaveFile + ex.Message , MyString.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         #endregion
+
 
         #region [ Закрыть вкладку/приложение ] 
 
@@ -311,7 +370,7 @@ namespace Compiler.Presenter
 
             if (richTextBox.Modified)
             {
-                DialogResult result = MessageBox.Show($"Сохранить изменения в файле \"{tabPageToClose.Text}\" перед закрытием?", "Сохранение", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show(MyString.SavingChangesFile + tabPageToClose.Text, MyString.Saving, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                 {
@@ -331,16 +390,16 @@ namespace Compiler.Presenter
         // Закрыть приложение
         public void CLoseCompilyator()
         {
-            for (int i = 0; i < _tabControl.Controls.Count; i++)
+            for (int i = _tabControl.Controls.Count; i >0 ; i--)
             {
                 _tabControl.SelectedIndex = i;
 
-                TabPage tabPageToClose = _tabControl.TabPages[i];
+                TabPage tabPageToClose = _tabControl.TabPages[i-1];
                 RichTextBox richTextBox = GetSelectedRichTextBox(tabPageToClose);
 
                 if (richTextBox.Modified)
                 {
-                    DialogResult result = MessageBox.Show($"Сохранить изменения в файле \"{tabPageToClose.Text}\" перед выходом?", "Сохранение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult result = MessageBox.Show( MyString.SavingChangesFile + tabPageToClose.Text, MyString.Saving, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                     if (result == DialogResult.Yes)
                     {
@@ -359,24 +418,25 @@ namespace Compiler.Presenter
 
         #endregion
 
+
         #region [ Отменить/Повторить ]
 
         // Нажатие на кнопку "Отменить" 
-        public async void UndoButton_Click()
+        public void UndoButton_Click()
         {
             RichTextBox currentTextBox = GetSelectedRichTextBox();
             if (currentTextBox == null) return;
 
             Stack<string> undoStack = _undoStacks[currentTextBox];
             Stack<string> redoStack = _redoStacks[currentTextBox];
-            if (undoStack.Count > 1)
+            if (undoStack.Count > 0)
             {
                 isUndoRedoInProgress = true; // Блокируем TextChanged
                 try
                 {
-                    if (redoStack.Count == 0 && undoStack.Peek() == currentTextBox.Text) redoStack.Push(undoStack.Pop());
+                    if (redoStack.Count == 0 && undoStack.Peek() == currentTextBox.Text && undoStack.Count != 1) redoStack.Push(undoStack.Pop());
                     else redoStack.Push(currentTextBox.Text);
-                    string previousState = undoStack.Pop();
+                    previousState = undoStack.Pop();
                     currentTextBox.Text = previousState;
                     currentTextBox.SelectionStart = currentTextBox.TextLength;
                     currentTextBox.ScrollToCaret();
@@ -390,7 +450,7 @@ namespace Compiler.Presenter
         }
 
         // Нажатие на кнопку "Повторить" 
-        public async void RedoButton_Click()
+        public void RedoButton_Click()
         {
             RichTextBox currentTextBox = GetSelectedRichTextBox();
             if (currentTextBox == null) return;
@@ -433,8 +493,10 @@ namespace Compiler.Presenter
         {
             Stack<string> undoStack = _undoStacks[richTextBox];
             Stack<string> redoStack = _redoStacks[richTextBox];
+
             if (undoStack.Count == 0 || richTextBox.Text != undoStack.Peek())
             {
+                if (redoStack.Count > 0) undoStack.Push(previousState);
                 undoStack.Push(richTextBox.Text);
                 UpdateUndoRedoButtonStates();
                 redoStack.Clear();
@@ -443,13 +505,14 @@ namespace Compiler.Presenter
             {
                 string[] undoArray = undoStack.ToArray();
                 undoStack.Clear();
-                for (int i = undoArray.Length - 2; i > -1; i--)
+                for (int i = undoArray.Length - 1; i > -1; i--)
                 {
                     undoStack.Push(undoArray[i]);
                 }
             }
         }
         #endregion
+
 
         #region [ Копировать  Вырезать    Вставить    Удалить   Выделить всё ]
 
@@ -507,6 +570,7 @@ namespace Compiler.Presenter
 
         #endregion
 
+
         #region [ Шрифт Цвет Подсветка ]
 
         // Выбор шрифта
@@ -515,7 +579,14 @@ namespace Compiler.Presenter
             text_manager.SettingsFont();
             FontRTBs();
         }
-
+        public void SetFontOutput()
+        {
+            text_manager.SettingsFontOutput();
+            TabPage currentTabPage = _tabControl.SelectedTab;
+            SplitContainer splitContainer = (SplitContainer)currentTabPage.Controls[0];
+            DataGridView dataGridView = (DataGridView)splitContainer.Panel2.Controls[0];
+            dataGridView.Font = text_manager.SelectedFontOutput;
+        }
         public void SettingsColorKeywords()
         {
             Form prompt = new Form()
@@ -523,18 +594,18 @@ namespace Compiler.Presenter
                 Width = 500,
                 Height = 300,
                 FormBorderStyle = FormBorderStyle.FixedDialog,
-                Text = "Выбор цвета",
+                Text = MyString.ChooseColor,
                 StartPosition = FormStartPosition.CenterParent
             };
 
-            Label textLabel = new Label() { Left = 50, Top = 20, Text = "Выберете цвет какого типа слов вы хотите изменить:",AutoSize = true};
-            Label currentLabelColor = new Label() { Left = 70, Top = 50, Text = "Текущий цвет", AutoSize = true };
+            Label textLabel = new Label() { Left = 30, Top = 20, Text = MyString.ChangeColorKeyword,AutoSize = true};
+            Label currentLabelColor = new Label() { Left = 70, Top = 50, Text = MyString.CurrentColor, AutoSize = true };
             Panel pTypes = new Panel() { BorderStyle = BorderStyle.Fixed3D,BackColor = text_manager.ColorTypes, Width = 40, Height = 40, Left = 100, Top = 80 };
-            Button btn_Types = new Button() { Text = "Типы данных", Left = 275, Width = 125, Height = 40, Top = 80 };
+            Button btn_Types = new Button() { Text = MyString.TypesOfData, Left = 275, Width = 125, Height = 40, Top = 80 };
             Panel pOperators = new Panel() { BorderStyle = BorderStyle.Fixed3D, BackColor = text_manager.ColorOperators, Width = 40, Height = 40, Left = 100, Top = 130 };
-            Button btn_Operators = new Button() { Text = "Операторы", Left = 275, Width = 125, Height = 40, Top = 130 };
+            Button btn_Operators = new Button() { Text = MyString.Operators, Left = 275, Width = 125, Height = 40, Top = 130 };
             Panel pEnum = new Panel() { BorderStyle = BorderStyle.Fixed3D, BackColor = text_manager.ColorEnum, Width = 40, Height = 40, Left = 100, Top = 180 };
-            Button btn_Enum = new Button() { Text = "Перечисления", Left = 275, Width = 125, Height = 40, Top = 180 };
+            Button btn_Enum = new Button() { Text = MyString.Enum, Left = 275, Width = 125, Height = 40, Top = 180 };
 
             btn_Types.Click += (sender, e) => { prompt.Close(); SettingsColorTypes(); };
             btn_Operators.Click += (sender, e) => { prompt.Close(); SettingsColorOperators(); };
@@ -550,6 +621,7 @@ namespace Compiler.Presenter
             prompt.Controls.Add(btn_Enum);
             prompt.ShowDialog();
         }
+
         #region [ Цвет ключевых слов]
 
         // Типы данных
@@ -622,11 +694,17 @@ namespace Compiler.Presenter
         }
 
         //Подсветка всех ключевых слов
-        private void HighlightAllKeywords(RichTextBox richTextBox)
+        private async void HighlightAllKeywords(RichTextBox richTextBox)
         {
-            HighlightKeywords(richTextBox, text_manager.KeywordsTypes, text_manager.ColorTypes);
-            HighlightKeywords(richTextBox, text_manager.KeywordsOperators, text_manager.ColorOperators);
-            HighlightKeywords(richTextBox, text_manager.KeywordsEnum, text_manager.ColorEnum);
+            richTextBox.Invoke((MethodInvoker)delegate {
+                HighlightKeywords(richTextBox, text_manager.KeywordsTypes, text_manager.ColorTypes);
+            });
+            richTextBox.Invoke((MethodInvoker)delegate {
+                HighlightKeywords(richTextBox, text_manager.KeywordsOperators, text_manager.ColorOperators);
+            });
+            richTextBox.Invoke((MethodInvoker)delegate {
+                HighlightKeywords(richTextBox, text_manager.KeywordsEnum, text_manager.ColorEnum);
+            });
         }
         private void HighlightKeywords(RichTextBox richTextBox, string[] keywords, Color highlightColor)
         {
@@ -720,7 +798,7 @@ namespace Compiler.Presenter
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Ошибка в прокрутке: {ex.Message}");
+                Console.WriteLine(MyString.ErrorScroll + ex.Message);
             }
         }
 

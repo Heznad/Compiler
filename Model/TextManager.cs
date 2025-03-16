@@ -12,7 +12,8 @@ namespace Compiler.Model
         string[] _keywordsTypes = { "int", "bool", "char", "double", "float", "void", "class" };
         string[] _keywordsOperators = { "if", "else", "for","switch", "case", "while", "return" };
         string[] _keywordsEnum = { "enum" };
-        private Font _selectedFont = new Font("Verdana", 12F); 
+        private Font _selectedFont = new Font("Verdana", 12F);
+        private Font _selectedFontOutput = new Font("Verdana", 10F);
         private Color _selectedColor = Color.Black;
         private Color _colorTypes = Color.Blue;
         private Color _colorOperators = Color.DeepPink;
@@ -22,6 +23,7 @@ namespace Compiler.Model
         public string[] KeywordsOperators { get => _keywordsOperators; set => _keywordsOperators = value; }
         public string[] KeywordsEnum { get => _keywordsEnum; set => _keywordsEnum = value; }
         public Font SelectedFont { get => _selectedFont; set => _selectedFont = value; }
+        public Font SelectedFontOutput { get => _selectedFontOutput; set => _selectedFontOutput = value; }
         public Color SelectedColor { get => _selectedColor; set => _selectedColor=value; }
         public Color ColorTypes { get => _colorTypes; set => _colorTypes = value; }
         public Color ColorOperators { get => _colorOperators; set => _colorOperators = value; }
@@ -40,7 +42,16 @@ namespace Compiler.Model
                 SelectedFont = fontDialog.Font;
             }
         }
+        public void SettingsFontOutput()
+        {
+            FontDialog fontDialog = new FontDialog();
+            fontDialog.Font = SelectedFontOutput;
 
+            if (fontDialog.ShowDialog() == DialogResult.OK)
+            {
+                SelectedFontOutput = fontDialog.Font;
+            }
+        }
         // Выбор цвета
         public Color SettingsColorFont(Color currentColor)
         {

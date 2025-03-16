@@ -1,0 +1,531 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    Microsoft ResX Schema
+
+    Version 2.0
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
+    associated with the data types.
+
+    Example:
+
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+
+    There are any number of "resheader" rows that contain simple
+    name/value pairs.
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
+    mimetype set.
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
+    extensible. For a given mimetype the value must be set accordingly:
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
+    read any of the formats listed below.
+
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="tsmi_File.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 24</value>
+  </data>
+  <data name="tsmi_File.Text" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="tsmi_Correction.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 24</value>
+  </data>
+  <data name="tsmi_Correction.Text" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="tsmi_Text.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 24</value>
+  </data>
+  <data name="tsmi_Text.Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="пускToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 24</value>
+  </data>
+  <data name="пускToolStripMenuItem.Text" xml:space="preserve">
+    <value>Run</value>
+  </data>
+  <data name="tsmi_Reference.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 24</value>
+  </data>
+  <data name="tsmi_Reference.Text" xml:space="preserve">
+    <value>Reference</value>
+  </data>
+  <data name="tsmi_Localization.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 24</value>
+  </data>
+  <data name="tsmi_Localization.Text" xml:space="preserve">
+    <value>Localization</value>
+  </data>
+  <data name="tsmi_View.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 24</value>
+  </data>
+  <data name="tsmi_View.Text" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="menuStrip1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tsmi_Create.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 26</value>
+  </data>
+  <data name="tsmi_Create.Text" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="tsmi_Open.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 26</value>
+  </data>
+  <data name="tsmi_Open.Text" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="tsmi_Save.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 26</value>
+  </data>
+  <data name="tsmi_Save.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="tsmi_SaveAs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 26</value>
+  </data>
+  <data name="tsmi_SaveAs.Text" xml:space="preserve">
+    <value>Save as</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 6</value>
+  </data>
+  <data name="tsmi_Exit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 26</value>
+  </data>
+  <data name="tsmi_Exit.Text" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="tsmi_Undo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 26</value>
+  </data>
+  <data name="tsmi_Undo.Text" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="tsmi_Redo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 26</value>
+  </data>
+  <data name="tsmi_Redo.Text" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="tsmi_Cut.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 26</value>
+  </data>
+  <data name="tsmi_Cut.Text" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="tsmi_Copy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 26</value>
+  </data>
+  <data name="tsmi_Copy.Text" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="tsmi_Paste.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 26</value>
+  </data>
+  <data name="tsmi_Paste.Text" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="tsmi_Delete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 26</value>
+  </data>
+  <data name="tsmi_Delete.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="tsmi_SelectAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 26</value>
+  </data>
+  <data name="tsmi_SelectAll.Text" xml:space="preserve">
+    <value>Select all</value>
+  </data>
+  <data name="постановкаЗадачиToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 26</value>
+  </data>
+  <data name="постановкаЗадачиToolStripMenuItem.Text" xml:space="preserve">
+    <value>Problem statement</value>
+  </data>
+  <data name="грамматикаToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 26</value>
+  </data>
+  <data name="грамматикаToolStripMenuItem.Text" xml:space="preserve">
+    <value>Grammar</value>
+  </data>
+  <data name="классификацияГрамматикиToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 26</value>
+  </data>
+  <data name="классификацияГрамматикиToolStripMenuItem.Text" xml:space="preserve">
+    <value>Grammar classification</value>
+  </data>
+  <data name="методАнализаToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 26</value>
+  </data>
+  <data name="методАнализаToolStripMenuItem.Text" xml:space="preserve">
+    <value>Analysis method</value>
+  </data>
+  <data name="диагностикаИToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 26</value>
+  </data>
+  <data name="диагностикаИToolStripMenuItem.Text" xml:space="preserve">
+    <value>Diagnosis and neutralization of errors</value>
+  </data>
+  <data name="тестовыйПримерToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 26</value>
+  </data>
+  <data name="тестовыйПримерToolStripMenuItem.Text" xml:space="preserve">
+    <value>Test example</value>
+  </data>
+  <data name="списокЛитературыToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 26</value>
+  </data>
+  <data name="списокЛитературыToolStripMenuItem.Text" xml:space="preserve">
+    <value>List of literature</value>
+  </data>
+  <data name="исходныйКодПрограммыToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 26</value>
+  </data>
+  <data name="исходныйКодПрограммыToolStripMenuItem.Text" xml:space="preserve">
+    <value>Program source code</value>
+  </data>
+  <data name="tsmi_Help.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 26</value>
+  </data>
+  <data name="tsmi_Help.Text" xml:space="preserve">
+    <value>Calling help</value>
+  </data>
+  <data name="tsmi_Info.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 26</value>
+  </data>
+  <data name="tsmi_Info.Text" xml:space="preserve">
+    <value>About the program</value>
+  </data>
+  <data name="tsmi_Russian.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 26</value>
+  </data>
+  <data name="tsmi_Russian.Text" xml:space="preserve">
+    <value>Russian</value>
+  </data>
+  <data name="tsmi_English.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 26</value>
+  </data>
+  <data name="tsmi_English.Text" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="tsmi_FontInput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 26</value>
+  </data>
+  <data name="tsmi_FontInput.Text" xml:space="preserve">
+    <value>Font of the input area</value>
+  </data>
+  <data name="tsmi_FontOutput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 26</value>
+  </data>
+  <data name="tsmi_FontOutput.Text" xml:space="preserve">
+    <value>Font of the output area</value>
+  </data>
+  <data name="tsmi_ColorFont.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 26</value>
+  </data>
+  <data name="tsmi_ColorFont.Text" xml:space="preserve">
+    <value>Font Color</value>
+  </data>
+  <data name="tsmi_ColorKeywords.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 26</value>
+  </data>
+  <data name="tsmi_ColorKeywords.Text" xml:space="preserve">
+    <value>Keyword Color</value>
+  </data>
+  <data name="statusStrip1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="toolStripStatusLabelText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 20</value>
+  </data>
+  <data name="toolStripStatusLabelText.Text" xml:space="preserve">
+    <value>Current date and time:</value>
+  </data>
+  <data name="panel_Buttons.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="btn_Info.ToolTip" xml:space="preserve">
+    <value>About the program</value>
+  </data>
+  <data name="btn_Help.ToolTip" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="btn_Start.ToolTip" xml:space="preserve">
+    <value>Run</value>
+  </data>
+  <data name="btn_Put.ToolTip" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="btn_Cut.ToolTip" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="btn_Copy.ToolTip" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="btn_Redo.ToolTip" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="btn_Undo.ToolTip" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="btn_Save.ToolTip" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="btn_Open.ToolTip" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="btn_Create.ToolTip" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="tabControl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="richTextBox2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="richTextBox1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Compiler</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+</root>

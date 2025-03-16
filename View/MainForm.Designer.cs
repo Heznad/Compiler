@@ -63,7 +63,8 @@
             tsmi_Russian = new ToolStripMenuItem();
             tsmi_English = new ToolStripMenuItem();
             tsmi_View = new ToolStripMenuItem();
-            tsmi_Font = new ToolStripMenuItem();
+            tsmi_FontInput = new ToolStripMenuItem();
+            tsmi_FontOutput = new ToolStripMenuItem();
             tsmi_ColorFont = new ToolStripMenuItem();
             tsmi_ColorKeywords = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
@@ -98,58 +99,49 @@
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
             menuStrip1.Items.AddRange(new ToolStripItem[] { tsmi_File, tsmi_Correction, tsmi_Text, пускToolStripMenuItem, tsmi_Reference, tsmi_Localization, tsmi_View });
-            menuStrip1.Location = new Point(0, 0);
+            resources.ApplyResources(menuStrip1, "menuStrip1");
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 28);
-            menuStrip1.TabIndex = 0;
-            menuStrip1.Text = "menuStrip1";
             // 
             // tsmi_File
             // 
             tsmi_File.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Create, tsmi_Open, tsmi_Save, tsmi_SaveAs, toolStripSeparator1, tsmi_Exit });
             tsmi_File.ForeColor = Color.Black;
             tsmi_File.Name = "tsmi_File";
-            tsmi_File.Size = new Size(59, 24);
-            tsmi_File.Text = "Файл";
+            resources.ApplyResources(tsmi_File, "tsmi_File");
             // 
             // tsmi_Create
             // 
             tsmi_Create.Name = "tsmi_Create";
-            tsmi_Create.Size = new Size(192, 26);
-            tsmi_Create.Text = "Создать";
+            resources.ApplyResources(tsmi_Create, "tsmi_Create");
             tsmi_Create.Click += btn_File_Click;
             // 
             // tsmi_Open
             // 
             tsmi_Open.Name = "tsmi_Open";
-            tsmi_Open.Size = new Size(192, 26);
-            tsmi_Open.Text = "Открыть";
+            resources.ApplyResources(tsmi_Open, "tsmi_Open");
             tsmi_Open.Click += btn_Folder_Click;
             // 
             // tsmi_Save
             // 
             tsmi_Save.Name = "tsmi_Save";
-            tsmi_Save.Size = new Size(192, 26);
-            tsmi_Save.Text = "Сохранить";
+            resources.ApplyResources(tsmi_Save, "tsmi_Save");
             tsmi_Save.Click += btn_Save_Click;
             // 
             // tsmi_SaveAs
             // 
             tsmi_SaveAs.Name = "tsmi_SaveAs";
-            tsmi_SaveAs.Size = new Size(192, 26);
-            tsmi_SaveAs.Text = "Сохранить как";
+            resources.ApplyResources(tsmi_SaveAs, "tsmi_SaveAs");
             tsmi_SaveAs.Click += btn_SaveAs_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(189, 6);
+            resources.ApplyResources(toolStripSeparator1, "toolStripSeparator1");
             // 
             // tsmi_Exit
             // 
             tsmi_Exit.Name = "tsmi_Exit";
-            tsmi_Exit.Size = new Size(192, 26);
-            tsmi_Exit.Text = "Выход";
+            resources.ApplyResources(tsmi_Exit, "tsmi_Exit");
             tsmi_Exit.Click += btn_Exit_Click;
             // 
             // tsmi_Correction
@@ -157,56 +149,48 @@
             tsmi_Correction.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Undo, tsmi_Redo, tsmi_Cut, tsmi_Copy, tsmi_Paste, tsmi_Delete, tsmi_SelectAll });
             tsmi_Correction.ForeColor = Color.Black;
             tsmi_Correction.Name = "tsmi_Correction";
-            tsmi_Correction.Size = new Size(74, 24);
-            tsmi_Correction.Text = "Правка";
+            resources.ApplyResources(tsmi_Correction, "tsmi_Correction");
             // 
             // tsmi_Undo
             // 
             tsmi_Undo.Name = "tsmi_Undo";
-            tsmi_Undo.Size = new Size(186, 26);
-            tsmi_Undo.Text = "Отменить";
+            resources.ApplyResources(tsmi_Undo, "tsmi_Undo");
             tsmi_Undo.Click += btn_Undo_Click;
             // 
             // tsmi_Redo
             // 
             tsmi_Redo.Name = "tsmi_Redo";
-            tsmi_Redo.Size = new Size(186, 26);
-            tsmi_Redo.Text = "Повторить";
+            resources.ApplyResources(tsmi_Redo, "tsmi_Redo");
             tsmi_Redo.Click += btn_Redo_Click;
             // 
             // tsmi_Cut
             // 
             tsmi_Cut.Name = "tsmi_Cut";
-            tsmi_Cut.Size = new Size(186, 26);
-            tsmi_Cut.Text = "Вырезать";
+            resources.ApplyResources(tsmi_Cut, "tsmi_Cut");
             tsmi_Cut.Click += btn_Cut_Click;
             // 
             // tsmi_Copy
             // 
             tsmi_Copy.Name = "tsmi_Copy";
-            tsmi_Copy.Size = new Size(186, 26);
-            tsmi_Copy.Text = "Копировать";
+            resources.ApplyResources(tsmi_Copy, "tsmi_Copy");
             tsmi_Copy.Click += btn_Copy_Click;
             // 
             // tsmi_Paste
             // 
             tsmi_Paste.Name = "tsmi_Paste";
-            tsmi_Paste.Size = new Size(186, 26);
-            tsmi_Paste.Text = "Вставить";
+            resources.ApplyResources(tsmi_Paste, "tsmi_Paste");
             tsmi_Paste.Click += btn_Put_Click;
             // 
             // tsmi_Delete
             // 
             tsmi_Delete.Name = "tsmi_Delete";
-            tsmi_Delete.Size = new Size(186, 26);
-            tsmi_Delete.Text = "Удалить";
+            resources.ApplyResources(tsmi_Delete, "tsmi_Delete");
             tsmi_Delete.Click += tsmi_Delete_Click;
             // 
             // tsmi_SelectAll
             // 
             tsmi_SelectAll.Name = "tsmi_SelectAll";
-            tsmi_SelectAll.Size = new Size(186, 26);
-            tsmi_SelectAll.Text = "Выделить все";
+            resources.ApplyResources(tsmi_SelectAll, "tsmi_SelectAll");
             tsmi_SelectAll.Click += tsmi_SelectAll_Click;
             // 
             // tsmi_Text
@@ -214,84 +198,71 @@
             tsmi_Text.DropDownItems.AddRange(new ToolStripItem[] { постановкаЗадачиToolStripMenuItem, грамматикаToolStripMenuItem, классификацияГрамматикиToolStripMenuItem, методАнализаToolStripMenuItem, диагностикаИToolStripMenuItem, тестовыйПримерToolStripMenuItem, списокЛитературыToolStripMenuItem, исходныйКодПрограммыToolStripMenuItem });
             tsmi_Text.ForeColor = Color.Black;
             tsmi_Text.Name = "tsmi_Text";
-            tsmi_Text.Size = new Size(59, 24);
-            tsmi_Text.Text = "Текст";
+            resources.ApplyResources(tsmi_Text, "tsmi_Text");
             // 
             // постановкаЗадачиToolStripMenuItem
             // 
             постановкаЗадачиToolStripMenuItem.Name = "постановкаЗадачиToolStripMenuItem";
-            постановкаЗадачиToolStripMenuItem.Size = new Size(363, 26);
-            постановкаЗадачиToolStripMenuItem.Text = "Постановка задачи";
+            resources.ApplyResources(постановкаЗадачиToolStripMenuItem, "постановкаЗадачиToolStripMenuItem");
             // 
             // грамматикаToolStripMenuItem
             // 
             грамматикаToolStripMenuItem.Name = "грамматикаToolStripMenuItem";
-            грамматикаToolStripMenuItem.Size = new Size(363, 26);
-            грамматикаToolStripMenuItem.Text = "Грамматика";
+            resources.ApplyResources(грамматикаToolStripMenuItem, "грамматикаToolStripMenuItem");
             // 
             // классификацияГрамматикиToolStripMenuItem
             // 
             классификацияГрамматикиToolStripMenuItem.Name = "классификацияГрамматикиToolStripMenuItem";
-            классификацияГрамматикиToolStripMenuItem.Size = new Size(363, 26);
-            классификацияГрамматикиToolStripMenuItem.Text = "Классификация грамматики";
+            resources.ApplyResources(классификацияГрамматикиToolStripMenuItem, "классификацияГрамматикиToolStripMenuItem");
             // 
             // методАнализаToolStripMenuItem
             // 
             методАнализаToolStripMenuItem.Name = "методАнализаToolStripMenuItem";
-            методАнализаToolStripMenuItem.Size = new Size(363, 26);
-            методАнализаToolStripMenuItem.Text = "Метод анализа";
+            resources.ApplyResources(методАнализаToolStripMenuItem, "методАнализаToolStripMenuItem");
             // 
             // диагностикаИToolStripMenuItem
             // 
             диагностикаИToolStripMenuItem.Name = "диагностикаИToolStripMenuItem";
-            диагностикаИToolStripMenuItem.Size = new Size(363, 26);
-            диагностикаИToolStripMenuItem.Text = "Диагностика и нейтрализация ошибок";
+            resources.ApplyResources(диагностикаИToolStripMenuItem, "диагностикаИToolStripMenuItem");
             // 
             // тестовыйПримерToolStripMenuItem
             // 
             тестовыйПримерToolStripMenuItem.Name = "тестовыйПримерToolStripMenuItem";
-            тестовыйПримерToolStripMenuItem.Size = new Size(363, 26);
-            тестовыйПримерToolStripMenuItem.Text = "Тестовый пример";
+            resources.ApplyResources(тестовыйПримерToolStripMenuItem, "тестовыйПримерToolStripMenuItem");
             // 
             // списокЛитературыToolStripMenuItem
             // 
             списокЛитературыToolStripMenuItem.Name = "списокЛитературыToolStripMenuItem";
-            списокЛитературыToolStripMenuItem.Size = new Size(363, 26);
-            списокЛитературыToolStripMenuItem.Text = "Список литературы";
+            resources.ApplyResources(списокЛитературыToolStripMenuItem, "списокЛитературыToolStripMenuItem");
             // 
             // исходныйКодПрограммыToolStripMenuItem
             // 
             исходныйКодПрограммыToolStripMenuItem.Name = "исходныйКодПрограммыToolStripMenuItem";
-            исходныйКодПрограммыToolStripMenuItem.Size = new Size(363, 26);
-            исходныйКодПрограммыToolStripMenuItem.Text = "Исходный код программы";
+            resources.ApplyResources(исходныйКодПрограммыToolStripMenuItem, "исходныйКодПрограммыToolStripMenuItem");
             // 
             // пускToolStripMenuItem
             // 
             пускToolStripMenuItem.ForeColor = Color.Black;
             пускToolStripMenuItem.Name = "пускToolStripMenuItem";
-            пускToolStripMenuItem.Size = new Size(55, 24);
-            пускToolStripMenuItem.Text = "Пуск";
+            resources.ApplyResources(пускToolStripMenuItem, "пускToolStripMenuItem");
             // 
             // tsmi_Reference
             // 
             tsmi_Reference.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Help, tsmi_Info });
             tsmi_Reference.ForeColor = Color.Black;
             tsmi_Reference.Name = "tsmi_Reference";
-            tsmi_Reference.Size = new Size(81, 24);
-            tsmi_Reference.Text = "Справка";
+            resources.ApplyResources(tsmi_Reference, "tsmi_Reference");
             // 
             // tsmi_Help
             // 
             tsmi_Help.Name = "tsmi_Help";
-            tsmi_Help.Size = new Size(197, 26);
-            tsmi_Help.Text = "Вызов справки";
+            resources.ApplyResources(tsmi_Help, "tsmi_Help");
             tsmi_Help.Click += btn_Info_Click;
             // 
             // tsmi_Info
             // 
             tsmi_Info.Name = "tsmi_Info";
-            tsmi_Info.Size = new Size(197, 26);
-            tsmi_Info.Text = "О программе";
+            resources.ApplyResources(tsmi_Info, "tsmi_Info");
             tsmi_Info.Click += btn_Info_Click;
             // 
             // tsmi_Localization
@@ -299,90 +270,87 @@
             tsmi_Localization.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Russian, tsmi_English });
             tsmi_Localization.ForeColor = Color.Black;
             tsmi_Localization.Name = "tsmi_Localization";
-            tsmi_Localization.Size = new Size(115, 24);
-            tsmi_Localization.Text = "Локализация";
+            resources.ApplyResources(tsmi_Localization, "tsmi_Localization");
             // 
             // tsmi_Russian
             // 
             tsmi_Russian.Name = "tsmi_Russian";
-            tsmi_Russian.Size = new Size(146, 26);
-            tsmi_Russian.Text = "Русский";
+            resources.ApplyResources(tsmi_Russian, "tsmi_Russian");
+            tsmi_Russian.Click += tsmi_Russian_Click;
             // 
             // tsmi_English
             // 
             tsmi_English.Name = "tsmi_English";
-            tsmi_English.Size = new Size(146, 26);
-            tsmi_English.Text = "English";
+            resources.ApplyResources(tsmi_English, "tsmi_English");
+            tsmi_English.Click += tsmi_English_Click;
             // 
             // tsmi_View
             // 
-            tsmi_View.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Font, tsmi_ColorFont, tsmi_ColorKeywords });
+            tsmi_View.DropDownItems.AddRange(new ToolStripItem[] { tsmi_FontInput, tsmi_FontOutput, tsmi_ColorFont, tsmi_ColorKeywords });
             tsmi_View.ForeColor = Color.Black;
             tsmi_View.Name = "tsmi_View";
-            tsmi_View.Size = new Size(49, 24);
-            tsmi_View.Text = "Вид";
+            resources.ApplyResources(tsmi_View, "tsmi_View");
             // 
-            // tsmi_Font
+            // tsmi_FontInput
             // 
-            tsmi_Font.Name = "tsmi_Font";
-            tsmi_Font.Size = new Size(234, 26);
-            tsmi_Font.Text = "Шрифт";
-            tsmi_Font.Click += tsmi_Font_Click;
+            tsmi_FontInput.Name = "tsmi_FontInput";
+            resources.ApplyResources(tsmi_FontInput, "tsmi_FontInput");
+            tsmi_FontInput.Click += tsmi_Font_Click;
+            // 
+            // tsmi_FontOutput
+            // 
+            tsmi_FontOutput.Name = "tsmi_FontOutput";
+            resources.ApplyResources(tsmi_FontOutput, "tsmi_FontOutput");
+            tsmi_FontOutput.Click += tsmi_FontOutput_Click;
             // 
             // tsmi_ColorFont
             // 
             tsmi_ColorFont.Name = "tsmi_ColorFont";
-            tsmi_ColorFont.Size = new Size(234, 26);
-            tsmi_ColorFont.Text = "Цвет шрифта";
+            resources.ApplyResources(tsmi_ColorFont, "tsmi_ColorFont");
             tsmi_ColorFont.Click += tsmi_ColorFont_Click;
             // 
             // tsmi_ColorKeywords
             // 
             tsmi_ColorKeywords.Name = "tsmi_ColorKeywords";
-            tsmi_ColorKeywords.Size = new Size(234, 26);
-            tsmi_ColorKeywords.Text = "Цвет ключевых слов";
+            resources.ApplyResources(tsmi_ColorKeywords, "tsmi_ColorKeywords");
             tsmi_ColorKeywords.Click += tsmi_ColorKeywords_Click;
             // 
             // statusStrip1
             // 
             statusStrip1.ImageScalingSize = new Size(20, 20);
             statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabelText, toolStripStatusLabelTime, toolStripStatusLabelDate, datelabel, timelabel });
-            statusStrip1.Location = new Point(0, 424);
+            resources.ApplyResources(statusStrip1, "statusStrip1");
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(800, 26);
-            statusStrip1.TabIndex = 1;
-            statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabelText
             // 
             toolStripStatusLabelText.ForeColor = Color.Black;
             toolStripStatusLabelText.Name = "toolStripStatusLabelText";
-            toolStripStatusLabelText.Size = new Size(165, 20);
-            toolStripStatusLabelText.Text = "Текущая дата и время:";
+            resources.ApplyResources(toolStripStatusLabelText, "toolStripStatusLabelText");
             // 
             // toolStripStatusLabelTime
             // 
             toolStripStatusLabelTime.ForeColor = Color.Black;
             toolStripStatusLabelTime.Name = "toolStripStatusLabelTime";
-            toolStripStatusLabelTime.Size = new Size(0, 20);
+            resources.ApplyResources(toolStripStatusLabelTime, "toolStripStatusLabelTime");
             // 
             // toolStripStatusLabelDate
             // 
             toolStripStatusLabelDate.ForeColor = Color.Black;
             toolStripStatusLabelDate.Name = "toolStripStatusLabelDate";
-            toolStripStatusLabelDate.Size = new Size(0, 20);
+            resources.ApplyResources(toolStripStatusLabelDate, "toolStripStatusLabelDate");
             // 
             // datelabel
             // 
             datelabel.ForeColor = Color.Black;
             datelabel.Name = "datelabel";
-            datelabel.Size = new Size(0, 20);
+            resources.ApplyResources(datelabel, "datelabel");
             // 
             // timelabel
             // 
             timelabel.ForeColor = Color.Black;
             timelabel.Name = "timelabel";
-            timelabel.Size = new Size(0, 20);
+            resources.ApplyResources(timelabel, "timelabel");
             // 
             // panel_Buttons
             // 
@@ -399,163 +367,115 @@
             panel_Buttons.Controls.Add(btn_Open);
             panel_Buttons.Controls.Add(btn_Create);
             panel_Buttons.ForeColor = Color.Silver;
-            panel_Buttons.Location = new Point(0, 28);
-            panel_Buttons.Margin = new Padding(0, 0, 0, 5);
+            resources.ApplyResources(panel_Buttons, "panel_Buttons");
             panel_Buttons.Name = "panel_Buttons";
-            panel_Buttons.Padding = new Padding(5);
-            panel_Buttons.Size = new Size(800, 58);
-            panel_Buttons.TabIndex = 2;
             // 
             // btn_Info
             // 
-            btn_Info.FlatStyle = FlatStyle.Flat;
+            resources.ApplyResources(btn_Info, "btn_Info");
             btn_Info.ForeColor = Color.Gainsboro;
             btn_Info.Image = Properties.Resources.info;
-            btn_Info.Location = new Point(606, 5);
-            btn_Info.Margin = new Padding(5);
             btn_Info.Name = "btn_Info";
-            btn_Info.Size = new Size(48, 48);
-            btn_Info.TabIndex = 10;
-            toolTip1.SetToolTip(btn_Info, "О программе");
+            toolTip1.SetToolTip(btn_Info, resources.GetString("btn_Info.ToolTip"));
             btn_Info.UseVisualStyleBackColor = true;
             btn_Info.Click += btn_Info_Click;
             // 
             // btn_Help
             // 
-            btn_Help.FlatStyle = FlatStyle.Flat;
+            resources.ApplyResources(btn_Help, "btn_Help");
             btn_Help.ForeColor = Color.Gainsboro;
             btn_Help.Image = Properties.Resources.help;
-            btn_Help.Location = new Point(548, 5);
-            btn_Help.Margin = new Padding(5);
             btn_Help.Name = "btn_Help";
-            btn_Help.Size = new Size(48, 48);
-            btn_Help.TabIndex = 9;
-            toolTip1.SetToolTip(btn_Help, "Вызов справки");
+            toolTip1.SetToolTip(btn_Help, resources.GetString("btn_Help.ToolTip"));
             btn_Help.UseVisualStyleBackColor = true;
             btn_Help.Click += btn_Info_Click;
             // 
             // btn_Start
             // 
-            btn_Start.FlatStyle = FlatStyle.Flat;
+            resources.ApplyResources(btn_Start, "btn_Start");
             btn_Start.ForeColor = Color.Gainsboro;
             btn_Start.Image = Properties.Resources.start;
-            btn_Start.Location = new Point(490, 5);
-            btn_Start.Margin = new Padding(5);
             btn_Start.Name = "btn_Start";
-            btn_Start.Size = new Size(48, 48);
-            btn_Start.TabIndex = 8;
-            toolTip1.SetToolTip(btn_Start, "Пуск");
+            toolTip1.SetToolTip(btn_Start, resources.GetString("btn_Start.ToolTip"));
             btn_Start.UseVisualStyleBackColor = true;
             // 
             // btn_Put
             // 
-            btn_Put.FlatStyle = FlatStyle.Flat;
+            resources.ApplyResources(btn_Put, "btn_Put");
             btn_Put.ForeColor = Color.Gainsboro;
             btn_Put.Image = Properties.Resources.put;
-            btn_Put.Location = new Point(432, 5);
-            btn_Put.Margin = new Padding(5);
             btn_Put.Name = "btn_Put";
-            btn_Put.Size = new Size(48, 48);
-            btn_Put.TabIndex = 7;
-            toolTip1.SetToolTip(btn_Put, "Вставить");
+            toolTip1.SetToolTip(btn_Put, resources.GetString("btn_Put.ToolTip"));
             btn_Put.UseVisualStyleBackColor = true;
             btn_Put.Click += btn_Put_Click;
             // 
             // btn_Cut
             // 
-            btn_Cut.FlatStyle = FlatStyle.Flat;
+            resources.ApplyResources(btn_Cut, "btn_Cut");
             btn_Cut.ForeColor = Color.Gainsboro;
             btn_Cut.Image = Properties.Resources.cut;
-            btn_Cut.Location = new Point(374, 5);
-            btn_Cut.Margin = new Padding(5);
             btn_Cut.Name = "btn_Cut";
-            btn_Cut.Size = new Size(48, 48);
-            btn_Cut.TabIndex = 6;
-            toolTip1.SetToolTip(btn_Cut, "Вырезать");
+            toolTip1.SetToolTip(btn_Cut, resources.GetString("btn_Cut.ToolTip"));
             btn_Cut.UseVisualStyleBackColor = true;
             btn_Cut.Click += btn_Cut_Click;
             // 
             // btn_Copy
             // 
-            btn_Copy.FlatStyle = FlatStyle.Flat;
+            resources.ApplyResources(btn_Copy, "btn_Copy");
             btn_Copy.ForeColor = Color.Gainsboro;
             btn_Copy.Image = Properties.Resources.copy;
-            btn_Copy.Location = new Point(316, 5);
-            btn_Copy.Margin = new Padding(5);
             btn_Copy.Name = "btn_Copy";
-            btn_Copy.Size = new Size(48, 48);
-            btn_Copy.TabIndex = 5;
-            toolTip1.SetToolTip(btn_Copy, "Копировать");
+            toolTip1.SetToolTip(btn_Copy, resources.GetString("btn_Copy.ToolTip"));
             btn_Copy.UseVisualStyleBackColor = true;
             btn_Copy.Click += btn_Copy_Click;
             // 
             // btn_Redo
             // 
-            btn_Redo.FlatStyle = FlatStyle.Flat;
+            resources.ApplyResources(btn_Redo, "btn_Redo");
             btn_Redo.ForeColor = Color.Gainsboro;
             btn_Redo.Image = Properties.Resources.forward;
-            btn_Redo.Location = new Point(258, 5);
-            btn_Redo.Margin = new Padding(5);
             btn_Redo.Name = "btn_Redo";
-            btn_Redo.Size = new Size(48, 48);
-            btn_Redo.TabIndex = 4;
-            toolTip1.SetToolTip(btn_Redo, "Повторить");
+            toolTip1.SetToolTip(btn_Redo, resources.GetString("btn_Redo.ToolTip"));
             btn_Redo.UseVisualStyleBackColor = true;
             btn_Redo.Click += btn_Redo_Click;
             // 
             // btn_Undo
             // 
-            btn_Undo.FlatStyle = FlatStyle.Flat;
+            resources.ApplyResources(btn_Undo, "btn_Undo");
             btn_Undo.ForeColor = Color.Gainsboro;
             btn_Undo.Image = Properties.Resources.back;
-            btn_Undo.Location = new Point(200, 5);
-            btn_Undo.Margin = new Padding(5);
             btn_Undo.Name = "btn_Undo";
-            btn_Undo.Size = new Size(48, 48);
-            btn_Undo.TabIndex = 3;
-            toolTip1.SetToolTip(btn_Undo, "Отменить");
+            toolTip1.SetToolTip(btn_Undo, resources.GetString("btn_Undo.ToolTip"));
             btn_Undo.UseVisualStyleBackColor = true;
             btn_Undo.Click += btn_Undo_Click;
             // 
             // btn_Save
             // 
-            btn_Save.FlatStyle = FlatStyle.Flat;
+            resources.ApplyResources(btn_Save, "btn_Save");
             btn_Save.ForeColor = Color.Gainsboro;
             btn_Save.Image = Properties.Resources.save;
-            btn_Save.Location = new Point(126, 5);
-            btn_Save.Margin = new Padding(5);
             btn_Save.Name = "btn_Save";
-            btn_Save.Size = new Size(48, 48);
-            btn_Save.TabIndex = 2;
-            toolTip1.SetToolTip(btn_Save, "Сохранить");
+            toolTip1.SetToolTip(btn_Save, resources.GetString("btn_Save.ToolTip"));
             btn_Save.UseVisualStyleBackColor = true;
             btn_Save.Click += btn_Save_Click;
             // 
             // btn_Open
             // 
-            btn_Open.FlatStyle = FlatStyle.Flat;
+            resources.ApplyResources(btn_Open, "btn_Open");
             btn_Open.ForeColor = Color.Gainsboro;
             btn_Open.Image = Properties.Resources.folder;
-            btn_Open.Location = new Point(68, 5);
-            btn_Open.Margin = new Padding(5);
             btn_Open.Name = "btn_Open";
-            btn_Open.Size = new Size(48, 48);
-            btn_Open.TabIndex = 1;
-            toolTip1.SetToolTip(btn_Open, "Открыть");
+            toolTip1.SetToolTip(btn_Open, resources.GetString("btn_Open.ToolTip"));
             btn_Open.UseVisualStyleBackColor = true;
             btn_Open.Click += btn_Folder_Click;
             // 
             // btn_Create
             // 
-            btn_Create.FlatStyle = FlatStyle.Flat;
+            resources.ApplyResources(btn_Create, "btn_Create");
             btn_Create.ForeColor = Color.Gainsboro;
             btn_Create.Image = Properties.Resources.file;
-            btn_Create.Location = new Point(10, 5);
-            btn_Create.Margin = new Padding(5);
             btn_Create.Name = "btn_Create";
-            btn_Create.Size = new Size(48, 48);
-            btn_Create.TabIndex = 0;
-            toolTip1.SetToolTip(btn_Create, "Создать");
+            toolTip1.SetToolTip(btn_Create, resources.GetString("btn_Create.ToolTip"));
             btn_Create.UseVisualStyleBackColor = true;
             btn_Create.Click += btn_File_Click;
             // 
@@ -566,58 +486,40 @@
             // 
             // tabControl
             // 
-            tabControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            tabControl.Location = new Point(0, 88);
-            tabControl.Margin = new Padding(1);
+            resources.ApplyResources(tabControl, "tabControl");
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
-            tabControl.Size = new Size(800, 336);
-            tabControl.TabIndex = 3;
             tabControl.SelectedIndexChanged += tabControl_SelectedIndexChanged;
             tabControl.MouseClick += TabControl_MouseClick;
             // 
             // richTextBox2
             // 
             richTextBox2.BackColor = SystemColors.Window;
-            richTextBox2.Dock = DockStyle.Fill;
-            richTextBox2.Location = new Point(0, 0);
-            richTextBox2.Margin = new Padding(0);
+            resources.ApplyResources(richTextBox2, "richTextBox2");
             richTextBox2.Name = "richTextBox2";
             richTextBox2.ReadOnly = true;
-            richTextBox2.Size = new Size(783, 137);
-            richTextBox2.TabIndex = 0;
-            richTextBox2.Text = "";
             // 
             // richTextBox1
             // 
-            richTextBox1.Dock = DockStyle.Fill;
-            richTextBox1.Location = new Point(0, 0);
-            richTextBox1.Margin = new Padding(0);
+            resources.ApplyResources(richTextBox1, "richTextBox1");
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(783, 146);
-            richTextBox1.TabIndex = 0;
-            richTextBox1.Text = "";
             // 
             // MainForm
             // 
             AllowDrop = true;
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
             Controls.Add(tabControl);
             Controls.Add(panel_Buttons);
             Controls.Add(statusStrip1);
             Controls.Add(menuStrip1);
             ForeColor = SystemColors.Control;
-            Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
-            MinimumSize = new Size(680, 400);
             Name = "MainForm";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "Компилятор";
             FormClosed += MainForm_FormClosed;
             DragDrop += MainForm_DragDrop;
             DragEnter += MainForm_DragEnter;
+            KeyDown += MainForm_KeyDown;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             statusStrip1.ResumeLayout(false);
@@ -684,9 +586,10 @@
         private ToolStripStatusLabel datelabel;
         private ToolStripStatusLabel timelabel;
         private ToolStripMenuItem tsmi_View;
-        private ToolStripMenuItem tsmi_Font;
-        private ToolStripMenuItem tsmi_ColorFont;
+        private ToolStripMenuItem tsmi_FontInput;
+        private ToolStripMenuItem tsmi_FontOutput;
         private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem tsmi_ColorFont;
         private ToolStripMenuItem tsmi_ColorKeywords;
     }
 }

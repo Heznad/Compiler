@@ -1,4 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using System.Globalization;
+using System.Resources;
+using System.Windows.Forms;
+using Compiler.Model;
 using Compiler.Presenter;
 using Compiler.View;
 
@@ -10,11 +13,13 @@ namespace Compiler
         public MainForm()
         {
             InitializeComponent();
+            this.KeyPreview = true;
             presenter = new(tabControl, btn_Undo, btn_Redo);
             timer1.Start();
             presenter.AddTabPage("NewFile");
             presenter.UpdateUndoRedoButtonStates();
         }
+
 
         #region [ Файл ]
         private void btn_File_Click(object sender, EventArgs e)
@@ -90,10 +95,29 @@ namespace Compiler
         }
         #endregion
 
+        #region [ Локализация ]
+        private void tsmi_Russian_Click(object sender, EventArgs e)
+        {
+            var changeLanguage = new ChangeLanguage();
+            changeLanguage.UpdateConfig("language", "ru");
+            presenter.CLoseCompilyator();
+        }
+        private void tsmi_English_Click(object sender, EventArgs e)
+        {
+            var changeLanguage = new ChangeLanguage();
+            changeLanguage.UpdateConfig("language", "en-US");
+            presenter.CLoseCompilyator();
+        }
+        #endregion
+
         #region [ Вид ]
         private void tsmi_Font_Click(object sender, EventArgs e)
         {
             presenter.SetFont();
+        }
+        private void tsmi_FontOutput_Click(object sender, EventArgs e)
+        {
+            presenter.SetFontOutput();
         }
         private void tsmi_ColorFont_Click(object sender, EventArgs e)
         {
@@ -120,24 +144,18 @@ namespace Compiler
         }
         private void MainForm_DragEnter(object sender, DragEventArgs e)
         {
-            // Проверяем, что перетаскиваемые данные - файлы
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                // Разрешаем перетаскивание (курсор изменится)
                 e.Effect = DragDropEffects.Copy;
             }
             else
             {
-                // Запрещаем перетаскивание (курсор останется обычным)
                 e.Effect = DragDropEffects.None;
             }
         }
         private void MainForm_DragDrop(object sender, DragEventArgs e)
         {
-            // Получаем список перетаскиваемых файлов
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-
-            // Обрабатываем каждый файл
             foreach (string file in files)
             {
                 presenter.IncludeTextFromFile(file);
@@ -156,7 +174,7 @@ namespace Compiler
                     if (tabControl.GetTabRect(i).Contains(e.Location))
                     {
                         ContextMenuStrip contextMenu = new ContextMenuStrip();
-                        ToolStripMenuItem closeTabItem = new ToolStripMenuItem("Закрыть вкладку");
+                        ToolStripMenuItem closeTabItem = new ToolStripMenuItem(MyString.CloseTab);
                         closeTabItem.Click += (s, ea) =>
                         {
                             presenter.CloseSelectedTab();
@@ -181,7 +199,49 @@ namespace Compiler
                 btn_Redo.Enabled = false;
             }
         }
-        #endregion       
+        #endregion
 
+        // Горячие клавиши
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control)
+            {
+                if (e.KeyCode == Keys.S)
+                {
+                    presenter.SaveFile();
+                    e.Handled = true;
+                }
+                else if (e.KeyCode == Keys.Z)
+                {
+                    presenter.UndoButton_Click();
+                    e.Handled = true;
+                }
+                else if (e.KeyCode == Keys.X)
+                {
+                    presenter.RichTextBox_Cut();
+                    e.Handled = true;
+                }
+                else if (e.KeyCode == Keys.C)
+                {
+                    presenter.RichTextBox_Copy();
+                    e.Handled = true;
+                }
+                else if (e.KeyCode == Keys.V)
+                {
+                    presenter.RichTextBox_Paste();
+                    e.Handled = true;
+                }
+                else if (e.KeyCode == Keys.N)
+                {
+                    presenter.AddTabPage();
+                    e.Handled = true;
+                }
+                else if (e.KeyCode == Keys.Y)
+                {
+                    presenter.RedoButton_Click();
+                    e.Handled = true;
+                }
+            }
+        }  
     }
 }

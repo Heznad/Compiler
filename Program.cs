@@ -1,3 +1,5 @@
+using System.Configuration;
+
 namespace Compiler
 {
     internal static class Program
@@ -8,8 +10,9 @@ namespace Compiler
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
+            var language = ConfigurationManager.AppSettings["language"];
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(language);
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(language);
             ApplicationConfiguration.Initialize();
             Application.Run(new MainForm());
         }
