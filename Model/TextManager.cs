@@ -19,9 +19,9 @@ namespace Compiler.Model
         private Color _colorOperators = Color.DeepPink;
         private Color _colorEnum = Color.Green;
 
-        public string[] KeywordsTypes { get => _keywordsTypes; set => _keywordsTypes = value; }
-        public string[] KeywordsOperators { get => _keywordsOperators; set => _keywordsOperators = value; }
-        public string[] KeywordsEnum { get => _keywordsEnum; set => _keywordsEnum = value; }
+        public string[] KeywordsTypes { get => _keywordsTypes; }
+        public string[] KeywordsOperators { get => _keywordsOperators; }
+        public string[] KeywordsEnum { get => _keywordsEnum; }
         public Font SelectedFont { get => _selectedFont; set => _selectedFont = value; }
         public Font SelectedFontOutput { get => _selectedFontOutput; set => _selectedFontOutput = value; }
         public Color SelectedColor { get => _selectedColor; set => _selectedColor=value; }
