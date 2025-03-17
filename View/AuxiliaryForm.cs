@@ -1,9 +1,13 @@
-﻿using System.Reflection;
+﻿using System.Globalization;
+using System.Reflection;
 
 namespace Compiler.View
 {
     public partial class AuxiliaryForm : Form
     {
+ 
+        /*Вспомогательная форма.
+        Для вывода содержимого больших текстовых файлов*/
         public AuxiliaryForm(string format)
         {
             InitializeComponent();
@@ -23,14 +27,26 @@ namespace Compiler.View
                     break;
             }
         }
+
+        // Файлы для формы "Справка"
         private void HelpForm()
         {
-            GetText("Compiler.TextFiles.Help.txt");
+            if (CultureInfo.CurrentCulture.Name == "ru")
+                GetText("Compiler.TextFiles.Help.txt");
+            else
+                GetText("Compiler.TextFiles.HelpEN.txt");
         }
+
+        // Файлы для формы "О программе"
         private void InfoForm()
         {
-            GetText("Compiler.TextFiles.Info.txt");
+            if (CultureInfo.CurrentCulture.Name == "ru")
+                GetText("Compiler.TextFiles.Info.txt");
+            else
+                GetText("Compiler.TextFiles.InfoEN.txt");
         }
+
+       // Получаем текст из встроенных ресурсов
         private void GetText(string path)
         {
             try

@@ -143,6 +143,16 @@ namespace Compiler.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap lightbulb {
+            get {
+                object obj = ResourceManager.GetObject("lightbulb", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap put {
             get {
                 object obj = ResourceManager.GetObject("put", resourceCulture);

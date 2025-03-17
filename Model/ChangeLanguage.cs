@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
+﻿using System.Configuration;
 
 namespace Compiler.Model
 {
+    // Изменения языка через файл конфигурации App.config
     public class ChangeLanguage
     {
         public void UpdateConfig(string key, string value)
@@ -21,7 +16,7 @@ namespace Compiler.Model
                 }
                 else
                 {
-                    config.AppSettings.Settings.Add(key, value); // Добавить, если нет
+                    config.AppSettings.Settings.Add(key, value);
                 }
 
                 config.Save(ConfigurationSaveMode.Modified);
@@ -29,11 +24,8 @@ namespace Compiler.Model
             }
             catch (ConfigurationErrorsException ex)
             {
-                // Обработка исключений при работе с конфигурацией
-                Console.WriteLine("Ошибка при обновлении конфигурации: " + ex.Message);
-                // Log the exception details for debugging.
-                // Consider throwing a custom exception with more context.
-                throw; // re-throw the exception to be handled by the caller
+                Console.WriteLine(MyString.ErrorConfigure + ex.Message);
+                throw;
             }
         }
     }

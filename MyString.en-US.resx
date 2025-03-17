@@ -120,6 +120,9 @@
   <data name="AboutProgram" xml:space="preserve">
     <value>About the program</value>
   </data>
+  <data name="Analyzer" xml:space="preserve">
+    <value>Analyzer</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -135,8 +138,17 @@
   <data name="CloseTab" xml:space="preserve">
     <value>Close tab</value>
   </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
   <data name="CurrentColor" xml:space="preserve">
     <value>Current color:</value>
+  </data>
+  <data name="Cut" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
   </data>
   <data name="dgvColumn" xml:space="preserve">
     <value>Column</value>
@@ -153,8 +165,14 @@
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="ErrorConfigure" xml:space="preserve">
+    <value>Error when updating the configuration:</value>
+  </data>
   <data name="ErrorDownloadResource" xml:space="preserve">
     <value>Error in resource loading:</value>
+  </data>
+  <data name="ErrorLoadWindow" xml:space="preserve">
+    <value>Error in load window: </value>
   </data>
   <data name="ErrorOpenFile" xml:space="preserve">
     <value>Error when opening a file:</value>
@@ -171,14 +189,35 @@
   <data name="Keywords" xml:space="preserve">
     <value>Keywords</value>
   </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="MessageExit" xml:space="preserve">
+    <value>Are you sure you want to close the app?</value>
+  </data>
+  <data name="MessageRestart" xml:space="preserve">
+    <value>The language of the system has been changed. For the changes to take effect, you need to restart the application. Reboot now?</value>
+  </data>
   <data name="NameFile" xml:space="preserve">
     <value>Name of file: </value>
+  </data>
+  <data name="NewFile" xml:space="preserve">
+    <value>NewFile</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="Operators" xml:space="preserve">
     <value>Operators</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>Output</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="Pseudocode" xml:space="preserve">
+    <value>Pseudocode</value>
   </data>
   <data name="ResourceNotFound" xml:space="preserve">
     <value>The resource was not found: </value>

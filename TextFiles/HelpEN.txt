@@ -1,0 +1,73 @@
+﻿Welcome to the help for the Compiler application! This document will help you familiarize yourself with the main functions and interface elements of the program.
+
+Main window:
+
+The main application window consists of the following elements:
+
+• Menu bar: Located under the window header and contains the main menu sections:
+
+  • File: Contains commands for working with files:
+    *  Create (create a new file with the code).
+    *  Open (open an existing file with the code).
+    *  Save (save the current file with the code).
+    *  Save as (save a new file path).
+
+  • Edit: Contains commands for editing text:
+    *  Undo (undo recent changes).
+    *  Repeat (Repeat the last changes).
+    *  Cut (cut out the selected text).
+    *  Copy (copy selected text).
+    *  Paste (paste text from clipboard).
+    *  Delete (delete the highlighted text).
+    *  Select all (select the entire text).
+    *  Syntax highlighting
+
+  • Text: contains a reference on the topic of the chosen grammar implementation of the new programming language:
+
+    *  Setting the task.
+    * Grammar.
+    * Grammar classification.
+    * The method of analysis.
+    * Error diagnosis and neutralization.
+    *  A test case.
+    * List of references.
+    * The source code of the program.
+
+  • Start: .
+
+  • Help: Provides access to background information about the program:
+    *  Calling help (opens this help).
+    * About the program (displays information about the program version, author, etc.).
+
+  • Localization: Changes the localization of the program:
+    *  Russian Russian (changes the localization of the program to Russian).
+    * English (changes the localization of the program to English).
+
+  • View: Changes font and font colors.
+    * Font (Font change).
+    * Font color.
+
+• Toolbar: Located under the menu bar and contains buttons for quick access to the most frequently used commands. Buttons (from left to right):
+* The "Create" button (displayed as a sheet of paper with lines).
+  * The "Open" button (displayed as a folder).
+  * The "Save" button (displayed as a floppy disk).
+  * The "Cancel" button (displayed as a left arrow).
+  * The "Return" button (displayed as a right arrow).
+  * The "Copy" button (displayed as a piece of paper).
+  * The "Cut" button (shown as scissors).
+  * The "Insert" button (displayed as a notepad).
+  * The "Run" button (displayed as a green right arrow).
+
+  • Help: Opens the reference documentation.
+  • About the program: Displays information about the program version.
+• Text area: The main area of the window used for entering and editing code or text.
+
+• Status bar: Located at the bottom of the window, it displays the current date and time, and may also contain other useful information (such as the cursor row and column number, program status, etc.).
+
+Using the app:
+
+1. Create a new file: Select "File" -> "Create" in the menu bar or click the corresponding button on the toolbar.
+2. Open an existing file: Select "File" -> "Open" in the menu bar or click the corresponding button on the toolbar. Select the file you want to open in the dialog box.
+3. Text Editing: Enter or edit the text in the text area. Use the Edit commands to cut, copy, and paste text.
+4. Save a file: Select "File" -> "Save" in the menu bar or click the corresponding button on the toolbar. Specify the file name and the location where you want to save it in the dialog box.
+5. Compilation/Code execution: (Determined depending on the type of compiler) Click the Start button on the toolbar.

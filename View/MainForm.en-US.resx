@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!--
-    Microsoft ResX Schema
-
+  <!-- 
+    Microsoft ResX Schema 
+    
     Version 2.0
-
-    The primary goals of this format is to allow a simple XML format
-    that is mostly human readable. The generation and parsing of the
-    various data types are done through the TypeConverter classes
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
     associated with the data types.
-
+    
     Example:
-
+    
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-
-    There are any number of "resheader" rows that contain simple
+                
+    There are any number of "resheader" rows that contain simple 
     name/value pairs.
-
-    Each data row contains a name, and value. The row also contains a
-    type or mimetype. Type corresponds to a .NET class that support
-    text/value conversion through the TypeConverter architecture.
-    Classes that don't support this are serialized and stored with the
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
     mimetype set.
-
-    The mimetype is used for serialized objects, and tells the
-    ResXResourceReader how to depersist the object. This is currently not
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
     extensible. For a given mimetype the value must be set accordingly:
-
-    Note - application/x-microsoft.net.object.binary.base64 is the format
-    that the ResXResourceWriter will generate, however the reader can
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
     read any of the formats listed below.
-
+    
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-
+    
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array
+    value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -118,51 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="tsmi_File.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 24</value>
-  </data>
-  <data name="tsmi_File.Text" xml:space="preserve">
-    <value>File</value>
-  </data>
-  <data name="tsmi_Correction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 24</value>
-  </data>
-  <data name="tsmi_Correction.Text" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="tsmi_Text.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 24</value>
-  </data>
-  <data name="tsmi_Text.Text" xml:space="preserve">
-    <value>Text</value>
-  </data>
-  <data name="пускToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 24</value>
-  </data>
-  <data name="пускToolStripMenuItem.Text" xml:space="preserve">
-    <value>Run</value>
-  </data>
-  <data name="tsmi_Reference.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 24</value>
-  </data>
-  <data name="tsmi_Reference.Text" xml:space="preserve">
-    <value>Reference</value>
-  </data>
-  <data name="tsmi_Localization.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 24</value>
-  </data>
-  <data name="tsmi_Localization.Text" xml:space="preserve">
-    <value>Localization</value>
-  </data>
-  <data name="tsmi_View.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 24</value>
-  </data>
-  <data name="tsmi_View.Text" xml:space="preserve">
-    <value>View</value>
-  </data>
-  <data name="menuStrip1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="tsmi_Create.Size" type="System.Drawing.Size, System.Drawing">
     <value>141, 26</value>
   </data>
@@ -195,6 +150,12 @@
   </data>
   <data name="tsmi_Exit.Text" xml:space="preserve">
     <value>Exit</value>
+  </data>
+  <data name="tsmi_File.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 24</value>
+  </data>
+  <data name="tsmi_File.Text" xml:space="preserve">
+    <value>File</value>
   </data>
   <data name="tsmi_Undo.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 26</value>
@@ -237,6 +198,12 @@
   </data>
   <data name="tsmi_SelectAll.Text" xml:space="preserve">
     <value>Select all</value>
+  </data>
+  <data name="tsmi_Correction.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 24</value>
+  </data>
+  <data name="tsmi_Correction.Text" xml:space="preserve">
+    <value>Edit</value>
   </data>
   <data name="постановкаЗадачиToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>341, 26</value>
@@ -286,6 +253,18 @@
   <data name="исходныйКодПрограммыToolStripMenuItem.Text" xml:space="preserve">
     <value>Program source code</value>
   </data>
+  <data name="tsmi_Text.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 24</value>
+  </data>
+  <data name="tsmi_Text.Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="пускToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 24</value>
+  </data>
+  <data name="пускToolStripMenuItem.Text" xml:space="preserve">
+    <value>Run</value>
+  </data>
   <data name="tsmi_Help.Size" type="System.Drawing.Size, System.Drawing">
     <value>220, 26</value>
   </data>
@@ -298,6 +277,12 @@
   <data name="tsmi_Info.Text" xml:space="preserve">
     <value>About the program</value>
   </data>
+  <data name="tsmi_Reference.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 24</value>
+  </data>
+  <data name="tsmi_Reference.Text" xml:space="preserve">
+    <value>Reference</value>
+  </data>
   <data name="tsmi_Russian.Size" type="System.Drawing.Size, System.Drawing">
     <value>141, 26</value>
   </data>
@@ -309,6 +294,12 @@
   </data>
   <data name="tsmi_English.Text" xml:space="preserve">
     <value>English</value>
+  </data>
+  <data name="tsmi_Localization.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 24</value>
+  </data>
+  <data name="tsmi_Localization.Text" xml:space="preserve">
+    <value>Localization</value>
   </data>
   <data name="tsmi_FontInput.Size" type="System.Drawing.Size, System.Drawing">
     <value>245, 26</value>
@@ -334,8 +325,11 @@
   <data name="tsmi_ColorKeywords.Text" xml:space="preserve">
     <value>Keyword Color</value>
   </data>
-  <data name="statusStrip1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tsmi_View.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 24</value>
+  </data>
+  <data name="tsmi_View.Text" xml:space="preserve">
+    <value>View</value>
   </data>
   <data name="toolStripStatusLabelText.Size" type="System.Drawing.Size, System.Drawing">
     <value>157, 20</value>
@@ -343,8 +337,8 @@
   <data name="toolStripStatusLabelText.Text" xml:space="preserve">
     <value>Current date and time:</value>
   </data>
-  <data name="panel_Buttons.ToolTip" xml:space="preserve">
-    <value />
+  <data name="btn_Light.ToolTip" xml:space="preserve">
+    <value>Syntax highlighting</value>
   </data>
   <data name="btn_Info.ToolTip" xml:space="preserve">
     <value>About the program</value>
@@ -373,20 +367,15 @@
   <data name="btn_Save.ToolTip" xml:space="preserve">
     <value>Save</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btn_Open.FlatStyle" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="btn_Open.ToolTip" xml:space="preserve">
     <value>Open</value>
   </data>
   <data name="btn_Create.ToolTip" xml:space="preserve">
     <value>Create</value>
-  </data>
-  <data name="tabControl.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="richTextBox2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="richTextBox1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -525,7 +514,28 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Compiler</value>
   </data>
+  <data name="menuStrip1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="statusStrip1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="panel_Buttons.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tabControl.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="richTextBox2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="richTextBox1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="$this.ToolTip" xml:space="preserve">
     <value />
+  </data>
+  <data name="tsmi_Light.Text" xml:space="preserve">
+    <value>Syntax highlighting</value>
   </data>
 </root>

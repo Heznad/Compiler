@@ -42,7 +42,7 @@
             richTextBox.Name = "richTextBox";
             richTextBox.ReadOnly = true;
             richTextBox.ScrollBars = RichTextBoxScrollBars.Vertical;
-            richTextBox.Size = new Size(562, 333);
+            richTextBox.Size = new Size(762, 533);
             richTextBox.TabIndex = 0;
             richTextBox.Text = "";
             // 
@@ -52,7 +52,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             BackColor = Color.White;
-            ClientSize = new Size(582, 353);
+            ClientSize = new Size(782, 553);
             Controls.Add(richTextBox);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MinimumSize = new Size(400, 200);

@@ -1,6 +1,5 @@
-using System.Windows.Forms;
 using Compiler.Model;
-using System.Text.RegularExpressions;
+
 namespace Compiler.Presenter
 {
     public class PresenterForm
@@ -12,15 +11,17 @@ namespace Compiler.Presenter
         private Dictionary<RichTextBox, Stack<Command>> _undoStacks = new Dictionary<RichTextBox, Stack<Command>>();
         private Dictionary<RichTextBox, Stack<Command>> _redoStacks = new Dictionary<RichTextBox, Stack<Command>>();
         private string _lastText = ""; // Сохраняем предыдущий текст
-        private int _lastTextLength = 0;
+        private int _lastTextLength = 0; // размер прошлого текста
         private bool isProcessingText = false; // Флаг для предотвращения гонки потоков при быстром вводе
         private bool _isPerformingUndoRedo = false; // Добавляем флаг для блокировки TextChanged во время Undo/Redo
         private bool _isHighLight = false; // Подсветка текста
+        private bool _isVolumeRichTextBox = false; // Объём текста
+        private bool _cutFlag = false; // Флаг для "Вырезать"
         // Изменяемые элементы UI
         TabControl _tabControl;
         Button _btnUndo;
         Button _btnRedo;
-        
+
         public bool IsHighLight { get => _isHighLight; set => _isHighLight = value; }
 
         public PresenterForm(TabControl tabControl, Button btn_Undo, Button btn_Redo)
@@ -29,7 +30,6 @@ namespace Compiler.Presenter
             _btnUndo = btn_Undo;
             _btnRedo = btn_Redo;
         }
-
 
         #region [ Отслеживание изменения состояния текстового редактора ]
 
@@ -44,6 +44,8 @@ namespace Compiler.Presenter
             try
             {
                 RichTextBox currentRichTextBox = (RichTextBox)sender;
+                // Условие чтобы прекратилась автоматическая подсветка кода, иначе будет мерцание
+                if (currentRichTextBox.TextLength >= 300) _isVolumeRichTextBox = true; 
                 await Task.Run(() => ProcessRichTextBoxChanges(currentRichTextBox));
             }
             finally
@@ -67,7 +69,7 @@ namespace Compiler.Presenter
 
             currentRichTextBox.Invoke((MethodInvoker)delegate { UpdateLineNumbers(); });
 
-            if (!_isHighLight)
+            if (!_isHighLight && !_isVolumeRichTextBox)
             {
                 await Task.Run(() =>
                 {
@@ -75,8 +77,8 @@ namespace Compiler.Presenter
                 }
                 );
             }
-
             currentRichTextBox.Invoke((MethodInvoker)delegate { currentRichTextBox.Modified = true; });
+
         }
 
         // Запрет на прокрутку с помощью колёсика мыши
@@ -88,11 +90,6 @@ namespace Compiler.Presenter
             }
         }
 
-        private void richTextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            RichTextBox richTextBox = GetSelectedRichTextBox();
-            _lastText = richTextBox.Text;
-        }
         #endregion
 
 
@@ -113,7 +110,7 @@ namespace Compiler.Presenter
         private void InitializeTabPage(string name)
         {
             TabPage tabPage = new(name);
-            SplitContainer splitContainer = new SplitContainer
+            SplitContainer splitContainer = new()
             {
                 Orientation = Orientation.Horizontal,
                 Dock = DockStyle.Fill,
@@ -122,15 +119,16 @@ namespace Compiler.Presenter
                 Margin = new Padding(3)
 
             };
-            SplitContainer splitContainerP1 = new SplitContainer
+
+            SplitContainer splitContainerWork = new()
             {
                 Orientation = Orientation.Vertical,
                 Dock = DockStyle.Fill,
                 SplitterWidth = 1,
                 SplitterDistance = 20
             };
-            splitContainerP1.FixedPanel = FixedPanel.Panel1;
-            RichTextBox lineNumberRichTextBox = new RichTextBox
+            splitContainerWork.FixedPanel = FixedPanel.Panel1;
+            RichTextBox lineNumberRichTextBox = new()
             {
                 Dock = DockStyle.Left,
                 BorderStyle = BorderStyle.None,
@@ -142,7 +140,24 @@ namespace Compiler.Presenter
                 ScrollBars = RichTextBoxScrollBars.None,
                 WordWrap = false
             };
-            RichTextBox richTextBox = new RichTextBox
+            RichTextBox richTextBox = InitializeRichTextBox();
+            splitContainerWork.Panel1.Controls.Add(lineNumberRichTextBox);
+            splitContainerWork.Panel2.Controls.Add(richTextBox);
+
+            TabControl tabControlResult = InitializeTabControlResult();
+
+            splitContainer.Panel1.Controls.Add(splitContainerWork);
+            splitContainer.Panel2.Controls.Add(tabControlResult);
+
+            tabPage.Controls.Add(splitContainer);
+
+            _tabControl.TabPages.Add(tabPage);
+        }
+
+        // Создание рабочей области
+        private RichTextBox InitializeRichTextBox()
+        {
+            RichTextBox richTextBox = new()
             {
                 Dock = DockStyle.Fill,
                 AcceptsTab = true,
@@ -151,30 +166,82 @@ namespace Compiler.Presenter
                 Font = text_manager.SelectedFont,
                 AllowDrop = true
             };
+            richTextBox.ContextMenuStrip = InitializeContextMenu();
             richTextBox.TextChanged += RichTextBox_TextChangedAsync;
             richTextBox.VScroll += RichTextBox_VScroll;
             richTextBox.DragEnter += RichTextBox_DragEnter;
             richTextBox.DragDrop += RichTextBox_DragDrop;
             richTextBox.MouseWheel += RichTextBox_MouseWheel;
             richTextBox.KeyDown += richTextBox_KeyDown;
+            richTextBox.MouseUp += RichTextBox_MouseUp;
             _undoStacks[richTextBox] = new Stack<Command>();
             _redoStacks[richTextBox] = new Stack<Command>();
-            splitContainerP1.Panel1.Controls.Add(lineNumberRichTextBox);
-            splitContainerP1.Panel2.Controls.Add(richTextBox);
 
-            DataGridView dataGridView = InitializeDataGridView();
-
-            splitContainer.Panel1.Controls.Add(splitContainerP1);
-            splitContainer.Panel2.Controls.Add(dataGridView);
-
-            tabPage.Controls.Add(splitContainer);
-
-            _tabControl.TabPages.Add(tabPage);
+            return richTextBox;
         }
 
+        // Создание контекстного меню
+        private ContextMenuStrip InitializeContextMenu()
+        {
+            // Создаем ContextMenuStrip (всплывающее меню)
+            ContextMenuStrip contextMenu = new ContextMenuStrip();
+
+            // Создаем пункты меню
+            ToolStripMenuItem cutMenuItem = new ToolStripMenuItem(MyString.Cut);
+            ToolStripMenuItem copyMenuItem = new ToolStripMenuItem(MyString.Copy);
+            ToolStripMenuItem pasteMenuItem = new ToolStripMenuItem(MyString.Paste);
+            ToolStripMenuItem deleteMenuItem = new ToolStripMenuItem(MyString.Delete);
+
+            // Добавляем обработчики событий для пунктов меню
+            cutMenuItem.Click += CutMenuItem_Click;
+            copyMenuItem.Click += CopyMenuItem_Click;
+            pasteMenuItem.Click += PasteMenuItem_Click;
+            deleteMenuItem.Click += DeleteMenuItem_Click;
+
+            // Добавляем пункты меню в ContextMenuStrip
+            contextMenu.Items.Add(cutMenuItem);
+            contextMenu.Items.Add(copyMenuItem);
+            contextMenu.Items.Add(pasteMenuItem);
+            contextMenu.Items.Add(deleteMenuItem);
+
+            return contextMenu;
+        }
+
+        // Создание окна вывода
+        private TabControl InitializeTabControlResult()
+        {
+            TabControl tabControl = new()
+            {
+                Dock = DockStyle.Fill,
+            };
+
+            TabPage tabPageAnalyzer = new(MyString.Analyzer);
+            DataGridView dataGridViewAnalyzer = InitializeDataGridView();
+            tabPageAnalyzer.Controls.Add(dataGridViewAnalyzer);
+
+            TabPage tabPagePseodocode = new(MyString.Pseudocode);
+
+            TabPage tabPageOutput = new(MyString.Output);
+            RichTextBox richTextBoxOutput = new()
+            {
+                Dock = DockStyle.Fill,
+                ReadOnly = true,
+                BackColor = Color.White,
+                ForeColor = text_manager.SelectedColor,
+                Font = text_manager.SelectedFontOutput
+            };
+            tabPageOutput.Controls.Add(richTextBoxOutput);
+
+            tabControl.Controls.Add(tabPageAnalyzer);
+            tabControl.Controls.Add(tabPagePseodocode);
+            tabControl.Controls.Add(tabPageOutput);
+            return tabControl;
+        }
+
+        // Создания таблицы вывода для Анализатора
         private DataGridView InitializeDataGridView()
         {
-            DataGridView dataGridView = new DataGridView
+            DataGridView dataGridViewAnalyzer = new DataGridView
             {
                 Dock = DockStyle.Fill,
                 Font = text_manager.SelectedFontOutput,
@@ -189,43 +256,43 @@ namespace Compiler.Presenter
                 AllowUserToResizeRows = false,
             };
             // Отключаем автоматическое создание колонок.
-            dataGridView.AutoGenerateColumns = false;
+            dataGridViewAnalyzer.AutoGenerateColumns = false;
 
             // Добавление колонок
             DataGridViewTextBoxColumn lineNumberColumn = new DataGridViewTextBoxColumn();
-            lineNumberColumn.HeaderText = ""; // № строк, который вы добавляете сами, без заголовка
-            lineNumberColumn.Width = 30; // Задайте нужную ширину
-            lineNumberColumn.ReadOnly = true; // Чтобы нельзя было редактировать столбец с номером строки.
-            dataGridView.Columns.Add(lineNumberColumn);
+            lineNumberColumn.HeaderText = ""; 
+            lineNumberColumn.Width = 30; 
+            lineNumberColumn.ReadOnly = true; 
+            dataGridViewAnalyzer.Columns.Add(lineNumberColumn);
 
             DataGridViewTextBoxColumn filePathColumn = new DataGridViewTextBoxColumn();
             filePathColumn.HeaderText = MyString.dgvFilePath;
             filePathColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView.Columns.Add(filePathColumn);
+            dataGridViewAnalyzer.Columns.Add(filePathColumn);
 
             DataGridViewTextBoxColumn lineColumn = new DataGridViewTextBoxColumn();
             lineColumn.HeaderText = MyString.dgvLine;
-            lineColumn.Width = 50; // Задайте нужную ширину
-            dataGridView.Columns.Add(lineColumn);
+            lineColumn.Width = 50; 
+            dataGridViewAnalyzer.Columns.Add(lineColumn);
 
             DataGridViewTextBoxColumn columnColumn = new DataGridViewTextBoxColumn();
             columnColumn.HeaderText = MyString.dgvColumn;
-            columnColumn.Width = 60; // Задайте нужную ширину
-            dataGridView.Columns.Add(columnColumn);
+            columnColumn.Width = 60; 
+            dataGridViewAnalyzer.Columns.Add(columnColumn);
 
             DataGridViewTextBoxColumn messageColumn = new DataGridViewTextBoxColumn();
             messageColumn.HeaderText = MyString.dgvMessage;
             messageColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView.Columns.Add(messageColumn);
+            dataGridViewAnalyzer.Columns.Add(messageColumn);
 
-            dataGridView.Rows.Add("1", @"D:\clang\project\StaticAnalyzer\StaticAnalyzer\codeTests.cpp", "28", "27", "Possible null pointer dereference: file");
-            dataGridView.Rows.Add("2", @"D:\clang\project\StaticAnalyzer\StaticAnalyzer\codeTests.cpp", "28", "27", "Uninitialized pointer: file");
+            dataGridViewAnalyzer.Rows.Add("1", @"D:\clang\project\StaticAnalyzer\StaticAnalyzer\codeTests.cpp");
+            dataGridViewAnalyzer.Rows.Add("2", @"D:\clang\project\StaticAnalyzer\StaticAnalyzer\codeTests.cpp");
 
-            dataGridView.AlternatingRowsDefaultCellStyle.BackColor = System.Drawing.Color.LightGray; // Чередование цветов строк
-            dataGridView.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.WhiteSmoke; // Цвет фона заголовков
-            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dataGridViewAnalyzer.AlternatingRowsDefaultCellStyle.BackColor = System.Drawing.Color.LightGray; // Чередование цветов строк
+            dataGridViewAnalyzer.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.WhiteSmoke; // Цвет фона заголовков
+            dataGridViewAnalyzer.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             filePathColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            return dataGridView;
+            return dataGridViewAnalyzer;
         }
 
         // Появление диалогового окна для задания имени файла
@@ -236,12 +303,12 @@ namespace Compiler.Presenter
                 Width = 300,
                 Height = 200,
                 FormBorderStyle = FormBorderStyle.FixedDialog,
-                Text = "Введите название файла",
+                Text = MyString.NameFile,
                 StartPosition = FormStartPosition.CenterParent
             };
 
-            Label textLabel = new Label() { Left = 50, Top = 20, Text = MyString.NameFile };
-            TextBox textBox = new TextBox() { Text = "NewFile", Left = 50, Top = 50, Width = 200 };
+            Label textLabel = new Label() { Left = 50, Top = 20, Text = MyString.NameFile, AutoSize = true };
+            TextBox textBox = new TextBox() { Text = MyString.NewFile, Left = 50, Top = 50, Width = 200, };
             Button confirmation = new Button() { Text = MyString.OK, Left = 50, Width = 100, Height = 30, Top = 90, DialogResult = DialogResult.OK };
             Button cancel = new Button() { Text = MyString.Cancel, Left = 150, Width = 100, Height = 30, Top = 90, DialogResult = DialogResult.Cancel };
 
@@ -277,6 +344,9 @@ namespace Compiler.Presenter
                 {
                     string filePath = openFileDialog.FileName;
                     IncludeTextFromFile(filePath);
+                    DataGridView dataGridViewAnalyzer = GetDataGridViewAnalyzer();
+                    dataGridViewAnalyzer.Rows.Clear();
+                    dataGridViewAnalyzer.Rows.Add("1", filePath);
                 }
                 catch (Exception ex)
                 {
@@ -298,7 +368,7 @@ namespace Compiler.Presenter
             tabPageFilePaths.Add(tp, filePath);
             _tabControl.SelectedIndex = _tabControl.TabCount - 1;
         }
-        
+
         // Отображение курсора при наведении на RichTextBox при перетаскивания файла 
         private void RichTextBox_DragEnter(object sender, DragEventArgs e)
         {
@@ -335,7 +405,7 @@ namespace Compiler.Presenter
                 TabPage currentTabPage = _tabControl.SelectedTab;
                 if (!tabPageFilePaths.ContainsKey(currentTabPage) || string.IsNullOrEmpty(tabPageFilePaths[currentTabPage]))
                 {
-                    SaveFileAs(); 
+                    SaveFileAs();
                 }
                 else
                 {
@@ -362,6 +432,9 @@ namespace Compiler.Presenter
                     SaveTabPageContentToFile(currentTabPage, filePath);
                     tabPageFilePaths[currentTabPage] = filePath; // Сохраняем путь к файлу
                     currentTabPage.Text = Path.GetFileName(filePath); // Обновляем заголовок вкладки
+                    DataGridView dataGridViewAnalyzer = GetDataGridViewAnalyzer();
+                    dataGridViewAnalyzer.Rows.Clear();
+                    dataGridViewAnalyzer.Rows.Add("1", filePath);
                 }
             }
             else return;
@@ -379,7 +452,7 @@ namespace Compiler.Presenter
             }
             catch (Exception ex)
             {
-                MessageBox.Show(MyString.ErrorSaveFile + ex.Message , MyString.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(MyString.ErrorSaveFile + ex.Message, MyString.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -413,19 +486,19 @@ namespace Compiler.Presenter
             _tabControl.TabPages.Remove(tabPageToClose);
         }
 
-        // Закрыть приложение
-        public void CLoseCompilyator()
+        // Закрыть все вкладки
+        public void CloseAllTabPages()
         {
-            for (int i = _tabControl.Controls.Count; i >0 ; i--)
+            for (int i = _tabControl.Controls.Count; i > 0; i--)
             {
                 _tabControl.SelectedIndex = i;
 
-                TabPage tabPageToClose = _tabControl.TabPages[i-1];
+                TabPage tabPageToClose = _tabControl.TabPages[i - 1];
                 RichTextBox richTextBox = GetSelectedRichTextBox(tabPageToClose);
 
                 if (richTextBox.Modified)
                 {
-                    DialogResult result = MessageBox.Show( MyString.SavingChangesFile + $"\"{tabPageToClose.Text}\"", MyString.Saving, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult result = MessageBox.Show(MyString.SavingChangesFile + $"\"{tabPageToClose.Text}\"", MyString.Saving, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                     if (result == DialogResult.Yes)
                     {
@@ -439,7 +512,19 @@ namespace Compiler.Presenter
                 tabPageFilePaths.Remove(tabPageToClose);
                 _tabControl.TabPages.Remove(tabPageToClose);
             }
-            Application.Exit();
+        }
+
+        // Перезагрузить приложение
+        public void RestartCompilyator()
+        {
+            CloseAllTabPages();
+            Application.Restart();
+        }
+
+        // Закрыть приложение
+        public void CLoseCompilyator()
+        {
+            CloseAllTabPages();
         }
 
         #endregion
@@ -484,10 +569,10 @@ namespace Compiler.Presenter
             Stack<Command> redoStack = _redoStacks[currentTextBox];
             if (redoStack.Count > 0)
             {
-                _isPerformingUndoRedo = true; 
+                _isPerformingUndoRedo = true;
                 Command command = redoStack.Pop();
                 command.Execute(currentTextBox);
-                undoStack.Push(command); 
+                undoStack.Push(command);
                 UpdateUndoRedoButtonStates();
                 _isPerformingUndoRedo = false;
             }
@@ -536,7 +621,7 @@ namespace Compiler.Presenter
                 if (deletePosition >= 0 && deletePosition + deleteLength <= deletedText.Length)
                     deletedText = deletedText.Substring(deletePosition, deleteLength);
                 else
-                    deletedText = ""; 
+                    deletedText = "";
 
                 DeleteTextCommand command = new DeleteTextCommand(deletePosition, deletedText);
                 ExecuteCommand(command);
@@ -546,10 +631,47 @@ namespace Compiler.Presenter
             _lastTextLength = richTextBox.TextLength;
             _lastText = richTextBox.Text;
         }
+
+        // Получаем последние состояние RichTextBox
+        private void richTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            RichTextBox richTextBox = GetSelectedRichTextBox();
+            _lastText = richTextBox.Text;
+        }
         #endregion
 
 
         #region [ Копировать/Вырезать/Вставить/Удалить/Выделить_всё ]
+
+        // Для Контекстного меню
+        private void CutMenuItem_Click(object sender, EventArgs e)
+        {
+            RichTextBox_Cut();
+        }
+        private void CopyMenuItem_Click(object sender, EventArgs e)
+        {
+            RichTextBox_Copy();
+        }
+        private void PasteMenuItem_Click(object sender, EventArgs e)
+        {
+            RichTextBox_Paste();
+        }
+        private void DeleteMenuItem_Click(object sender, EventArgs e)
+        {
+            RichTextBox_Delete();
+        }
+
+        // Вырезать
+        public void RichTextBox_Cut()
+        {
+            RichTextBox richTextBox = GetSelectedRichTextBox();
+            if (richTextBox.SelectionLength > 0)
+            {
+                richTextBox.Cut();
+                _cutFlag = true;
+            }
+            
+        }
 
         // Копировать
         public void RichTextBox_Copy()
@@ -561,16 +683,6 @@ namespace Compiler.Presenter
             }
         }
 
-        // Вырезать
-        public void RichTextBox_Cut()
-        {
-            RichTextBox richTextBox = GetSelectedRichTextBox();
-            if (richTextBox.SelectionLength > 0)
-            {
-                richTextBox.Cut();
-            }
-        }
-
         // Вставить
         public void RichTextBox_Paste()
         {
@@ -579,6 +691,11 @@ namespace Compiler.Presenter
                 RichTextBox richTextBox = GetSelectedRichTextBox();
                 string clipboardText = Clipboard.GetText();
                 richTextBox.SelectedText = clipboardText;
+                if (_cutFlag) 
+                { 
+                    Clipboard.Clear();
+                    _cutFlag = false;
+                };
             }
         }
 
@@ -607,6 +724,48 @@ namespace Compiler.Presenter
             richTextBox.SelectAll();
         }
 
+        private void RichTextBox_MouseUp(object? sender, MouseEventArgs e)
+        {
+            RichTextBox richTextBox = (RichTextBox)sender;
+            // Проверяем, была ли нажата правая кнопка мыши
+            if (e.Button == MouseButtons.Right)
+            {
+                // Если нет выделенного текста, отключаем пункты "Вырезать", "Копировать", "Удалить"
+                if (string.IsNullOrEmpty(richTextBox.SelectedText))
+                {
+                    richTextBox.ContextMenuStrip.Items[0].Enabled = false;
+                    richTextBox.ContextMenuStrip.Items[1].Enabled = false;
+                    richTextBox.ContextMenuStrip.Items[3].Enabled = false;
+                    if (Clipboard.ContainsText())
+                    {
+                        richTextBox.ContextMenuStrip.Items[2].Enabled = true;
+                    }
+                    else
+                    {
+                        richTextBox.ContextMenuStrip.Items[2].Enabled = false;
+                    }
+
+                }
+                else
+                {
+                    richTextBox.ContextMenuStrip.Items[0].Enabled = true;
+                    richTextBox.ContextMenuStrip.Items[1].Enabled = true;
+                    richTextBox.ContextMenuStrip.Items[3].Enabled = true;
+                    if (Clipboard.ContainsText())
+                    {
+                        richTextBox.ContextMenuStrip.Items[2].Enabled = true;
+                    }
+                    else
+                    {
+                        richTextBox.ContextMenuStrip.Items[2].Enabled = false;
+                    }
+                }
+
+                // Отображаем ContextMenuStrip в позиции курсора
+                richTextBox.ContextMenuStrip.Show(richTextBox, e.Location);
+            }
+        }
+
         #endregion
 
 
@@ -618,38 +777,42 @@ namespace Compiler.Presenter
             text_manager.SettingsFont();
             FontRTBs();
         }
+
+        // Выбор шрифта для окна вывода
         public void SetFontOutput()
         {
             text_manager.SettingsFontOutput();
-            TabPage currentTabPage = _tabControl.SelectedTab;
-            SplitContainer splitContainer = (SplitContainer)currentTabPage.Controls[0];
-            DataGridView dataGridView = (DataGridView)splitContainer.Panel2.Controls[0];
+            DataGridView dataGridView = GetDataGridViewAnalyzer();
             dataGridView.Font = text_manager.SelectedFontOutput;
         }
+
+        // Форма выбора типа для изменения цвета
         public void SettingsColorAllKeywords()
         {
             Form prompt = new Form()
             {
                 Width = 500,
-                Height = 300,
+                Height = 350,
                 FormBorderStyle = FormBorderStyle.FixedDialog,
                 Text = MyString.ChooseColor,
                 StartPosition = FormStartPosition.CenterParent
             };
 
-            Label textLabel = new Label() { Left = 30, Top = 20, Text = MyString.ChangeColorKeyword,AutoSize = true};
+            Label textLabel = new Label() { Left = 30, Top = 20, Text = MyString.ChangeColorKeyword, AutoSize = true };
             Label currentLabelColor = new Label() { Left = 70, Top = 50, Text = MyString.CurrentColor, AutoSize = true };
-            Panel pKeywords = new Panel() { BorderStyle = BorderStyle.Fixed3D,BackColor = text_manager.KeywordCategories["Keywords"], Width = 40, Height = 40, Left = 100, Top = 80 };
+            Panel pKeywords = new Panel() { BorderStyle = BorderStyle.Fixed3D, BackColor = text_manager.KeywordCategories["Keywords"], Width = 40, Height = 40, Left = 100, Top = 80 };
             Button btn_Keywords = new Button() { Text = MyString.Keywords, Left = 275, Width = 125, Height = 40, Top = 80 };
             Panel pTypes = new Panel() { BorderStyle = BorderStyle.Fixed3D, BackColor = text_manager.KeywordCategories["TypesData"], Width = 40, Height = 40, Left = 100, Top = 130 };
             Button btn_Types = new Button() { Text = MyString.TypesOfData, Left = 275, Width = 125, Height = 40, Top = 130 };
             Panel pOperators = new Panel() { BorderStyle = BorderStyle.Fixed3D, BackColor = text_manager.KeywordCategories["Operators"], Width = 40, Height = 40, Left = 100, Top = 180 };
             Button btn_Operators = new Button() { Text = MyString.Operators, Left = 275, Width = 125, Height = 40, Top = 180 };
-
+            Panel pComments = new Panel() { BorderStyle = BorderStyle.Fixed3D, BackColor = text_manager.KeywordCategories["Comments"], Width = 40, Height = 40, Left = 100, Top = 230 };
+            Button btn_Comments = new Button() { Text = MyString.Operators, Left = 275, Width = 125, Height = 40, Top = 230 };
 
             btn_Keywords.Click += (sender, e) => { prompt.Close(); SettingsColorKeywords(); };
             btn_Types.Click += (sender, e) => { prompt.Close(); SettingsColorTypes(); };
             btn_Operators.Click += (sender, e) => { prompt.Close(); SettingsColorOperators(); };
+            btn_Comments.Click += (sender, e) => { prompt.Close(); SettingsColorComments(); };
 
             prompt.Controls.Add(textLabel);
             prompt.Controls.Add(currentLabelColor);
@@ -659,32 +822,40 @@ namespace Compiler.Presenter
             prompt.Controls.Add(btn_Types);
             prompt.Controls.Add(pOperators);
             prompt.Controls.Add(btn_Operators);
+            prompt.Controls.Add(pComments);
+            prompt.Controls.Add(btn_Comments);
             prompt.ShowDialog();
         }
 
         #region [ Цвет ключевых слов]
 
+        // Ключевые слова
+        public void SettingsColorKeywords()
+        {
+            text_manager.KeywordCategories["Keywords"] = text_manager.SettingsColorFont(text_manager.KeywordCategories["Keywords"]);
+            HighlightKeywords();
+        }
+
         // Типы данных
         public void SettingsColorTypes()
         {
-            text_manager.SettingsColorFont(text_manager.KeywordCategories["TypesData"]);
-            //HighlightKeywords(GetSelectedRichTextBox(), text_manager.KeywordsTypes, text_manager.ColorTypes);
+            text_manager.KeywordCategories["TypesData"] = text_manager.SettingsColorFont(text_manager.KeywordCategories["TypesData"]);
+            HighlightKeywords();
         }
 
         // Операторы
         public void SettingsColorOperators()
         {
-            text_manager.SettingsColorFont(text_manager.KeywordCategories["Operators"]);
-            //HighlightKeywords(GetSelectedRichTextBox(), text_manager.KeywordsOperators, text_manager.ColorOperators);
+            text_manager.KeywordCategories["Operators"] = text_manager.SettingsColorFont(text_manager.KeywordCategories["Operators"]);
+            HighlightKeywords();
         }
 
-        // Перечисление
-        public void SettingsColorKeywords()
+        // Комменты
+        public void SettingsColorComments()
         {
-            text_manager.SettingsColorFont(text_manager.KeywordCategories["Keywords"]);
-            //HighlightKeywords();
+            text_manager.KeywordCategories["Comments"] = text_manager.SettingsColorFont(text_manager.KeywordCategories["Comments"]);
+            HighlightKeywords();
         }
-
         #endregion
 
         // Выбор цвета
@@ -733,83 +904,87 @@ namespace Compiler.Presenter
             }
         }
 
-        private void HighlightKeywords()
+        // Подсветка текста
+        public void HighlightKeywords()
         {
             RichTextBox richTextBox = GetSelectedRichTextBox();
+
             int selectionStart = richTextBox.SelectionStart;
             int selectionLength = richTextBox.SelectionLength;
             _isHighLight = true;
             richTextBox.SuspendLayout();
 
-            // Создаем HashSet для хранения индексов уже подсвеченных слов
-            HashSet<int> highlightedIndices = new HashSet<int>();
-
-            richTextBox.SelectionStart = 0;
-            richTextBox.SelectionLength = richTextBox.TextLength;
-            richTextBox.SelectionColor = text_manager.SelectedColor;
-
-            // Перебираем каждую категорию ключевых слов
-            foreach (var category in text_manager.Keywords)
+            try
             {
-                string categoryName = category.Key;
-                List<string> keywordList = category.Value;
-                Color keywordColor = text_manager.KeywordCategories[categoryName];  // Получаем цвет для данной категории
+                richTextBox.SelectionStart = 0;
+                richTextBox.SelectionLength = richTextBox.TextLength;
+                richTextBox.SelectionColor = text_manager.SelectedColor;
 
-                // Перебираем ключевые слова в категории
-                foreach (string keyword in keywordList)
+                // Подсветка комментариев
+                HighlightComments(richTextBox, text_manager.KeywordCategories["Comments"]);
+
+                foreach (var category in text_manager.Keywords)
                 {
-                    int index = 0;
-                    while (index < richTextBox.Text.Length)
-                    {
-                        index = richTextBox.Text.IndexOf(keyword, index, StringComparison.OrdinalIgnoreCase);
-                        if (index >= 0)
-                        {
-                            // Проверяем, чтобы слово было целым и не было частью другого слова
-                            if ((index == 0 || !char.IsLetterOrDigit(richTextBox.Text[index - 1])) &&
-                                (index + keyword.Length == richTextBox.Text.Length || !char.IsLetterOrDigit(richTextBox.Text[index + keyword.Length])))
-                            {
-                                bool alreadyHighlighted = false;
-                                // Проверяем, чтобы этот индекс не был уже подсвечен
-                                for (int i = index; i < index + keyword.Length; i++)
-                                {
-                                    if (highlightedIndices.Contains(i))
-                                    {
-                                        alreadyHighlighted = true;
-                                        break;
-                                    }
-                                }
+                    string categoryName = category.Key;
+                    List<string> keywordList = category.Value;
+                    Color keywordColor = text_manager.KeywordCategories[categoryName];  
 
-                                if (!alreadyHighlighted)
+                    foreach (string keyword in keywordList)
+                    {
+                        int index = 0;
+                        while (index < richTextBox.Text.Length)
+                        {
+                            index = richTextBox.Text.IndexOf(keyword, index, StringComparison.OrdinalIgnoreCase);
+                            if (index >= 0)
+                            {
+                                if ((index == 0 || !char.IsLetterOrDigit(richTextBox.Text[index - 1])) &&
+                                    (index + keyword.Length == richTextBox.Text.Length || !char.IsLetterOrDigit(richTextBox.Text[index + keyword.Length])))
                                 {
                                     richTextBox.SelectionStart = index;
                                     richTextBox.SelectionLength = keyword.Length;
-                                    richTextBox.SelectionColor = keywordColor;  // Используем цвет для данной категории
-
-                                    // Добавляем индексы подсвеченного слова в HashSet
-                                    for (int i = index; i < index + keyword.Length; i++)
-                                    {
-                                        highlightedIndices.Add(i);
-                                    }
+                                    richTextBox.SelectionColor = keywordColor; 
                                 }
+                                index += keyword.Length;
                             }
-                            index += keyword.Length;
-                        }
-                        else
-                        {
-                            break;
+                            else
+                            {
+                                break;
+                            }
                         }
                     }
                 }
             }
-
-            richTextBox.SelectionStart = selectionStart;
-            richTextBox.SelectionLength = selectionLength;
-            richTextBox.SelectionColor = text_manager.SelectedColor;
-            richTextBox.ResumeLayout();
-            //richTextBox.Focus();
+            finally
+            {
+                richTextBox.SelectionStart = selectionStart;
+                richTextBox.SelectionLength = selectionLength;
+                richTextBox.SelectionColor = text_manager.SelectedColor;
+                richTextBox.ResumeLayout();
+                richTextBox.Focus();
+            }
         }
 
+        // Подсветка комментов
+        private void HighlightComments(RichTextBox richTextBox, Color commentColor)
+        {
+            string text = richTextBox.Text;
+            int start = 0;
+            while ((start = text.IndexOf("//", start)) >= 0)
+            {
+                int end = text.IndexOf("\n", start);
+                if (end < 0)
+                {
+                    end = text.Length;
+                }
+                int length = end - start;
 
+                richTextBox.SelectionStart = start;
+                richTextBox.SelectionLength = length;
+                richTextBox.SelectionColor = commentColor;
+
+                start = end;
+            }
+        }
 
         #endregion
 
@@ -822,6 +997,7 @@ namespace Compiler.Presenter
             UpdateLineNumberScroll();
         }
 
+        // Обновление чисел по количеству строк в рабочей области
         private void UpdateLineNumbers()
         {
             RichTextBox richTextBox = GetSelectedRichTextBox();
@@ -843,7 +1019,7 @@ namespace Compiler.Presenter
             UpdateLineNumberScroll();
         }
 
-        // Прокрутка
+        // Изменение положения в соответствии с главным скроллом
         private void UpdateLineNumberScroll()
         {
             RichTextBox richTextBox = GetSelectedRichTextBox();
@@ -866,7 +1042,7 @@ namespace Compiler.Presenter
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error during scroll update: " + ex.Message);
+                Console.WriteLine(MyString.ErrorScroll + ex.Message);
             }
         }
 
@@ -887,6 +1063,7 @@ namespace Compiler.Presenter
             return (RichTextBox)splitContainerP1.Panel1.Controls[0];
         }
 
+        // Получение Рабочей области
         private SplitContainer GetlineNumberSplitContainer(TabPage tabPage = null)
         {
             if (tabPage == null) tabPage = _tabControl.SelectedTab;
@@ -896,6 +1073,7 @@ namespace Compiler.Presenter
 
         #endregion
 
+
         // Получение текущего текстового поля
         private RichTextBox GetSelectedRichTextBox(TabPage tabPage = null)
         {
@@ -904,6 +1082,15 @@ namespace Compiler.Presenter
             SplitContainer splitContainerP1 = (SplitContainer)splitContainer.Panel1.Controls[0];
             return (RichTextBox)splitContainerP1.Panel2.Controls[0];
         }
-        
+
+        // Получение текущей таблицы анализатора
+        private DataGridView GetDataGridViewAnalyzer(TabPage tabPage = null)
+        {
+            if (tabPage == null) tabPage = _tabControl.SelectedTab;
+            SplitContainer splitContainer = (SplitContainer)tabPage.Controls[0];
+            TabControl TabControl = (TabControl)splitContainer.Panel2.Controls[0];
+            TabPage tabPageAnalyzer = (TabPage)TabControl.Controls[0];
+            return (DataGridView)tabPageAnalyzer.Controls[0];
+        }
     }
 }

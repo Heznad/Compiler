@@ -120,6 +120,9 @@
   <data name="AboutProgram" xml:space="preserve">
     <value>О программе</value>
   </data>
+  <data name="Analyzer" xml:space="preserve">
+    <value>Анализатор</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Отмена</value>
   </data>
@@ -135,8 +138,17 @@
   <data name="CloseTab" xml:space="preserve">
     <value>Закрыть вкладку</value>
   </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Копировать</value>
+  </data>
   <data name="CurrentColor" xml:space="preserve">
     <value>Текущий цвет: </value>
+  </data>
+  <data name="Cut" xml:space="preserve">
+    <value>Вырезать</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
   </data>
   <data name="dgvColumn" xml:space="preserve">
     <value>Колонка</value>
@@ -153,8 +165,14 @@
   <data name="Error" xml:space="preserve">
     <value>Ошибка</value>
   </data>
+  <data name="ErrorConfigure" xml:space="preserve">
+    <value>Ошибка при обновлении конфигурации: </value>
+  </data>
   <data name="ErrorDownloadResource" xml:space="preserve">
     <value>Ошибка в загрузке ресурса: </value>
+  </data>
+  <data name="ErrorLoadWindow" xml:space="preserve">
+    <value>Ошибка в загрузке окна: </value>
   </data>
   <data name="ErrorOpenFile" xml:space="preserve">
     <value>Ошибка при открытии файла: </value>
@@ -171,14 +189,35 @@
   <data name="Keywords" xml:space="preserve">
     <value>Ключевые слова</value>
   </data>
+  <data name="Message" xml:space="preserve">
+    <value>Сообщение</value>
+  </data>
+  <data name="MessageExit" xml:space="preserve">
+    <value>Вы уверены, что хотите закрыть приложение?</value>
+  </data>
+  <data name="MessageRestart" xml:space="preserve">
+    <value>Язык системы был изменён. Чтобы изменения вступили в силу, необходимо перезагрузить приложение. Перезагрузить сейчас?</value>
+  </data>
   <data name="NameFile" xml:space="preserve">
     <value>Название файла:</value>
+  </data>
+  <data name="NewFile" xml:space="preserve">
+    <value>Новый файл</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>ОК</value>
   </data>
   <data name="Operators" xml:space="preserve">
     <value>Операторы</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>Вывод</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>Вставить</value>
+  </data>
+  <data name="Pseudocode" xml:space="preserve">
+    <value>Псевдокод</value>
   </data>
   <data name="ResourceNotFound" xml:space="preserve">
     <value>Ресурс не найден: </value>

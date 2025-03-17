@@ -1,0 +1,32 @@
+﻿The application was developed by a 3rd year student of the Faculty of AVTF, AP-226,
+Karabelnikov Vitaly
+Topic: Developing a user interface (GUI) for a language processor.
+This laboratory work is a practical part of the course work on the discipline "Theory of formal languages and compilers"
+Purpose of the work: To develop a text editor application.
+
+This application has been successfully developed and meets all the stated requirements and additional tasks.
+
+The following requirements have been met:
+
+• Graphical User Interface (GUI)
+• The application starts and runs correctly on a computer without an installed development environment (IDE).
+• Window title
+• Interface design according to a given example
+• Menu and toolbar functionality
+• Reaction to window size change
+• Changing the size ratio of areas
+• Scroll Bars
+• When opening a new file or exiting the program, the application suggests saving changes to the file if the user edited the text.
+
+Implementation of additional tasks:
+
+• Changing the text size
+• The editing window is implemented as a tabbed interface, allowing the user to simultaneously work with several text files.
+• Internationalization
+• Line numbering
+• Drag-and-drop file opening
+• Status bar
+• Syntax highlighting
+• Tabbed interface (results display window)
+• Error display as a table
+• Keyboard shortcuts

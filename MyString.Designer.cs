@@ -70,6 +70,15 @@ namespace Compiler {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Анализатор.
+        /// </summary>
+        internal static string Analyzer {
+            get {
+                return ResourceManager.GetString("Analyzer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Отмена.
         /// </summary>
         internal static string Cancel {
@@ -115,11 +124,38 @@ namespace Compiler {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Копировать.
+        /// </summary>
+        internal static string Copy {
+            get {
+                return ResourceManager.GetString("Copy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Текущий цвет: .
         /// </summary>
         internal static string CurrentColor {
             get {
                 return ResourceManager.GetString("CurrentColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вырезать.
+        /// </summary>
+        internal static string Cut {
+            get {
+                return ResourceManager.GetString("Cut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Удалить.
+        /// </summary>
+        internal static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
             }
         }
         
@@ -169,11 +205,29 @@ namespace Compiler {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибка при обновлении конфигурации: .
+        /// </summary>
+        internal static string ErrorConfigure {
+            get {
+                return ResourceManager.GetString("ErrorConfigure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Ошибка в загрузке ресурса: .
         /// </summary>
         internal static string ErrorDownloadResource {
             get {
                 return ResourceManager.GetString("ErrorDownloadResource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибка в загрузке окна: .
+        /// </summary>
+        internal static string ErrorLoadWindow {
+            get {
+                return ResourceManager.GetString("ErrorLoadWindow", resourceCulture);
             }
         }
         
@@ -223,11 +277,47 @@ namespace Compiler {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Сообщение.
+        /// </summary>
+        internal static string Message {
+            get {
+                return ResourceManager.GetString("Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы уверены, что хотите закрыть приложение?.
+        /// </summary>
+        internal static string MessageExit {
+            get {
+                return ResourceManager.GetString("MessageExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Язык системы был изменён. Чтобы изменения вступили в силу, необходимо перезагрузить приложение. Перезагрузить сейчас?.
+        /// </summary>
+        internal static string MessageRestart {
+            get {
+                return ResourceManager.GetString("MessageRestart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Название файла:.
         /// </summary>
         internal static string NameFile {
             get {
                 return ResourceManager.GetString("NameFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Новый файл.
+        /// </summary>
+        internal static string NewFile {
+            get {
+                return ResourceManager.GetString("NewFile", resourceCulture);
             }
         }
         
@@ -246,6 +336,33 @@ namespace Compiler {
         internal static string Operators {
             get {
                 return ResourceManager.GetString("Operators", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вывод.
+        /// </summary>
+        internal static string Output {
+            get {
+                return ResourceManager.GetString("Output", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вставить.
+        /// </summary>
+        internal static string Paste {
+            get {
+                return ResourceManager.GetString("Paste", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Псевдокод.
+        /// </summary>
+        internal static string Pseudocode {
+            get {
+                return ResourceManager.GetString("Pseudocode", resourceCulture);
             }
         }
         

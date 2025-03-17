@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Compiler.Model
 {
+    /* Класс для представление команды "Вставка"
+     Нужен для Undo/Redo.
+    Противоположная команда удалению*/
     class InsertTextCommand : Command
     {
-        private readonly int _position;
-        private readonly string _text;
+        private readonly int _position; // Позиция где было команда
+        private readonly string _text;  // Сохранённый текст
 
         public InsertTextCommand(int position, string text)
         {
@@ -17,6 +15,7 @@ namespace Compiler.Model
             _text = text;
         }
 
+        // Выполнение команды
         public override void Execute(RichTextBox textBox)
         {
             textBox.SelectionStart = _position;
@@ -24,6 +23,7 @@ namespace Compiler.Model
             textBox.SelectedText = _text;
         }
 
+        // Обратная команды для помещения в Undo
         public override void Undo(RichTextBox textBox)
         {
             textBox.SelectionStart = _position;

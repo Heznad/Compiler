@@ -46,6 +46,7 @@
             tsmi_Paste = new ToolStripMenuItem();
             tsmi_Delete = new ToolStripMenuItem();
             tsmi_SelectAll = new ToolStripMenuItem();
+            tsmi_Light = new ToolStripMenuItem();
             tsmi_Text = new ToolStripMenuItem();
             постановкаЗадачиToolStripMenuItem = new ToolStripMenuItem();
             грамматикаToolStripMenuItem = new ToolStripMenuItem();
@@ -74,6 +75,7 @@
             datelabel = new ToolStripStatusLabel();
             timelabel = new ToolStripStatusLabel();
             panel_Buttons = new Panel();
+            btn_Light = new Button();
             btn_Info = new Button();
             btn_Help = new Button();
             btn_Start = new Button();
@@ -147,7 +149,7 @@
             // 
             // tsmi_Correction
             // 
-            tsmi_Correction.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Undo, tsmi_Redo, tsmi_Cut, tsmi_Copy, tsmi_Paste, tsmi_Delete, tsmi_SelectAll });
+            tsmi_Correction.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Undo, tsmi_Redo, tsmi_Cut, tsmi_Copy, tsmi_Paste, tsmi_Delete, tsmi_SelectAll, tsmi_Light });
             tsmi_Correction.ForeColor = Color.Black;
             tsmi_Correction.Name = "tsmi_Correction";
             resources.ApplyResources(tsmi_Correction, "tsmi_Correction");
@@ -193,6 +195,11 @@
             tsmi_SelectAll.Name = "tsmi_SelectAll";
             resources.ApplyResources(tsmi_SelectAll, "tsmi_SelectAll");
             tsmi_SelectAll.Click += tsmi_SelectAll_Click;
+            // 
+            // tsmi_Light
+            // 
+            tsmi_Light.Name = "tsmi_Light";
+            resources.ApplyResources(tsmi_Light, "tsmi_Light");
             // 
             // tsmi_Text
             // 
@@ -356,6 +363,7 @@
             // panel_Buttons
             // 
             panel_Buttons.BackColor = SystemColors.Control;
+            panel_Buttons.Controls.Add(btn_Light);
             panel_Buttons.Controls.Add(btn_Info);
             panel_Buttons.Controls.Add(btn_Help);
             panel_Buttons.Controls.Add(btn_Start);
@@ -370,6 +378,15 @@
             panel_Buttons.ForeColor = Color.Silver;
             resources.ApplyResources(panel_Buttons, "panel_Buttons");
             panel_Buttons.Name = "panel_Buttons";
+            // 
+            // btn_Light
+            // 
+            resources.ApplyResources(btn_Light, "btn_Light");
+            btn_Light.ForeColor = Color.Gainsboro;
+            btn_Light.Name = "btn_Light";
+            toolTip1.SetToolTip(btn_Light, resources.GetString("btn_Light.ToolTip"));
+            btn_Light.UseVisualStyleBackColor = true;
+            btn_Light.Click += btn_Light_Click;
             // 
             // btn_Info
             // 
@@ -508,7 +525,7 @@
             // timer_2
             // 
             timer_2.Interval = 2000;
-            timer_2.Tick += timer_2second_Tick;
+            timer_2.Tick += timer2_Tick;
             // 
             // MainForm
             // 
@@ -522,7 +539,7 @@
             ForeColor = SystemColors.Control;
             MainMenuStrip = menuStrip1;
             Name = "MainForm";
-            FormClosed += MainForm_FormClosed;
+            FormClosing += MainForm_FormClosing;
             DragDrop += MainForm_DragDrop;
             DragEnter += MainForm_DragEnter;
             KeyDown += MainForm_KeyDown;
@@ -598,5 +615,7 @@
         private ToolStripMenuItem tsmi_ColorFont;
         private ToolStripMenuItem tsmi_ColorKeywords;
         private System.Windows.Forms.Timer timer_2;
+        private Button btn_Light;
+        private ToolStripMenuItem tsmi_Light;
     }
 }

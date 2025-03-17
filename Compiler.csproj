@@ -19,12 +19,16 @@
 
   <ItemGroup>
     <None Remove="App.config" />
+    <None Remove="TextFiles\HelpEN.txt" />
     <None Remove="TextFiles\Info.txt" />
+    <None Remove="TextFiles\InfoEN.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="TextFiles\Help.txt" />
+    <EmbeddedResource Include="TextFiles\HelpEN.txt" />
     <EmbeddedResource Include="TextFiles\Info.txt" />
+    <EmbeddedResource Include="TextFiles\InfoEN.txt" />
   </ItemGroup>
 
   <ItemGroup>

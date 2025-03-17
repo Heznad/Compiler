@@ -121,37 +121,6 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>800, 28</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="menuStrip1.Text" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="tsmi_File.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 24</value>
-  </data>
-  <data name="tsmi_File.Text" xml:space="preserve">
-    <value>Файл</value>
-  </data>
   <data name="tsmi_Create.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 26</value>
   </data>
@@ -185,59 +154,65 @@
   <data name="tsmi_Exit.Text" xml:space="preserve">
     <value>Выход</value>
   </data>
-  <data name="tsmi_Correction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 24</value>
+  <data name="tsmi_File.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 24</value>
   </data>
-  <data name="tsmi_Correction.Text" xml:space="preserve">
-    <value>Правка</value>
+  <data name="tsmi_File.Text" xml:space="preserve">
+    <value>Файл</value>
   </data>
   <data name="tsmi_Undo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 26</value>
+    <value>245, 26</value>
   </data>
   <data name="tsmi_Undo.Text" xml:space="preserve">
     <value>Отменить</value>
   </data>
   <data name="tsmi_Redo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 26</value>
+    <value>245, 26</value>
   </data>
   <data name="tsmi_Redo.Text" xml:space="preserve">
     <value>Повторить</value>
   </data>
   <data name="tsmi_Cut.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 26</value>
+    <value>245, 26</value>
   </data>
   <data name="tsmi_Cut.Text" xml:space="preserve">
     <value>Вырезать</value>
   </data>
   <data name="tsmi_Copy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 26</value>
+    <value>245, 26</value>
   </data>
   <data name="tsmi_Copy.Text" xml:space="preserve">
     <value>Копировать</value>
   </data>
   <data name="tsmi_Paste.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 26</value>
+    <value>245, 26</value>
   </data>
   <data name="tsmi_Paste.Text" xml:space="preserve">
     <value>Вставить</value>
   </data>
   <data name="tsmi_Delete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 26</value>
+    <value>245, 26</value>
   </data>
   <data name="tsmi_Delete.Text" xml:space="preserve">
     <value>Удалить</value>
   </data>
   <data name="tsmi_SelectAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 26</value>
+    <value>245, 26</value>
   </data>
   <data name="tsmi_SelectAll.Text" xml:space="preserve">
     <value>Выделить все</value>
   </data>
-  <data name="tsmi_Text.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 24</value>
+  <data name="tsmi_Light.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 26</value>
   </data>
-  <data name="tsmi_Text.Text" xml:space="preserve">
-    <value>Текст</value>
+  <data name="tsmi_Light.Text" xml:space="preserve">
+    <value>Подсветка синтаксиса</value>
+  </data>
+  <data name="tsmi_Correction.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 24</value>
+  </data>
+  <data name="tsmi_Correction.Text" xml:space="preserve">
+    <value>Правка</value>
   </data>
   <data name="постановкаЗадачиToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>363, 26</value>
@@ -287,17 +262,17 @@
   <data name="исходныйКодПрограммыToolStripMenuItem.Text" xml:space="preserve">
     <value>Исходный код программы</value>
   </data>
+  <data name="tsmi_Text.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 24</value>
+  </data>
+  <data name="tsmi_Text.Text" xml:space="preserve">
+    <value>Текст</value>
+  </data>
   <data name="пускToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 24</value>
   </data>
   <data name="пускToolStripMenuItem.Text" xml:space="preserve">
     <value>Пуск</value>
-  </data>
-  <data name="tsmi_Reference.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 24</value>
-  </data>
-  <data name="tsmi_Reference.Text" xml:space="preserve">
-    <value>Справка</value>
   </data>
   <data name="tsmi_Help.Size" type="System.Drawing.Size, System.Drawing">
     <value>197, 26</value>
@@ -311,11 +286,11 @@
   <data name="tsmi_Info.Text" xml:space="preserve">
     <value>О программе</value>
   </data>
-  <data name="tsmi_Localization.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 24</value>
+  <data name="tsmi_Reference.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 24</value>
   </data>
-  <data name="tsmi_Localization.Text" xml:space="preserve">
-    <value>Локализация</value>
+  <data name="tsmi_Reference.Text" xml:space="preserve">
+    <value>Справка</value>
   </data>
   <data name="tsmi_Russian.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 26</value>
@@ -329,11 +304,11 @@
   <data name="tsmi_English.Text" xml:space="preserve">
     <value>Английский</value>
   </data>
-  <data name="tsmi_View.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 24</value>
+  <data name="tsmi_Localization.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 24</value>
   </data>
-  <data name="tsmi_View.Text" xml:space="preserve">
-    <value>Вид</value>
+  <data name="tsmi_Localization.Text" xml:space="preserve">
+    <value>Локализация</value>
   </data>
   <data name="tsmi_FontInput.Size" type="System.Drawing.Size, System.Drawing">
     <value>256, 26</value>
@@ -359,14 +334,63 @@
   <data name="tsmi_ColorKeywords.Text" xml:space="preserve">
     <value>Цвет ключевых слов</value>
   </data>
+  <data name="tsmi_View.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 24</value>
+  </data>
+  <data name="tsmi_View.Text" xml:space="preserve">
+    <value>Вид</value>
+  </data>
+  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>722, 28</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="menuStrip1.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>153, 17</value>
   </metadata>
+  <data name="toolStripStatusLabelText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 20</value>
+  </data>
+  <data name="toolStripStatusLabelText.Text" xml:space="preserve">
+    <value>Текущая дата и время:</value>
+  </data>
+  <data name="toolStripStatusLabelTime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 20</value>
+  </data>
+  <data name="toolStripStatusLabelDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 20</value>
+  </data>
+  <data name="datelabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 20</value>
+  </data>
+  <data name="timelabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 20</value>
+  </data>
   <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 424</value>
+    <value>0, 427</value>
   </data>
   <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>800, 26</value>
+    <value>722, 26</value>
   </data>
   <data name="statusStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -386,188 +410,78 @@
   <data name="&gt;&gt;statusStrip1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="toolStripStatusLabelText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 20</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btn_Light.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
   </data>
-  <data name="toolStripStatusLabelText.Text" xml:space="preserve">
-    <value>Текущая дата и время:</value>
+  <data name="btn_Light.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+</value>
   </data>
-  <data name="toolStripStatusLabelTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 20</value>
+  <data name="btn_Light.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="toolStripStatusLabelDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 20</value>
-  </data>
-  <data name="datelabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 20</value>
-  </data>
-  <data name="timelabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 20</value>
-  </data>
-  <data name="&gt;&gt;btn_Info.Name" xml:space="preserve">
-    <value>btn_Info</value>
-  </data>
-  <data name="&gt;&gt;btn_Info.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_Info.Parent" xml:space="preserve">
-    <value>panel_Buttons</value>
-  </data>
-  <data name="&gt;&gt;btn_Info.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;btn_Help.Name" xml:space="preserve">
-    <value>btn_Help</value>
-  </data>
-  <data name="&gt;&gt;btn_Help.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_Help.Parent" xml:space="preserve">
-    <value>panel_Buttons</value>
-  </data>
-  <data name="&gt;&gt;btn_Help.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;btn_Start.Name" xml:space="preserve">
-    <value>btn_Start</value>
-  </data>
-  <data name="&gt;&gt;btn_Start.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_Start.Parent" xml:space="preserve">
-    <value>panel_Buttons</value>
-  </data>
-  <data name="&gt;&gt;btn_Start.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;btn_Put.Name" xml:space="preserve">
-    <value>btn_Put</value>
-  </data>
-  <data name="&gt;&gt;btn_Put.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_Put.Parent" xml:space="preserve">
-    <value>panel_Buttons</value>
-  </data>
-  <data name="&gt;&gt;btn_Put.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;btn_Cut.Name" xml:space="preserve">
-    <value>btn_Cut</value>
-  </data>
-  <data name="&gt;&gt;btn_Cut.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_Cut.Parent" xml:space="preserve">
-    <value>panel_Buttons</value>
-  </data>
-  <data name="&gt;&gt;btn_Cut.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;btn_Copy.Name" xml:space="preserve">
-    <value>btn_Copy</value>
-  </data>
-  <data name="&gt;&gt;btn_Copy.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_Copy.Parent" xml:space="preserve">
-    <value>panel_Buttons</value>
-  </data>
-  <data name="&gt;&gt;btn_Copy.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;btn_Redo.Name" xml:space="preserve">
-    <value>btn_Redo</value>
-  </data>
-  <data name="&gt;&gt;btn_Redo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_Redo.Parent" xml:space="preserve">
-    <value>panel_Buttons</value>
-  </data>
-  <data name="&gt;&gt;btn_Redo.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;btn_Undo.Name" xml:space="preserve">
-    <value>btn_Undo</value>
-  </data>
-  <data name="&gt;&gt;btn_Undo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_Undo.Parent" xml:space="preserve">
-    <value>panel_Buttons</value>
-  </data>
-  <data name="&gt;&gt;btn_Undo.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;btn_Save.Name" xml:space="preserve">
-    <value>btn_Save</value>
-  </data>
-  <data name="&gt;&gt;btn_Save.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_Save.Parent" xml:space="preserve">
-    <value>panel_Buttons</value>
-  </data>
-  <data name="&gt;&gt;btn_Save.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;btn_Open.Name" xml:space="preserve">
-    <value>btn_Open</value>
-  </data>
-  <data name="&gt;&gt;btn_Open.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_Open.Parent" xml:space="preserve">
-    <value>panel_Buttons</value>
-  </data>
-  <data name="&gt;&gt;btn_Open.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;btn_Create.Name" xml:space="preserve">
-    <value>btn_Create</value>
-  </data>
-  <data name="&gt;&gt;btn_Create.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_Create.Parent" xml:space="preserve">
-    <value>panel_Buttons</value>
-  </data>
-  <data name="&gt;&gt;btn_Create.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="panel_Buttons.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 28</value>
+  <data name="btn_Light.Location" type="System.Drawing.Point, System.Drawing">
+    <value>664, 6</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="panel_Buttons.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 5</value>
-  </data>
-  <data name="panel_Buttons.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="btn_Light.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
   </data>
-  <data name="panel_Buttons.Size" type="System.Drawing.Size, System.Drawing">
-    <value>800, 58</value>
+  <data name="btn_Light.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 48</value>
   </data>
-  <data name="panel_Buttons.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;panel_Buttons.Name" xml:space="preserve">
-    <value>panel_Buttons</value>
-  </data>
-  <data name="&gt;&gt;panel_Buttons.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel_Buttons.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panel_Buttons.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="btn_Light.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
   </data>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>393, 17</value>
   </metadata>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btn_Light.ToolTip" xml:space="preserve">
+    <value>Подсветка</value>
+  </data>
+  <data name="&gt;&gt;btn_Light.Name" xml:space="preserve">
+    <value>btn_Light</value>
+  </data>
+  <data name="&gt;&gt;btn_Light.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_Light.Parent" xml:space="preserve">
+    <value>panel_Buttons</value>
+  </data>
+  <data name="&gt;&gt;btn_Light.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="btn_Info.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
@@ -596,7 +510,7 @@
     <value>panel_Buttons</value>
   </data>
   <data name="&gt;&gt;btn_Info.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="btn_Help.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -626,7 +540,7 @@
     <value>panel_Buttons</value>
   </data>
   <data name="&gt;&gt;btn_Help.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="btn_Start.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -656,7 +570,7 @@
     <value>panel_Buttons</value>
   </data>
   <data name="&gt;&gt;btn_Start.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="btn_Put.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -686,7 +600,7 @@
     <value>panel_Buttons</value>
   </data>
   <data name="&gt;&gt;btn_Put.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="btn_Cut.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -716,7 +630,7 @@
     <value>panel_Buttons</value>
   </data>
   <data name="&gt;&gt;btn_Cut.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="btn_Copy.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -746,7 +660,7 @@
     <value>panel_Buttons</value>
   </data>
   <data name="&gt;&gt;btn_Copy.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="btn_Redo.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -776,7 +690,7 @@
     <value>panel_Buttons</value>
   </data>
   <data name="&gt;&gt;btn_Redo.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="btn_Undo.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -806,7 +720,7 @@
     <value>panel_Buttons</value>
   </data>
   <data name="&gt;&gt;btn_Undo.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="btn_Save.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -836,7 +750,7 @@
     <value>panel_Buttons</value>
   </data>
   <data name="&gt;&gt;btn_Save.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="btn_Open.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -866,7 +780,7 @@
     <value>panel_Buttons</value>
   </data>
   <data name="&gt;&gt;btn_Open.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="btn_Create.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -896,7 +810,34 @@
     <value>panel_Buttons</value>
   </data>
   <data name="&gt;&gt;btn_Create.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
+  </data>
+  <data name="panel_Buttons.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 28</value>
+  </data>
+  <data name="panel_Buttons.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 5</value>
+  </data>
+  <data name="panel_Buttons.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="panel_Buttons.Size" type="System.Drawing.Size, System.Drawing">
+    <value>800, 58</value>
+  </data>
+  <data name="panel_Buttons.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;panel_Buttons.Name" xml:space="preserve">
+    <value>panel_Buttons</value>
+  </data>
+  <data name="&gt;&gt;panel_Buttons.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel_Buttons.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panel_Buttons.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <metadata name="timer_1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>290, 17</value>
@@ -905,13 +846,13 @@
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="tabControl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 88</value>
+    <value>0, 87</value>
   </data>
   <data name="tabControl.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="tabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>800, 336</value>
+    <value>722, 339</value>
   </data>
   <data name="tabControl.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -928,9 +869,6 @@
   <data name="&gt;&gt;tabControl.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>393, 17</value>
-  </metadata>
   <data name="richTextBox2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -992,7 +930,7 @@
     <value>8, 20</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>800, 450</value>
+    <value>722, 453</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1129,7 +1067,7 @@
 </value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>680, 400</value>
+    <value>740, 380</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -1225,6 +1163,12 @@
     <value>tsmi_SelectAll</value>
   </data>
   <data name="&gt;&gt;tsmi_SelectAll.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsmi_Light.Name" xml:space="preserve">
+    <value>tsmi_Light</value>
+  </data>
+  <data name="&gt;&gt;tsmi_Light.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tsmi_Text.Name" xml:space="preserve">

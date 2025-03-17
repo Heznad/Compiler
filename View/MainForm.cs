@@ -1,6 +1,4 @@
 ﻿using System.Globalization;
-using System.Resources;
-using System.Windows.Forms;
 using Compiler.Model;
 using Compiler.Presenter;
 using Compiler.View;
@@ -13,13 +11,12 @@ namespace Compiler
         public MainForm()
         {
             InitializeComponent();
-            this.KeyPreview = true;
+            this.KeyPreview = true; // Для горячих клавищ
             presenter = new(tabControl, btn_Undo, btn_Redo);
             timer_1.Start();
             timer_2.Start();
-            presenter.AddTabPage("NewFile");
+            presenter.AddTabPage(MyString.NewFile);
             presenter.UpdateUndoRedoButtonStates();
-            SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
         }
 
 
@@ -42,7 +39,7 @@ namespace Compiler
         }
         private void btn_Exit_Click(object sender, EventArgs e)
         {
-            presenter.CLoseCompilyator();
+             this.Close();
         }
         #endregion
 
@@ -75,6 +72,10 @@ namespace Compiler
         {
             presenter.RichTextBox_SelectAll();
         }
+        private void btn_Light_Click(object sender, EventArgs e)
+        {
+            presenter.HighlightKeywords();
+        }
         #endregion
 
         #region [ Справка ]
@@ -89,26 +90,53 @@ namespace Compiler
             }
             else
             {
+
                 ToolStripMenuItem t = (ToolStripMenuItem)sender;
                 string name = t.Name;
                 AuxiliaryForm af = new(name);
                 af.ShowDialog();
             }
         }
+
         #endregion
 
         #region [ Локализация ]
         private void tsmi_Russian_Click(object sender, EventArgs e)
         {
-            var changeLanguage = new ChangeLanguage();
-            changeLanguage.UpdateConfig("language", "ru");
-            presenter.CLoseCompilyator();
+
+            if (CultureInfo.CurrentCulture.Name == "en-US")
+            {
+                var changeLanguage = new ChangeLanguage();
+                changeLanguage.UpdateConfig("language", "ru");
+                DialogResult result = MessageBox.Show(
+        MyString.MessageRestart,
+        MyString.Message,
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Information,
+        MessageBoxDefaultButton.Button1,
+        MessageBoxOptions.DefaultDesktopOnly);
+
+                if (result == DialogResult.Yes) presenter.RestartCompilyator();
+                tsmi_Localization.Enabled = false;
+            }
         }
         private void tsmi_English_Click(object sender, EventArgs e)
         {
-            var changeLanguage = new ChangeLanguage();
-            changeLanguage.UpdateConfig("language", "en-US");
-            presenter.CLoseCompilyator();
+            if (CultureInfo.CurrentCulture.Name == "ru-RU" || CultureInfo.CurrentCulture.Name == "ru")
+            {
+                var changeLanguage = new ChangeLanguage();
+                changeLanguage.UpdateConfig("language", "en-US");
+                DialogResult result = MessageBox.Show(
+        MyString.MessageRestart,
+        MyString.Message,
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Information,
+        MessageBoxDefaultButton.Button1,
+        MessageBoxOptions.DefaultDesktopOnly);
+
+                if (result == DialogResult.Yes) presenter.RestartCompilyator();
+                tsmi_Localization.Enabled = false;
+            }
         }
         #endregion
 
@@ -131,20 +159,22 @@ namespace Compiler
         }
         #endregion
 
-        #region [ Таймер ]
+        #region [ Таймеры ]
         private void timer1_Tick(object sender, EventArgs e)
         {
-           // if (presenter.IsHighLight == true) presenter.IsHighLight = false;
+            // if (presenter.IsHighLight == true) presenter.IsHighLight = false;
             datelabel.Text = DateTime.Now.ToLongDateString();
             timelabel.Text = DateTime.Now.ToLongTimeString();
+        }
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (presenter.IsHighLight) presenter.IsHighLight = false;
         }
         #endregion
 
         #region [ Свойства Form ]
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            presenter.CLoseCompilyator();
-        }
+
+        // Состояние курсоры при перетаскивание файла
         private void MainForm_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -156,6 +186,8 @@ namespace Compiler
                 e.Effect = DragDropEffects.None;
             }
         }
+
+        // Перетаскивание файла в зону формы
         private void MainForm_DragDrop(object sender, DragEventArgs e)
         {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
@@ -165,6 +197,25 @@ namespace Compiler
             }
 
         }
+        
+        // Спрашиваем пользователя разрешения, сохраняем файлы и выходим  
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+        MyString.MessageExit,
+        MyString.Message,
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Information,
+        MessageBoxDefaultButton.Button1,
+        MessageBoxOptions.DefaultDesktopOnly);
+
+            if (result == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+            else presenter.CLoseCompilyator();
+        }
+
         #endregion
 
         #region [ Нажатие правой кнопкой мыши на вкладку ]
@@ -247,9 +298,6 @@ namespace Compiler
             }
         }
 
-        private void timer_2second_Tick(object sender, EventArgs e)
-        {
-            if (presenter.IsHighLight == true) presenter.IsHighLight = false;
-        }
+        
     }
 }
