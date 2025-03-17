@@ -15,7 +15,7 @@ namespace Compiler.Presenter
         private int _lastTextLength = 0;
         private bool isProcessingText = false; // Флаг для предотвращения гонки потоков при быстром вводе
         private bool _isPerformingUndoRedo = false; // Добавляем флаг для блокировки TextChanged во время Undo/Redo
-        private System.Threading.CancellationTokenSource _highlightCancellationTokenSource;
+        private CancellationTokenSource _highlightCancellationTokenSource;
         // Изменяемые элементы UI
         TabControl _tabControl;
         Button _btnUndo;
@@ -58,14 +58,13 @@ namespace Compiler.Presenter
             {
                 await Task.Run(() =>
                 {
-                    // Ensure UI thread access
                     currentRichTextBox.Invoke((MethodInvoker)delegate { UndoRedoStacksWork(currentRichTextBox); });
                 }
                 );
             }
             currentRichTextBox.Invoke((MethodInvoker)delegate { UpdateLineNumbers(); });
             _highlightCancellationTokenSource?.Cancel();
-            _highlightCancellationTokenSource = new System.Threading.CancellationTokenSource();
+            _highlightCancellationTokenSource = new CancellationTokenSource();
 
             try
             {
@@ -81,7 +80,6 @@ namespace Compiler.Presenter
             {
                 Console.WriteLine("Highlighting operation cancelled.");
             }
-
             currentRichTextBox.Invoke((MethodInvoker)delegate { currentRichTextBox.Modified = true; });
         }
 
@@ -133,20 +131,19 @@ namespace Compiler.Presenter
                 Orientation = Orientation.Vertical,
                 Dock = DockStyle.Fill,
                 SplitterWidth = 1,
-                SplitterDistance = 10
+                SplitterDistance = 20
             };
             splitContainerP1.FixedPanel = FixedPanel.Panel1;
             RichTextBox lineNumberRichTextBox = new RichTextBox
             {
                 Dock = DockStyle.Left,
-                Width = 40,
-                BorderStyle = BorderStyle.None, // Убираем границу
+                BorderStyle = BorderStyle.None,
                 BackColor = Color.White,
                 ForeColor = text_manager.SelectedColor,
                 Font = text_manager.SelectedFont,
                 Enabled = false,
-                Multiline = true, // Важно для отображения нескольких строк
-                ScrollBars = RichTextBoxScrollBars.None, // Убираем полосы прокрутки
+                Multiline = true,
+                ScrollBars = RichTextBoxScrollBars.None,
                 WordWrap = false
             };
             RichTextBox richTextBox = new RichTextBox
@@ -301,6 +298,7 @@ namespace Compiler.Presenter
             TabPage tp = _tabControl.TabPages[_tabControl.TabCount - 1];
             RichTextBox richTextBox = GetSelectedRichTextBox(tp);
             richTextBox.Text = fileContent;
+            richTextBox.SelectionStart = richTextBox.TextLength;
             tabPageFilePaths.Add(tp, filePath);
             _tabControl.SelectedIndex = _tabControl.TabCount - 1;
         }
@@ -458,9 +456,8 @@ namespace Compiler.Presenter
             RichTextBox richTextBox = GetSelectedRichTextBox();
             Stack<Command> undoStack = _undoStacks[richTextBox];
             Stack<Command> redoStack = _redoStacks[richTextBox];
-            //command.Execute(richTextBox1);
             undoStack.Push(command);
-            redoStack.Clear(); // Очищаем Redo после новой операции
+            redoStack.Clear();
             UpdateUndoRedoButtonStates();
         }
         // Нажатие на кнопку "Отменить" 
@@ -491,10 +488,10 @@ namespace Compiler.Presenter
             Stack<Command> redoStack = _redoStacks[currentTextBox];
             if (redoStack.Count > 0)
             {
-                _isPerformingUndoRedo = true; // Предотвращаем запись операций во время Redo
+                _isPerformingUndoRedo = true; 
                 Command command = redoStack.Pop();
                 command.Execute(currentTextBox);
-                undoStack.Push(command); // Перемещаем обратно в Undo
+                undoStack.Push(command); 
                 UpdateUndoRedoButtonStates();
                 _isPerformingUndoRedo = false;
             }
@@ -537,14 +534,13 @@ namespace Compiler.Presenter
             }
             else if (richTextBox.TextLength < _lastTextLength)
             {
-                // Удаление текста
                 int deletePosition = richTextBox.SelectionStart;
                 int deleteLength = _lastTextLength - richTextBox.TextLength;
-                string deletedText = _lastText; // Предыдущий текст (чтобы знать, что удалили). Это важно!
+                string deletedText = _lastText;
                 if (deletePosition >= 0 && deletePosition + deleteLength <= deletedText.Length)
-                    deletedText = deletedText.Substring(deletePosition, deleteLength); // Extract deleted text
+                    deletedText = deletedText.Substring(deletePosition, deleteLength);
                 else
-                    deletedText = ""; // Fallback
+                    deletedText = ""; 
 
                 DeleteTextCommand command = new DeleteTextCommand(deletePosition, deletedText);
                 ExecuteCommand(command);
@@ -557,7 +553,7 @@ namespace Compiler.Presenter
         #endregion
 
 
-        #region [ Копировать  Вырезать    Вставить    Удалить   Выделить всё ]
+        #region [ Копировать/Вырезать/Вставить/Удалить/Выделить_всё ]
 
         // Копировать
         public void RichTextBox_Copy()
@@ -582,8 +578,12 @@ namespace Compiler.Presenter
         // Вставить
         public void RichTextBox_Paste()
         {
-            RichTextBox richTextBox = GetSelectedRichTextBox();
-            richTextBox.Paste();
+            if (Clipboard.ContainsText())
+            {
+                RichTextBox richTextBox = GetSelectedRichTextBox();
+                string clipboardText = Clipboard.GetText();
+                richTextBox.SelectedText = clipboardText;
+            }
         }
 
         // Удалить
@@ -614,7 +614,7 @@ namespace Compiler.Presenter
         #endregion
 
 
-        #region [ Шрифт Цвет Подсветка ]
+        #region [ Шрифт/Цвет/Подсветка ]
 
         // Выбор шрифта
         public void SetFont()
@@ -671,21 +671,21 @@ namespace Compiler.Presenter
         public void SettingsColorTypes()
         {
             text_manager.ColorTypes = text_manager.SettingsColorFont(text_manager.ColorTypes);
-            HighlightKeywords(GetSelectedRichTextBox(), text_manager.KeywordsTypes, text_manager.ColorTypes);
+            //HighlightKeywords(GetSelectedRichTextBox(), text_manager.KeywordsTypes, text_manager.ColorTypes);
         }
 
         // Операторы
         public void SettingsColorOperators()
         {
             text_manager.ColorOperators = text_manager.SettingsColorFont(text_manager.ColorOperators);
-            HighlightKeywords(GetSelectedRichTextBox(), text_manager.KeywordsOperators, text_manager.ColorOperators);
+            //HighlightKeywords(GetSelectedRichTextBox(), text_manager.KeywordsOperators, text_manager.ColorOperators);
         }
 
         // Перечисление
         public void SettingsColorEnum()
         {
             text_manager.ColorEnum = text_manager.SettingsColorFont(text_manager.ColorEnum);
-            HighlightKeywords(GetSelectedRichTextBox(), text_manager.KeywordsEnum, text_manager.ColorEnum);
+            //HighlightKeywords(GetSelectedRichTextBox(), text_manager.KeywordsEnum, text_manager.ColorEnum);
         }
 
         #endregion
@@ -749,6 +749,7 @@ namespace Compiler.Presenter
                 HighlightKeywords(richTextBox, text_manager.KeywordsEnum, text_manager.ColorEnum);
             });
         }
+
         private void HighlightKeywords(RichTextBox richTextBox, string[] keywords, Color highlightColor)
         {
             if (richTextBox == null || keywords == null || keywords.Length == 0) return;
@@ -804,19 +805,24 @@ namespace Compiler.Presenter
             UpdateLineNumberScroll();
         }
 
-        // Нумерация в вспомогательном rtb
         private void UpdateLineNumbers()
         {
             RichTextBox richTextBox = GetSelectedRichTextBox();
             RichTextBox lineNumberRichTextBox = GetlineNumberRichTextBox();
-
-            lineNumberRichTextBox.Clear();
+            SplitContainer splitContainer = GetlineNumberSplitContainer();
+            System.Text.StringBuilder lineNumbersText = new System.Text.StringBuilder();
             int lineCount = richTextBox.Lines.Length;
-
+            int maxDigits = lineCount.ToString().Length;
+            int requiredWidth = CalculateWidth(maxDigits);
+            if (splitContainer.SplitterDistance != requiredWidth)
+            {
+                splitContainer.SplitterDistance = Math.Min(requiredWidth, splitContainer.Width - splitContainer.Panel2MinSize);
+            }
             for (int i = 1; i <= lineCount; i++)
             {
-                lineNumberRichTextBox.AppendText(i.ToString() + Environment.NewLine);
+                lineNumbersText.AppendLine(i.ToString());
             }
+            lineNumberRichTextBox.Text = lineNumbersText.ToString();
             UpdateLineNumberScroll();
         }
 
@@ -826,24 +832,33 @@ namespace Compiler.Presenter
             RichTextBox richTextBox = GetSelectedRichTextBox();
             RichTextBox lineNumberRichTextBox = GetlineNumberRichTextBox();
             if (richTextBox == null || lineNumberRichTextBox == null) return;
-
             try
             {
                 int firstVisibleCharIndex = richTextBox.GetCharIndexFromPosition(new Point(0, 0));
                 int firstVisibleLineNumber = richTextBox.GetLineFromCharIndex(firstVisibleCharIndex);
-
                 if (firstVisibleLineNumber >= 0 && firstVisibleLineNumber < richTextBox.Lines.Length)
                 {
-                    // Get the starting index of the first visible line in the RichTextBox
                     int startOfLineIndex = richTextBox.GetFirstCharIndexFromLine(firstVisibleLineNumber);
-                    lineNumberRichTextBox.SelectionStart = lineNumberRichTextBox.GetFirstCharIndexFromLine(firstVisibleLineNumber);
+                    if (lineNumberRichTextBox.SelectionStart != lineNumberRichTextBox.GetFirstCharIndexFromLine(firstVisibleLineNumber))
+                    {
+                        lineNumberRichTextBox.SelectionStart = lineNumberRichTextBox.GetFirstCharIndexFromLine(firstVisibleLineNumber);
+                    }
+
                     lineNumberRichTextBox.ScrollToCaret();
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(MyString.ErrorScroll + ex.Message);
+                Console.WriteLine("Error during scroll update: " + ex.Message);
             }
+        }
+
+        // Расчет ширины на основе количества цифр
+        private int CalculateWidth(int digits)
+        {
+            int baseWidth = 10;
+            int extraWidthPerDigit = 12;
+            return baseWidth + (digits * extraWidthPerDigit);
         }
 
         // Получение текщего вспомогательно rtb
@@ -855,8 +870,14 @@ namespace Compiler.Presenter
             return (RichTextBox)splitContainerP1.Panel1.Controls[0];
         }
 
-        #endregion
+        private SplitContainer GetlineNumberSplitContainer(TabPage tabPage = null)
+        {
+            if (tabPage == null) tabPage = _tabControl.SelectedTab;
+            SplitContainer splitContainer = (SplitContainer)tabPage.Controls[0];
+            return (SplitContainer)splitContainer.Panel1.Controls[0];
+        }
 
+        #endregion
 
         // Получение текущего текстового поля
         private RichTextBox GetSelectedRichTextBox(TabPage tabPage = null)
