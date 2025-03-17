@@ -150,9 +150,6 @@
   <data name="dgvMessage" xml:space="preserve">
     <value>Message</value>
   </data>
-  <data name="Enum" xml:space="preserve">
-    <value>Enum</value>
-  </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
@@ -170,6 +167,9 @@
   </data>
   <data name="Help" xml:space="preserve">
     <value>Help</value>
+  </data>
+  <data name="Keywords" xml:space="preserve">
+    <value>Keywords</value>
   </data>
   <data name="NameFile" xml:space="preserve">
     <value>Name of file: </value>

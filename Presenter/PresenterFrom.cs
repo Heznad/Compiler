@@ -15,12 +15,14 @@ namespace Compiler.Presenter
         private int _lastTextLength = 0;
         private bool isProcessingText = false; // Флаг для предотвращения гонки потоков при быстром вводе
         private bool _isPerformingUndoRedo = false; // Добавляем флаг для блокировки TextChanged во время Undo/Redo
-        private CancellationTokenSource _highlightCancellationTokenSource;
+        private bool _isHighLight = false; // Подсветка текста
         // Изменяемые элементы UI
         TabControl _tabControl;
         Button _btnUndo;
         Button _btnRedo;
         
+        public bool IsHighLight { get => _isHighLight; set => _isHighLight = value; }
+
         public PresenterForm(TabControl tabControl, Button btn_Undo, Button btn_Redo)
         {
             _tabControl = tabControl;
@@ -62,24 +64,18 @@ namespace Compiler.Presenter
                 }
                 );
             }
-            currentRichTextBox.Invoke((MethodInvoker)delegate { UpdateLineNumbers(); });
-            _highlightCancellationTokenSource?.Cancel();
-            _highlightCancellationTokenSource = new CancellationTokenSource();
 
-            try
+            currentRichTextBox.Invoke((MethodInvoker)delegate { UpdateLineNumbers(); });
+
+            if (!_isHighLight)
             {
                 await Task.Run(() =>
                 {
-                    currentRichTextBox.Invoke((MethodInvoker)delegate
-                    {
-                        HighlightAllKeywords(currentRichTextBox, _highlightCancellationTokenSource.Token);
-                    });
-                }, _highlightCancellationTokenSource.Token);
+                    currentRichTextBox.Invoke((MethodInvoker)delegate { HighlightKeywords(); });
+                }
+                );
             }
-            catch (OperationCanceledException)
-            {
-                Console.WriteLine("Highlighting operation cancelled.");
-            }
+
             currentRichTextBox.Invoke((MethodInvoker)delegate { currentRichTextBox.Modified = true; });
         }
 
@@ -630,7 +626,7 @@ namespace Compiler.Presenter
             DataGridView dataGridView = (DataGridView)splitContainer.Panel2.Controls[0];
             dataGridView.Font = text_manager.SelectedFontOutput;
         }
-        public void SettingsColorKeywords()
+        public void SettingsColorAllKeywords()
         {
             Form prompt = new Form()
             {
@@ -643,25 +639,26 @@ namespace Compiler.Presenter
 
             Label textLabel = new Label() { Left = 30, Top = 20, Text = MyString.ChangeColorKeyword,AutoSize = true};
             Label currentLabelColor = new Label() { Left = 70, Top = 50, Text = MyString.CurrentColor, AutoSize = true };
-            Panel pTypes = new Panel() { BorderStyle = BorderStyle.Fixed3D,BackColor = text_manager.ColorTypes, Width = 40, Height = 40, Left = 100, Top = 80 };
-            Button btn_Types = new Button() { Text = MyString.TypesOfData, Left = 275, Width = 125, Height = 40, Top = 80 };
-            Panel pOperators = new Panel() { BorderStyle = BorderStyle.Fixed3D, BackColor = text_manager.ColorOperators, Width = 40, Height = 40, Left = 100, Top = 130 };
-            Button btn_Operators = new Button() { Text = MyString.Operators, Left = 275, Width = 125, Height = 40, Top = 130 };
-            Panel pEnum = new Panel() { BorderStyle = BorderStyle.Fixed3D, BackColor = text_manager.ColorEnum, Width = 40, Height = 40, Left = 100, Top = 180 };
-            Button btn_Enum = new Button() { Text = MyString.Enum, Left = 275, Width = 125, Height = 40, Top = 180 };
+            Panel pKeywords = new Panel() { BorderStyle = BorderStyle.Fixed3D,BackColor = text_manager.KeywordCategories["Keywords"], Width = 40, Height = 40, Left = 100, Top = 80 };
+            Button btn_Keywords = new Button() { Text = MyString.Keywords, Left = 275, Width = 125, Height = 40, Top = 80 };
+            Panel pTypes = new Panel() { BorderStyle = BorderStyle.Fixed3D, BackColor = text_manager.KeywordCategories["TypesData"], Width = 40, Height = 40, Left = 100, Top = 130 };
+            Button btn_Types = new Button() { Text = MyString.TypesOfData, Left = 275, Width = 125, Height = 40, Top = 130 };
+            Panel pOperators = new Panel() { BorderStyle = BorderStyle.Fixed3D, BackColor = text_manager.KeywordCategories["Operators"], Width = 40, Height = 40, Left = 100, Top = 180 };
+            Button btn_Operators = new Button() { Text = MyString.Operators, Left = 275, Width = 125, Height = 40, Top = 180 };
 
+
+            btn_Keywords.Click += (sender, e) => { prompt.Close(); SettingsColorKeywords(); };
             btn_Types.Click += (sender, e) => { prompt.Close(); SettingsColorTypes(); };
             btn_Operators.Click += (sender, e) => { prompt.Close(); SettingsColorOperators(); };
-            btn_Enum.Click += (sender, e) => { prompt.Close(); SettingsColorEnum(); };
 
             prompt.Controls.Add(textLabel);
             prompt.Controls.Add(currentLabelColor);
+            prompt.Controls.Add(pKeywords);
+            prompt.Controls.Add(btn_Keywords);
             prompt.Controls.Add(pTypes);
             prompt.Controls.Add(btn_Types);
             prompt.Controls.Add(pOperators);
             prompt.Controls.Add(btn_Operators);
-            prompt.Controls.Add(pEnum);
-            prompt.Controls.Add(btn_Enum);
             prompt.ShowDialog();
         }
 
@@ -670,22 +667,22 @@ namespace Compiler.Presenter
         // Типы данных
         public void SettingsColorTypes()
         {
-            text_manager.ColorTypes = text_manager.SettingsColorFont(text_manager.ColorTypes);
+            text_manager.SettingsColorFont(text_manager.KeywordCategories["TypesData"]);
             //HighlightKeywords(GetSelectedRichTextBox(), text_manager.KeywordsTypes, text_manager.ColorTypes);
         }
 
         // Операторы
         public void SettingsColorOperators()
         {
-            text_manager.ColorOperators = text_manager.SettingsColorFont(text_manager.ColorOperators);
+            text_manager.SettingsColorFont(text_manager.KeywordCategories["Operators"]);
             //HighlightKeywords(GetSelectedRichTextBox(), text_manager.KeywordsOperators, text_manager.ColorOperators);
         }
 
         // Перечисление
-        public void SettingsColorEnum()
+        public void SettingsColorKeywords()
         {
-            text_manager.ColorEnum = text_manager.SettingsColorFont(text_manager.ColorEnum);
-            //HighlightKeywords(GetSelectedRichTextBox(), text_manager.KeywordsEnum, text_manager.ColorEnum);
+            text_manager.SettingsColorFont(text_manager.KeywordCategories["Keywords"]);
+            //HighlightKeywords();
         }
 
         #endregion
@@ -736,69 +733,89 @@ namespace Compiler.Presenter
             }
         }
 
-        //Подсветка всех ключевых слов
-        private async void HighlightAllKeywords(RichTextBox richTextBox, System.Threading.CancellationToken cancellationToken)
+        private void HighlightKeywords()
         {
-            richTextBox.Invoke((MethodInvoker)delegate {
-                HighlightKeywords(richTextBox, text_manager.KeywordsTypes, text_manager.ColorTypes);
-            });
-            richTextBox.Invoke((MethodInvoker)delegate {
-                HighlightKeywords(richTextBox, text_manager.KeywordsOperators, text_manager.ColorOperators);
-            });
-            richTextBox.Invoke((MethodInvoker)delegate {
-                HighlightKeywords(richTextBox, text_manager.KeywordsEnum, text_manager.ColorEnum);
-            });
-        }
+            RichTextBox richTextBox = GetSelectedRichTextBox();
+            int selectionStart = richTextBox.SelectionStart;
+            int selectionLength = richTextBox.SelectionLength;
+            _isHighLight = true;
+            richTextBox.SuspendLayout();
 
-        private void HighlightKeywords(RichTextBox richTextBox, string[] keywords, Color highlightColor)
-        {
-            if (richTextBox == null || keywords == null || keywords.Length == 0) return;
+            // Создаем HashSet для хранения индексов уже подсвеченных слов
+            HashSet<int> highlightedIndices = new HashSet<int>();
 
-            // Сохраняем текущую позицию курсора и цвет, чтобы потом их восстановить
-            int originalSelectionStart = richTextBox.SelectionStart;
-            int originalSelectionLength = richTextBox.SelectionLength;
-            Color originalColor = richTextBox.SelectionColor;
+            richTextBox.SelectionStart = 0;
+            richTextBox.SelectionLength = richTextBox.TextLength;
+            richTextBox.SelectionColor = text_manager.SelectedColor;
 
-            try
+            // Перебираем каждую категорию ключевых слов
+            foreach (var category in text_manager.Keywords)
             {
-                foreach (string keyword in keywords)
-                {
-                    // Находим все вхождения ключевого слова
-                    int start = 0;
-                    while (start < richTextBox.TextLength)
-                    {
-                        int wordStartIndex = richTextBox.Find(keyword, start, RichTextBoxFinds.WholeWord);
-                        if (wordStartIndex != -1)
-                        {
-                            // Подсвечиваем ключевое слово
-                            richTextBox.SelectionStart = wordStartIndex;
-                            richTextBox.SelectionLength = keyword.Length;
-                            richTextBox.SelectionColor = highlightColor;
+                string categoryName = category.Key;
+                List<string> keywordList = category.Value;
+                Color keywordColor = text_manager.KeywordCategories[categoryName];  // Получаем цвет для данной категории
 
-                            // Перемещаем позицию для следующего поиска
-                            start = wordStartIndex + keyword.Length;
+                // Перебираем ключевые слова в категории
+                foreach (string keyword in keywordList)
+                {
+                    int index = 0;
+                    while (index < richTextBox.Text.Length)
+                    {
+                        index = richTextBox.Text.IndexOf(keyword, index, StringComparison.OrdinalIgnoreCase);
+                        if (index >= 0)
+                        {
+                            // Проверяем, чтобы слово было целым и не было частью другого слова
+                            if ((index == 0 || !char.IsLetterOrDigit(richTextBox.Text[index - 1])) &&
+                                (index + keyword.Length == richTextBox.Text.Length || !char.IsLetterOrDigit(richTextBox.Text[index + keyword.Length])))
+                            {
+                                bool alreadyHighlighted = false;
+                                // Проверяем, чтобы этот индекс не был уже подсвечен
+                                for (int i = index; i < index + keyword.Length; i++)
+                                {
+                                    if (highlightedIndices.Contains(i))
+                                    {
+                                        alreadyHighlighted = true;
+                                        break;
+                                    }
+                                }
+
+                                if (!alreadyHighlighted)
+                                {
+                                    richTextBox.SelectionStart = index;
+                                    richTextBox.SelectionLength = keyword.Length;
+                                    richTextBox.SelectionColor = keywordColor;  // Используем цвет для данной категории
+
+                                    // Добавляем индексы подсвеченного слова в HashSet
+                                    for (int i = index; i < index + keyword.Length; i++)
+                                    {
+                                        highlightedIndices.Add(i);
+                                    }
+                                }
+                            }
+                            index += keyword.Length;
                         }
                         else
                         {
-                            break; // Ключевое слово больше не найдено
+                            break;
                         }
                     }
                 }
             }
-            finally
-            {
-                // Восстанавливаем исходные настройки RichTextBox
-                richTextBox.SelectionStart = originalSelectionStart;
-                richTextBox.SelectionLength = originalSelectionLength;
-                richTextBox.SelectionColor = originalColor;
-            }
+
+            richTextBox.SelectionStart = selectionStart;
+            richTextBox.SelectionLength = selectionLength;
+            richTextBox.SelectionColor = text_manager.SelectedColor;
+            richTextBox.ResumeLayout();
+            //richTextBox.Focus();
         }
+
+
 
         #endregion
 
 
         #region [ Прокрутка ]
-        
+
         // Событие прокурутки скролла у текстовго поля
         private void RichTextBox_VScroll(object sender, EventArgs e)
         {

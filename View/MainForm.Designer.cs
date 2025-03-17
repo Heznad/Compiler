@@ -85,11 +85,12 @@
             btn_Save = new Button();
             btn_Open = new Button();
             btn_Create = new Button();
-            timer1 = new System.Windows.Forms.Timer(components);
+            timer_1 = new System.Windows.Forms.Timer(components);
             tabControl = new TabControl();
             toolTip1 = new ToolTip(components);
             richTextBox2 = new RichTextBox();
             richTextBox1 = new RichTextBox();
+            timer_2 = new System.Windows.Forms.Timer(components);
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             panel_Buttons.SuspendLayout();
@@ -479,10 +480,10 @@
             btn_Create.UseVisualStyleBackColor = true;
             btn_Create.Click += btn_File_Click;
             // 
-            // timer1
+            // timer_1
             // 
-            timer1.Interval = 1000;
-            timer1.Tick += timer1_Tick;
+            timer_1.Interval = 1000;
+            timer_1.Tick += timer1_Tick;
             // 
             // tabControl
             // 
@@ -503,6 +504,11 @@
             // 
             resources.ApplyResources(richTextBox1, "richTextBox1");
             richTextBox1.Name = "richTextBox1";
+            // 
+            // timer_2
+            // 
+            timer_2.Interval = 2000;
+            timer_2.Tick += timer_2second_Tick;
             // 
             // MainForm
             // 
@@ -550,7 +556,7 @@
         private Button btn_Help;
         private Button btn_Start;
         private Button btn_Put;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer_1;
         private ToolStripStatusLabel toolStripStatusLabelText;
         private ToolStripStatusLabel toolStripStatusLabelDate;
         private ToolStripStatusLabel toolStripStatusLabelTime;
@@ -591,5 +597,6 @@
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem tsmi_ColorFont;
         private ToolStripMenuItem tsmi_ColorKeywords;
+        private System.Windows.Forms.Timer timer_2;
     }
 }

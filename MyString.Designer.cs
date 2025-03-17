@@ -160,15 +160,6 @@ namespace Compiler {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Перечисления.
-        /// </summary>
-        internal static string Enum {
-            get {
-                return ResourceManager.GetString("Enum", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на Ошибка.
         /// </summary>
         internal static string Error {
@@ -219,6 +210,15 @@ namespace Compiler {
         internal static string Help {
             get {
                 return ResourceManager.GetString("Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ключевые слова.
+        /// </summary>
+        internal static string Keywords {
+            get {
+                return ResourceManager.GetString("Keywords", resourceCulture);
             }
         }
         

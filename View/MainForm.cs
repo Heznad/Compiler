@@ -15,9 +15,11 @@ namespace Compiler
             InitializeComponent();
             this.KeyPreview = true;
             presenter = new(tabControl, btn_Undo, btn_Redo);
-            timer1.Start();
+            timer_1.Start();
+            timer_2.Start();
             presenter.AddTabPage("NewFile");
             presenter.UpdateUndoRedoButtonStates();
+            SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
         }
 
 
@@ -125,13 +127,14 @@ namespace Compiler
         }
         private void tsmi_ColorKeywords_Click(object sender, EventArgs e)
         {
-            presenter.SettingsColorKeywords();
+            presenter.SettingsColorAllKeywords();
         }
         #endregion
 
         #region [ Таймер ]
         private void timer1_Tick(object sender, EventArgs e)
         {
+           // if (presenter.IsHighLight == true) presenter.IsHighLight = false;
             datelabel.Text = DateTime.Now.ToLongDateString();
             timelabel.Text = DateTime.Now.ToLongTimeString();
         }
@@ -242,6 +245,11 @@ namespace Compiler
                     e.Handled = true;
                 }
             }
-        }  
+        }
+
+        private void timer_2second_Tick(object sender, EventArgs e)
+        {
+            if (presenter.IsHighLight == true) presenter.IsHighLight = false;
+        }
     }
 }
