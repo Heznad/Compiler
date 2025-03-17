@@ -6,8 +6,8 @@ namespace Compiler.Model
     Противоположная команда удалению*/
     class DeleteTextCommand : Command
     {
-        private readonly int _position; // Позиция где было команда
-        private readonly string _text;  // Сохраненный текст, который был удален
+        readonly int _position; // Позиция где было команда
+        readonly string _text;  // Сохраненный текст, который был удален
 
         public DeleteTextCommand(int position, string text)
         {

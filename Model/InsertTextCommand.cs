@@ -6,8 +6,8 @@ namespace Compiler.Model
     Противоположная команда удалению*/
     class InsertTextCommand : Command
     {
-        private readonly int _position; // Позиция где было команда
-        private readonly string _text;  // Сохранённый текст
+        readonly int _position; // Позиция где было команда
+        readonly string _text;  // Сохранённый текст
 
         public InsertTextCommand(int position, string text)
         {

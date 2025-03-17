@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,12 +20,38 @@
 
   <ItemGroup>
     <None Remove="App.config" />
+    <None Remove="icons\back.png" />
+    <None Remove="icons\compiler.ico" />
+    <None Remove="icons\copy.png" />
+    <None Remove="icons\cut.png" />
+    <None Remove="icons\file.png" />
+    <None Remove="icons\folder.png" />
+    <None Remove="icons\forward.png" />
+    <None Remove="icons\help.png" />
+    <None Remove="icons\info.png" />
+    <None Remove="icons\lightbulb.png" />
+    <None Remove="icons\put.png" />
+    <None Remove="icons\save.png" />
+    <None Remove="icons\start.png" />
     <None Remove="TextFiles\HelpEN.txt" />
     <None Remove="TextFiles\Info.txt" />
     <None Remove="TextFiles\InfoEN.txt" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="icons\back.png" />
+    <EmbeddedResource Include="icons\compiler.ico" />
+    <EmbeddedResource Include="icons\copy.png" />
+    <EmbeddedResource Include="icons\cut.png" />
+    <EmbeddedResource Include="icons\file.png" />
+    <EmbeddedResource Include="icons\folder.png" />
+    <EmbeddedResource Include="icons\forward.png" />
+    <EmbeddedResource Include="icons\help.png" />
+    <EmbeddedResource Include="icons\info.png" />
+    <EmbeddedResource Include="icons\lightbulb.png" />
+    <EmbeddedResource Include="icons\put.png" />
+    <EmbeddedResource Include="icons\save.png" />
+    <EmbeddedResource Include="icons\start.png" />
     <EmbeddedResource Include="TextFiles\Help.txt" />
     <EmbeddedResource Include="TextFiles\HelpEN.txt" />
     <EmbeddedResource Include="TextFiles\Info.txt" />

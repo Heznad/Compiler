@@ -120,6 +120,9 @@
   <data name="AboutProgram" xml:space="preserve">
     <value>About the program</value>
   </data>
+  <data name="AnalysisMethod" xml:space="preserve">
+    <value>Analysis method</value>
+  </data>
   <data name="Analyzer" xml:space="preserve">
     <value>Analyzer</value>
   </data>
@@ -162,6 +165,9 @@
   <data name="dgvMessage" xml:space="preserve">
     <value>Message</value>
   </data>
+  <data name="DiagnosticsAndNeutralizationOfErrors" xml:space="preserve">
+    <value>Diagnostics and neutralization of errors</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
@@ -183,11 +189,20 @@
   <data name="ErrorScroll" xml:space="preserve">
     <value>Scrolling error:</value>
   </data>
+  <data name="Grammar" xml:space="preserve">
+    <value>Grammar</value>
+  </data>
+  <data name="GrammarClassification" xml:space="preserve">
+    <value>Grammar classification</value>
+  </data>
   <data name="Help" xml:space="preserve">
     <value>Help</value>
   </data>
   <data name="Keywords" xml:space="preserve">
     <value>Keywords</value>
+  </data>
+  <data name="ListOfLiterature" xml:space="preserve">
+    <value>List of literature</value>
   </data>
   <data name="Message" xml:space="preserve">
     <value>Message</value>
@@ -216,6 +231,12 @@
   <data name="Paste" xml:space="preserve">
     <value>Paste</value>
   </data>
+  <data name="ProblemStatement" xml:space="preserve">
+    <value>Problem statement</value>
+  </data>
+  <data name="ProgramSourceCode" xml:space="preserve">
+    <value>Program source code</value>
+  </data>
   <data name="Pseudocode" xml:space="preserve">
     <value>Pseudocode</value>
   </data>
@@ -233,6 +254,9 @@
   </data>
   <data name="SuccessFileSave" xml:space="preserve">
     <value>The file was saved successfully.</value>
+  </data>
+  <data name="TextExample" xml:space="preserve">
+    <value>Test Example</value>
   </data>
   <data name="TypesOfData" xml:space="preserve">
     <value>Data types</value>

@@ -5,7 +5,6 @@ namespace Compiler.View
 {
     public partial class AuxiliaryForm : Form
     {
- 
         /*Вспомогательная форма.
         Для вывода содержимого больших текстовых файлов*/
         public AuxiliaryForm(string format)
@@ -13,6 +12,30 @@ namespace Compiler.View
             InitializeComponent();
             switch (format)
             {
+                case "tsmi_Problem":
+                    this.Text = MyString.ProblemStatement;
+                    break;
+                case "tsmi_Grammar":
+                    this.Text = MyString.Grammar;
+                    break;
+                case "tsmi_GrammarClass":
+                    this.Text = MyString.GrammarClassification;
+                    break;
+                case "tsmi_Analysis":
+                    this.Text = MyString.AnalysisMethod;
+                    break;
+                case "tsmi_Diagnostics":
+                    this.Text = MyString.DiagnosticsAndNeutralizationOfErrors;
+                    break;
+                case "tsmi_TextExample":
+                    this.Text = MyString.TextExample;
+                    break;
+                case "tsmi_ListLiterature":
+                    this.Text = MyString.ListOfLiterature;
+                    break;
+                case "tsmi_ProgramSource":
+                    this.Text = MyString.ProgramSourceCode;
+                    break;
                 case "btn_Help":
                 case "tsmi_Help":
                     this.Text = MyString.Help;

@@ -4,16 +4,16 @@ namespace Compiler.Model
     // Класс для работы с шрифтам, цветом и подсветкой
     public class TextManager
     {
-        private readonly Dictionary<string, List<string>> _keywords = new Dictionary<string, List<string>>()
+        readonly Dictionary<string, List<string>> _keywords = new Dictionary<string, List<string>>()
     {
         { "Keywords", new List<string> { "public", "private", "class", "void", "new" } },
         { "TypesData", new List<string> { "int", "string", "bool", "float", "double" } },
         { "Operators", new List<string> { "if", "else", "for", "while", "return" } }
     };
-        private Font _selectedFont = new Font("Verdana", 12F);
-        private Font _selectedFontOutput = new Font("Verdana", 10F);
-        private Color _selectedColor = Color.Black;
-        private Dictionary<string, Color> _keywordCategories = new Dictionary<string, Color>()
+        Font _selectedFont = new Font("Verdana", 12F);
+        Font _selectedFontOutput = new Font("Verdana", 10F);
+        Color _selectedColor = Color.Black;
+        Dictionary<string, Color> _keywordCategories = new Dictionary<string, Color>()
     {
         { "Keywords", Color.Blue },    // Основные ключевые слова (синий)
         { "TypesData", Color.Purple },   // Типы данных (зеленый)

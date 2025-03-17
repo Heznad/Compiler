@@ -120,6 +120,9 @@
   <data name="AboutProgram" xml:space="preserve">
     <value>О программе</value>
   </data>
+  <data name="AnalysisMethod" xml:space="preserve">
+    <value>Метод анализа</value>
+  </data>
   <data name="Analyzer" xml:space="preserve">
     <value>Анализатор</value>
   </data>
@@ -162,6 +165,9 @@
   <data name="dgvMessage" xml:space="preserve">
     <value>Сообщение</value>
   </data>
+  <data name="DiagnosticsAndNeutralizationOfErrors" xml:space="preserve">
+    <value>Диагностика и нейтрализация ошибок</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Ошибка</value>
   </data>
@@ -183,11 +189,20 @@
   <data name="ErrorScroll" xml:space="preserve">
     <value>Ошибка в прокрутке: </value>
   </data>
+  <data name="Grammar" xml:space="preserve">
+    <value>Грамматика</value>
+  </data>
+  <data name="GrammarClassification" xml:space="preserve">
+    <value>Классификация грамматики</value>
+  </data>
   <data name="Help" xml:space="preserve">
     <value>Справка</value>
   </data>
   <data name="Keywords" xml:space="preserve">
     <value>Ключевые слова</value>
+  </data>
+  <data name="ListOfLiterature" xml:space="preserve">
+    <value>Список литературы</value>
   </data>
   <data name="Message" xml:space="preserve">
     <value>Сообщение</value>
@@ -216,6 +231,12 @@
   <data name="Paste" xml:space="preserve">
     <value>Вставить</value>
   </data>
+  <data name="ProblemStatement" xml:space="preserve">
+    <value>Постановка задачи</value>
+  </data>
+  <data name="ProgramSourceCode" xml:space="preserve">
+    <value>Исходный код программы</value>
+  </data>
   <data name="Pseudocode" xml:space="preserve">
     <value>Псевдокод</value>
   </data>
@@ -233,6 +254,9 @@
   </data>
   <data name="SuccessFileSave" xml:space="preserve">
     <value>Файл успешно сохранён.</value>
+  </data>
+  <data name="TextExample" xml:space="preserve">
+    <value>Тестовый пример</value>
   </data>
   <data name="TypesOfData" xml:space="preserve">
     <value>Типы данных</value>

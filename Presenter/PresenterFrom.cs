@@ -6,17 +6,18 @@ namespace Compiler.Presenter
     {
         TextManager text_manager = new();
         // Словарь для хранения путей для сохранения файлов
-        private Dictionary<TabPage, string> tabPageFilePaths = new Dictionary<TabPage, string>();
+        Dictionary<TabPage, string> tabPageFilePaths = new Dictionary<TabPage, string>();
         // Словарь для хранения стеков undo/redo для каждого RichTextBox
-        private Dictionary<RichTextBox, Stack<Command>> _undoStacks = new Dictionary<RichTextBox, Stack<Command>>();
-        private Dictionary<RichTextBox, Stack<Command>> _redoStacks = new Dictionary<RichTextBox, Stack<Command>>();
-        private string _lastText = ""; // Сохраняем предыдущий текст
-        private int _lastTextLength = 0; // размер прошлого текста
-        private bool isProcessingText = false; // Флаг для предотвращения гонки потоков при быстром вводе
-        private bool _isPerformingUndoRedo = false; // Добавляем флаг для блокировки TextChanged во время Undo/Redo
-        private bool _isHighLight = false; // Подсветка текста
-        private bool _isVolumeRichTextBox = false; // Объём текста
-        private bool _cutFlag = false; // Флаг для "Вырезать"
+        Dictionary<RichTextBox, Stack<Command>> _undoStacks = new Dictionary<RichTextBox, Stack<Command>>();
+        Dictionary<RichTextBox, Stack<Command>> _redoStacks = new Dictionary<RichTextBox, Stack<Command>>();
+        int _maxVolumeStack = 200; // Размер стэков Undo/Redo
+        string _lastText = ""; // Сохраняем предыдущий текст
+        int _lastTextLength = 0; // размер прошлого текста
+        bool isProcessingText = false; // Флаг для предотвращения гонки потоков при быстром вводе
+        bool _isPerformingUndoRedo = false; // Добавляем флаг для блокировки TextChanged во время Undo/Redo
+        bool _isHighLight = false; // Подсветка текста
+        bool _isVolumeRichTextBox = false; // Объём текста
+        bool _cutFlag = false; // Флаг для "Вырезать"
         // Изменяемые элементы UI
         TabControl _tabControl;
         Button _btnUndo;
@@ -538,6 +539,19 @@ namespace Compiler.Presenter
             Stack<Command> undoStack = _undoStacks[richTextBox];
             Stack<Command> redoStack = _redoStacks[richTextBox];
             undoStack.Push(command);
+            if (undoStack.Count > _maxVolumeStack)
+            {
+                Stack<Command> tempStack = new Stack<Command>();
+                while (undoStack.Count > 1)
+                {
+                    tempStack.Push(undoStack.Pop());
+                }
+                undoStack.Pop();
+                while (tempStack.Count > 0)
+                {
+                    undoStack.Push(tempStack.Pop());
+                }
+            }
             redoStack.Clear();
             UpdateUndoRedoButtonStates();
         }
@@ -553,6 +567,19 @@ namespace Compiler.Presenter
                 Command command = undoStack.Pop();
                 command.Undo(currentTextBox);
                 redoStack.Push(command);  // Перемещаем в Redo
+                if (redoStack.Count > _maxVolumeStack)
+                {
+                    Stack<Command> tempStack = new Stack<Command>();
+                    while (redoStack.Count > 1)
+                    {
+                        tempStack.Push(redoStack.Pop());
+                    }
+                    redoStack.Pop();
+                    while (tempStack.Count > 0)
+                    {
+                        redoStack.Push(tempStack.Pop());
+                    }
+                }
                 UpdateUndoRedoButtonStates();
                 _isPerformingUndoRedo = false;
             }
@@ -573,6 +600,19 @@ namespace Compiler.Presenter
                 Command command = redoStack.Pop();
                 command.Execute(currentTextBox);
                 undoStack.Push(command);
+                if (undoStack.Count > _maxVolumeStack)
+                {
+                    Stack<Command> tempStack = new Stack<Command>();
+                    while (undoStack.Count > 1) 
+                    {
+                        tempStack.Push(undoStack.Pop());
+                    }
+                    undoStack.Pop(); 
+                    while (tempStack.Count > 0)
+                    {
+                        undoStack.Push(tempStack.Pop());
+                    }
+                }
                 UpdateUndoRedoButtonStates();
                 _isPerformingUndoRedo = false;
             }

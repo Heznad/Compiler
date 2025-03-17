@@ -117,225 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="tsmi_Create.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 26</value>
-  </data>
   <data name="tsmi_Create.Text" xml:space="preserve">
     <value>Create</value>
   </data>
-  <data name="tsmi_Open.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 26</value>
-  </data>
-  <data name="tsmi_Open.Text" xml:space="preserve">
-    <value>Open</value>
-  </data>
-  <data name="tsmi_Save.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 26</value>
+  <data name="btn_Help.ToolTip" xml:space="preserve">
+    <value>Help</value>
   </data>
   <data name="tsmi_Save.Text" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="tsmi_SaveAs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 26</value>
-  </data>
-  <data name="tsmi_SaveAs.Text" xml:space="preserve">
-    <value>Save as</value>
-  </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 6</value>
-  </data>
-  <data name="tsmi_Exit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 26</value>
-  </data>
-  <data name="tsmi_Exit.Text" xml:space="preserve">
-    <value>Exit</value>
-  </data>
-  <data name="tsmi_File.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 24</value>
-  </data>
-  <data name="tsmi_File.Text" xml:space="preserve">
-    <value>File</value>
-  </data>
-  <data name="tsmi_Undo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 26</value>
-  </data>
-  <data name="tsmi_Undo.Text" xml:space="preserve">
-    <value>Undo</value>
-  </data>
-  <data name="tsmi_Redo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 26</value>
-  </data>
-  <data name="tsmi_Redo.Text" xml:space="preserve">
-    <value>Redo</value>
-  </data>
-  <data name="tsmi_Cut.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 26</value>
+  <data name="tsmi_Copy.Text" xml:space="preserve">
+    <value>Copy</value>
   </data>
   <data name="tsmi_Cut.Text" xml:space="preserve">
     <value>Cut</value>
   </data>
-  <data name="tsmi_Copy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 26</value>
-  </data>
-  <data name="tsmi_Copy.Text" xml:space="preserve">
-    <value>Copy</value>
-  </data>
-  <data name="tsmi_Paste.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 26</value>
-  </data>
-  <data name="tsmi_Paste.Text" xml:space="preserve">
-    <value>Paste</value>
-  </data>
-  <data name="tsmi_Delete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 26</value>
-  </data>
-  <data name="tsmi_Delete.Text" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="tsmi_SelectAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 26</value>
-  </data>
-  <data name="tsmi_SelectAll.Text" xml:space="preserve">
-    <value>Select all</value>
-  </data>
-  <data name="tsmi_Correction.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 24</value>
-  </data>
-  <data name="tsmi_Correction.Text" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="постановкаЗадачиToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>341, 26</value>
-  </data>
-  <data name="постановкаЗадачиToolStripMenuItem.Text" xml:space="preserve">
-    <value>Problem statement</value>
-  </data>
-  <data name="грамматикаToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>341, 26</value>
-  </data>
-  <data name="грамматикаToolStripMenuItem.Text" xml:space="preserve">
-    <value>Grammar</value>
-  </data>
-  <data name="классификацияГрамматикиToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>341, 26</value>
-  </data>
-  <data name="классификацияГрамматикиToolStripMenuItem.Text" xml:space="preserve">
-    <value>Grammar classification</value>
-  </data>
-  <data name="методАнализаToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>341, 26</value>
-  </data>
-  <data name="методАнализаToolStripMenuItem.Text" xml:space="preserve">
-    <value>Analysis method</value>
-  </data>
-  <data name="диагностикаИToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>341, 26</value>
-  </data>
-  <data name="диагностикаИToolStripMenuItem.Text" xml:space="preserve">
-    <value>Diagnosis and neutralization of errors</value>
-  </data>
-  <data name="тестовыйПримерToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>341, 26</value>
-  </data>
-  <data name="тестовыйПримерToolStripMenuItem.Text" xml:space="preserve">
-    <value>Test example</value>
-  </data>
-  <data name="списокЛитературыToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>341, 26</value>
-  </data>
-  <data name="списокЛитературыToolStripMenuItem.Text" xml:space="preserve">
-    <value>List of literature</value>
-  </data>
-  <data name="исходныйКодПрограммыToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>341, 26</value>
-  </data>
-  <data name="исходныйКодПрограммыToolStripMenuItem.Text" xml:space="preserve">
-    <value>Program source code</value>
-  </data>
-  <data name="tsmi_Text.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 24</value>
-  </data>
-  <data name="tsmi_Text.Text" xml:space="preserve">
-    <value>Text</value>
-  </data>
-  <data name="пускToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 24</value>
-  </data>
-  <data name="пускToolStripMenuItem.Text" xml:space="preserve">
-    <value>Run</value>
-  </data>
-  <data name="tsmi_Help.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 26</value>
-  </data>
-  <data name="tsmi_Help.Text" xml:space="preserve">
-    <value>Calling help</value>
-  </data>
-  <data name="tsmi_Info.Size" type="System.Drawing.Size, System.Drawing">
-    <value>220, 26</value>
-  </data>
-  <data name="tsmi_Info.Text" xml:space="preserve">
-    <value>About the program</value>
-  </data>
-  <data name="tsmi_Reference.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 24</value>
-  </data>
-  <data name="tsmi_Reference.Text" xml:space="preserve">
-    <value>Reference</value>
-  </data>
-  <data name="tsmi_Russian.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 26</value>
-  </data>
-  <data name="tsmi_Russian.Text" xml:space="preserve">
-    <value>Russian</value>
-  </data>
-  <data name="tsmi_English.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 26</value>
-  </data>
-  <data name="tsmi_English.Text" xml:space="preserve">
-    <value>English</value>
-  </data>
-  <data name="tsmi_Localization.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 24</value>
-  </data>
-  <data name="tsmi_Localization.Text" xml:space="preserve">
-    <value>Localization</value>
-  </data>
-  <data name="tsmi_FontInput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 26</value>
-  </data>
-  <data name="tsmi_FontInput.Text" xml:space="preserve">
-    <value>Font of the input area</value>
-  </data>
-  <data name="tsmi_FontOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 26</value>
-  </data>
-  <data name="tsmi_FontOutput.Text" xml:space="preserve">
-    <value>Font of the output area</value>
-  </data>
-  <data name="tsmi_ColorFont.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 26</value>
-  </data>
-  <data name="tsmi_ColorFont.Text" xml:space="preserve">
-    <value>Font Color</value>
-  </data>
-  <data name="tsmi_ColorKeywords.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 26</value>
-  </data>
-  <data name="tsmi_ColorKeywords.Text" xml:space="preserve">
-    <value>Keyword Color</value>
-  </data>
-  <data name="tsmi_View.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 24</value>
-  </data>
-  <data name="tsmi_View.Text" xml:space="preserve">
-    <value>View</value>
-  </data>
-  <data name="toolStripStatusLabelText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 20</value>
-  </data>
-  <data name="toolStripStatusLabelText.Text" xml:space="preserve">
-    <value>Current date and time:</value>
+  <data name="btn_Save.ToolTip" xml:space="preserve">
+    <value>Save</value>
   </data>
   <data name="btn_Light.ToolTip" xml:space="preserve">
     <value>Syntax highlighting</value>
@@ -343,39 +141,75 @@
   <data name="btn_Info.ToolTip" xml:space="preserve">
     <value>About the program</value>
   </data>
-  <data name="btn_Help.ToolTip" xml:space="preserve">
-    <value>Help</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="tsmi_Cut.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 26</value>
   </data>
-  <data name="btn_Start.ToolTip" xml:space="preserve">
-    <value>Run</value>
+  <data name="tsmi_SelectAll.Text" xml:space="preserve">
+    <value>Select all</value>
   </data>
-  <data name="btn_Put.ToolTip" xml:space="preserve">
-    <value>Paste</value>
+  <data name="tsmi_GrammarClass.Text" xml:space="preserve">
+    <value>Grammar classification</value>
   </data>
-  <data name="btn_Cut.ToolTip" xml:space="preserve">
-    <value>Cut</value>
+  <data name="tsmi_Correction.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 24</value>
   </data>
-  <data name="btn_Copy.ToolTip" xml:space="preserve">
-    <value>Copy</value>
+  <data name="tsmi_File.Text" xml:space="preserve">
+    <value>File</value>
   </data>
-  <data name="btn_Redo.ToolTip" xml:space="preserve">
-    <value>Redo</value>
+  <data name="tsmi_Analysis.Text" xml:space="preserve">
+    <value>Analysis method</value>
+  </data>
+  <data name="tsmi_Reference.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 24</value>
+  </data>
+  <data name="tsmi_Create.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 26</value>
+  </data>
+  <data name="tsmi_English.Text" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="tsmi_Info.Text" xml:space="preserve">
+    <value>About the program</value>
+  </data>
+  <data name="tsmi_Correction.Text" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="tsmi_Undo.Text" xml:space="preserve">
+    <value>Undo</value>
   </data>
   <data name="btn_Undo.ToolTip" xml:space="preserve">
     <value>Undo</value>
   </data>
-  <data name="btn_Save.ToolTip" xml:space="preserve">
-    <value>Save</value>
+  <data name="tsmi_Info.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 26</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="btn_Open.FlatStyle" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="tsmi_Redo.Text" xml:space="preserve">
+    <value>Redo</value>
   </data>
-  <data name="btn_Open.ToolTip" xml:space="preserve">
-    <value>Open</value>
+  <data name="tsmi_English.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 26</value>
+  </data>
+  <data name="toolStripStatusLabelText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 20</value>
+  </data>
+  <data name="tsmi_Delete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 26</value>
+  </data>
+  <data name="tsmi_ColorKeywords.Text" xml:space="preserve">
+    <value>Keyword Color</value>
   </data>
   <data name="btn_Create.ToolTip" xml:space="preserve">
     <value>Create</value>
+  </data>
+  <data name="tsmi_FontInput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 26</value>
+  </data>
+  <data name="tsmi_TextExample.Text" xml:space="preserve">
+    <value>Text example</value>
+  </data>
+  <data name="tsmi_File.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 24</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -511,31 +345,189 @@
         QRAEQRAEQRAEQRAEQRAEQRAEQRAEQRAEaVb/D7RGZoIJkKIsAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Compiler</value>
+  <data name="tsmi_Open.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 26</value>
   </data>
-  <data name="menuStrip1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tsmi_Start.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 24</value>
   </data>
-  <data name="statusStrip1.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tsmi_Text.Text" xml:space="preserve">
+    <value>Text</value>
   </data>
-  <data name="panel_Buttons.ToolTip" xml:space="preserve">
-    <value />
+  <data name="tsmi_View.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 24</value>
   </data>
-  <data name="tabControl.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="richTextBox2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="richTextBox1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
+  <data name="btn_Cut.ToolTip" xml:space="preserve">
+    <value>Cut</value>
   </data>
   <data name="tsmi_Light.Text" xml:space="preserve">
     <value>Syntax highlighting</value>
+  </data>
+  <data name="tsmi_Localization.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 24</value>
+  </data>
+  <data name="btn_Put.ToolTip" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="tsmi_Diagnostics.Text" xml:space="preserve">
+    <value>Diagnostics and neutralization of errors</value>
+  </data>
+  <data name="tsmi_ColorFont.Text" xml:space="preserve">
+    <value>Font Color</value>
+  </data>
+  <data name="btn_Copy.ToolTip" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="tsmi_Start.Text" xml:space="preserve">
+    <value>Run</value>
+  </data>
+  <data name="tsmi_FontInput.Text" xml:space="preserve">
+    <value>Font of the input area</value>
+  </data>
+  <data name="btn_Start.ToolTip" xml:space="preserve">
+    <value>Run</value>
+  </data>
+  <data name="tsmi_ProgramSource.Text" xml:space="preserve">
+    <value>Program source code</value>
+  </data>
+  <data name="tsmi_SaveAs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 26</value>
+  </data>
+  <data name="tsmi_ColorFont.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 26</value>
+  </data>
+  <data name="tsmi_Undo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 26</value>
+  </data>
+  <data name="tsmi_Light.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 26</value>
+  </data>
+  <data name="tsmi_ListLiterature.Text" xml:space="preserve">
+    <value>List of literature</value>
+  </data>
+  <data name="btn_Open.ToolTip" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="tsmi_View.Text" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="tsmi_Russian.Text" xml:space="preserve">
+    <value>Russian</value>
+  </data>
+  <data name="tsmi_Exit.Text" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="tsmi_SelectAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 26</value>
+  </data>
+  <data name="toolStripStatusLabelText.Text" xml:space="preserve">
+    <value>Current date and time:</value>
+  </data>
+  <data name="tsmi_Localization.Text" xml:space="preserve">
+    <value>Localization</value>
+  </data>
+  <data name="tsmi_FontOutput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 26</value>
+  </data>
+  <data name="tsmi_Delete.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="tsmi_Reference.Text" xml:space="preserve">
+    <value>Reference</value>
+  </data>
+  <data name="tsmi_Redo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 26</value>
+  </data>
+  <data name="tsmi_Paste.Text" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="tsmi_Exit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 26</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 6</value>
+  </data>
+  <data name="tsmi_Help.Text" xml:space="preserve">
+    <value>Calling help</value>
+  </data>
+  <data name="tsmi_ColorKeywords.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 26</value>
+  </data>
+  <data name="tsmi_Help.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 26</value>
+  </data>
+  <data name="tsmi_Grammar.Text" xml:space="preserve">
+    <value>Grammar</value>
+  </data>
+  <data name="tsmi_Problem.Text" xml:space="preserve">
+    <value>Problem statement</value>
+  </data>
+  <data name="tsmi_FontOutput.Text" xml:space="preserve">
+    <value>Font of the output area</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Compiler</value>
+  </data>
+  <data name="tsmi_Open.Text" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="tsmi_Copy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 26</value>
+  </data>
+  <data name="btn_Redo.ToolTip" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="tsmi_Russian.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 26</value>
+  </data>
+  <data name="tsmi_SaveAs.Text" xml:space="preserve">
+    <value>Save as</value>
+  </data>
+  <data name="tsmi_Save.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 26</value>
+  </data>
+  <data name="tsmi_Text.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 24</value>
+  </data>
+  <data name="btn_Light.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+</value>
+  </data>
+  <data name="tsmi_Paste.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 26</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="toolTip1.TrayLocation" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
 </root>

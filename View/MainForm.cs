@@ -8,6 +8,7 @@ namespace Compiler
     public partial class MainForm : Form
     {
         PresenterForm presenter;
+        bool _restartFlag = false;
         public MainForm()
         {
             InitializeComponent();
@@ -39,7 +40,7 @@ namespace Compiler
         }
         private void btn_Exit_Click(object sender, EventArgs e)
         {
-             this.Close();
+            this.Close();
         }
         #endregion
 
@@ -78,13 +79,81 @@ namespace Compiler
         }
         #endregion
 
+        #region [ Текст ]
+        // Открытие вспомогательной формы для будущего текста данных тем
+        private void tsmi_Problem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem toolStrip = (ToolStripMenuItem)sender;
+            string name = toolStrip.Name;
+            AuxiliaryForm newForm = new(name);
+            newForm.Show();
+        }
+
+        private void tsmi_Grammar_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem toolStrip = (ToolStripMenuItem)sender;
+            string name = toolStrip.Name;
+            AuxiliaryForm newForm = new(name);
+            newForm.Show();
+        }
+
+        private void tsmi_GrammarClass_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem toolStrip = (ToolStripMenuItem)sender;
+            string name = toolStrip.Name;
+            AuxiliaryForm newForm = new(name);
+            newForm.Show();
+        }
+
+        private void tsmi_Analysis_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem toolStrip = (ToolStripMenuItem)sender;
+            string name = toolStrip.Name;
+            AuxiliaryForm newForm = new(name);
+            newForm.Show();
+        }
+
+        private void tsmi_Diagnostics_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem toolStrip = (ToolStripMenuItem)sender;
+            string name = toolStrip.Name;
+            AuxiliaryForm newForm = new(name);
+            newForm.Show();
+        }
+
+        private void tsmi_TextExample_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem toolStrip = (ToolStripMenuItem)sender;
+            string name = toolStrip.Name;
+            AuxiliaryForm newForm = new(name);
+            newForm.Show();
+        }
+
+        private void tsmi_ListLiterature_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem toolStrip = (ToolStripMenuItem)sender;
+            string name = toolStrip.Name;
+            AuxiliaryForm newForm = new(name);
+            newForm.Show();
+        }
+
+        private void tsmi_ProgramSource_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem toolStrip = (ToolStripMenuItem)sender;
+            string name = toolStrip.Name;
+            AuxiliaryForm newForm = new(name);
+            newForm.Show();
+        }
+
+        #endregion
+
         #region [ Справка ]
         private void btn_Info_Click(object sender, EventArgs e)
         {
             if (sender is Button)
             {
                 Button b = (Button)sender;
-                string name = b.Name;
+                string name = b.Text;
                 AuxiliaryForm af = new(name);
                 af.ShowDialog();
             }
@@ -92,7 +161,7 @@ namespace Compiler
             {
 
                 ToolStripMenuItem t = (ToolStripMenuItem)sender;
-                string name = t.Name;
+                string name = t.Text;
                 AuxiliaryForm af = new(name);
                 af.ShowDialog();
             }
@@ -116,7 +185,11 @@ namespace Compiler
         MessageBoxDefaultButton.Button1,
         MessageBoxOptions.DefaultDesktopOnly);
 
-                if (result == DialogResult.Yes) presenter.RestartCompilyator();
+                if (result == DialogResult.Yes)
+                {
+                    _restartFlag = true;
+                    presenter.RestartCompilyator();
+                }
                 tsmi_Localization.Enabled = false;
             }
         }
@@ -134,7 +207,11 @@ namespace Compiler
         MessageBoxDefaultButton.Button1,
         MessageBoxOptions.DefaultDesktopOnly);
 
-                if (result == DialogResult.Yes) presenter.RestartCompilyator();
+                if (result == DialogResult.Yes)
+                {
+                    _restartFlag = true;
+                    presenter.RestartCompilyator();
+                }
                 tsmi_Localization.Enabled = false;
             }
         }
@@ -197,23 +274,26 @@ namespace Compiler
             }
 
         }
-        
+
         // Спрашиваем пользователя разрешения, сохраняем файлы и выходим  
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult result = MessageBox.Show(
-        MyString.MessageExit,
-        MyString.Message,
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Information,
-        MessageBoxDefaultButton.Button1,
-        MessageBoxOptions.DefaultDesktopOnly);
-
-            if (result == DialogResult.No)
+            if (!_restartFlag)
             {
-                e.Cancel = true;
+                DialogResult result = MessageBox.Show(
+            MyString.MessageExit,
+            MyString.Message,
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Information,
+            MessageBoxDefaultButton.Button1,
+            MessageBoxOptions.DefaultDesktopOnly);
+
+                if (result == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+                else presenter.CLoseCompilyator();
             }
-            else presenter.CLoseCompilyator();
         }
 
         #endregion
@@ -296,8 +376,6 @@ namespace Compiler
                     e.Handled = true;
                 }
             }
-        }
-
-        
+        }    
     }
 }

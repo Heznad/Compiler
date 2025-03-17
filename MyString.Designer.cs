@@ -70,6 +70,15 @@ namespace Compiler {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Метод анализа.
+        /// </summary>
+        internal static string AnalysisMethod {
+            get {
+                return ResourceManager.GetString("AnalysisMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Анализатор.
         /// </summary>
         internal static string Analyzer {
@@ -196,6 +205,15 @@ namespace Compiler {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Диагностика и нейтрализация ошибок.
+        /// </summary>
+        internal static string DiagnosticsAndNeutralizationOfErrors {
+            get {
+                return ResourceManager.GetString("DiagnosticsAndNeutralizationOfErrors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Ошибка.
         /// </summary>
         internal static string Error {
@@ -259,6 +277,24 @@ namespace Compiler {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Грамматика.
+        /// </summary>
+        internal static string Grammar {
+            get {
+                return ResourceManager.GetString("Grammar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Классификация грамматики.
+        /// </summary>
+        internal static string GrammarClassification {
+            get {
+                return ResourceManager.GetString("GrammarClassification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Справка.
         /// </summary>
         internal static string Help {
@@ -273,6 +309,15 @@ namespace Compiler {
         internal static string Keywords {
             get {
                 return ResourceManager.GetString("Keywords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Список литературы.
+        /// </summary>
+        internal static string ListOfLiterature {
+            get {
+                return ResourceManager.GetString("ListOfLiterature", resourceCulture);
             }
         }
         
@@ -358,6 +403,24 @@ namespace Compiler {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Постановка задачи.
+        /// </summary>
+        internal static string ProblemStatement {
+            get {
+                return ResourceManager.GetString("ProblemStatement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Исходный код программы.
+        /// </summary>
+        internal static string ProgramSourceCode {
+            get {
+                return ResourceManager.GetString("ProgramSourceCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Псевдокод.
         /// </summary>
         internal static string Pseudocode {
@@ -408,6 +471,15 @@ namespace Compiler {
         internal static string SuccessFileSave {
             get {
                 return ResourceManager.GetString("SuccessFileSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Тестовый пример.
+        /// </summary>
+        internal static string TextExample {
+            get {
+                return ResourceManager.GetString("TextExample", resourceCulture);
             }
         }
         

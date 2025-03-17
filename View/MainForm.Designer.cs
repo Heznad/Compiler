@@ -48,15 +48,15 @@
             tsmi_SelectAll = new ToolStripMenuItem();
             tsmi_Light = new ToolStripMenuItem();
             tsmi_Text = new ToolStripMenuItem();
-            постановкаЗадачиToolStripMenuItem = new ToolStripMenuItem();
-            грамматикаToolStripMenuItem = new ToolStripMenuItem();
-            классификацияГрамматикиToolStripMenuItem = new ToolStripMenuItem();
-            методАнализаToolStripMenuItem = new ToolStripMenuItem();
-            диагностикаИToolStripMenuItem = new ToolStripMenuItem();
-            тестовыйПримерToolStripMenuItem = new ToolStripMenuItem();
-            списокЛитературыToolStripMenuItem = new ToolStripMenuItem();
-            исходныйКодПрограммыToolStripMenuItem = new ToolStripMenuItem();
-            пускToolStripMenuItem = new ToolStripMenuItem();
+            tsmi_Problem = new ToolStripMenuItem();
+            tsmi_Grammar = new ToolStripMenuItem();
+            tsmi_GrammarClass = new ToolStripMenuItem();
+            tsmi_Analysis = new ToolStripMenuItem();
+            tsmi_Diagnostics = new ToolStripMenuItem();
+            tsmi_TextExample = new ToolStripMenuItem();
+            tsmi_ListLiterature = new ToolStripMenuItem();
+            tsmi_ProgramSource = new ToolStripMenuItem();
+            tsmi_Start = new ToolStripMenuItem();
             tsmi_Reference = new ToolStripMenuItem();
             tsmi_Help = new ToolStripMenuItem();
             tsmi_Info = new ToolStripMenuItem();
@@ -100,268 +100,279 @@
             // 
             // menuStrip1
             // 
-            menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { tsmi_File, tsmi_Correction, tsmi_Text, пускToolStripMenuItem, tsmi_Reference, tsmi_Localization, tsmi_View });
             resources.ApplyResources(menuStrip1, "menuStrip1");
+            menuStrip1.ImageScalingSize = new Size(20, 20);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { tsmi_File, tsmi_Correction, tsmi_Text, tsmi_Start, tsmi_Reference, tsmi_Localization, tsmi_View });
             menuStrip1.Name = "menuStrip1";
+            toolTip1.SetToolTip(menuStrip1, resources.GetString("menuStrip1.ToolTip"));
             // 
             // tsmi_File
             // 
+            resources.ApplyResources(tsmi_File, "tsmi_File");
             tsmi_File.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Create, tsmi_Open, tsmi_Save, tsmi_SaveAs, toolStripSeparator1, tsmi_Exit });
             tsmi_File.ForeColor = Color.Black;
             tsmi_File.Name = "tsmi_File";
-            resources.ApplyResources(tsmi_File, "tsmi_File");
             // 
             // tsmi_Create
             // 
-            tsmi_Create.Name = "tsmi_Create";
             resources.ApplyResources(tsmi_Create, "tsmi_Create");
+            tsmi_Create.Name = "tsmi_Create";
             tsmi_Create.Click += btn_File_Click;
             // 
             // tsmi_Open
             // 
-            tsmi_Open.Name = "tsmi_Open";
             resources.ApplyResources(tsmi_Open, "tsmi_Open");
+            tsmi_Open.Name = "tsmi_Open";
             tsmi_Open.Click += btn_Folder_Click;
             // 
             // tsmi_Save
             // 
-            tsmi_Save.Name = "tsmi_Save";
             resources.ApplyResources(tsmi_Save, "tsmi_Save");
+            tsmi_Save.Name = "tsmi_Save";
             tsmi_Save.Click += btn_Save_Click;
             // 
             // tsmi_SaveAs
             // 
-            tsmi_SaveAs.Name = "tsmi_SaveAs";
             resources.ApplyResources(tsmi_SaveAs, "tsmi_SaveAs");
+            tsmi_SaveAs.Name = "tsmi_SaveAs";
             tsmi_SaveAs.Click += btn_SaveAs_Click;
             // 
             // toolStripSeparator1
             // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
             resources.ApplyResources(toolStripSeparator1, "toolStripSeparator1");
+            toolStripSeparator1.Name = "toolStripSeparator1";
             // 
             // tsmi_Exit
             // 
-            tsmi_Exit.Name = "tsmi_Exit";
             resources.ApplyResources(tsmi_Exit, "tsmi_Exit");
+            tsmi_Exit.Name = "tsmi_Exit";
             tsmi_Exit.Click += btn_Exit_Click;
             // 
             // tsmi_Correction
             // 
+            resources.ApplyResources(tsmi_Correction, "tsmi_Correction");
             tsmi_Correction.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Undo, tsmi_Redo, tsmi_Cut, tsmi_Copy, tsmi_Paste, tsmi_Delete, tsmi_SelectAll, tsmi_Light });
             tsmi_Correction.ForeColor = Color.Black;
             tsmi_Correction.Name = "tsmi_Correction";
-            resources.ApplyResources(tsmi_Correction, "tsmi_Correction");
             // 
             // tsmi_Undo
             // 
-            tsmi_Undo.Name = "tsmi_Undo";
             resources.ApplyResources(tsmi_Undo, "tsmi_Undo");
+            tsmi_Undo.Name = "tsmi_Undo";
             tsmi_Undo.Click += btn_Undo_Click;
             // 
             // tsmi_Redo
             // 
-            tsmi_Redo.Name = "tsmi_Redo";
             resources.ApplyResources(tsmi_Redo, "tsmi_Redo");
+            tsmi_Redo.Name = "tsmi_Redo";
             tsmi_Redo.Click += btn_Redo_Click;
             // 
             // tsmi_Cut
             // 
-            tsmi_Cut.Name = "tsmi_Cut";
             resources.ApplyResources(tsmi_Cut, "tsmi_Cut");
+            tsmi_Cut.Name = "tsmi_Cut";
             tsmi_Cut.Click += btn_Cut_Click;
             // 
             // tsmi_Copy
             // 
-            tsmi_Copy.Name = "tsmi_Copy";
             resources.ApplyResources(tsmi_Copy, "tsmi_Copy");
+            tsmi_Copy.Name = "tsmi_Copy";
             tsmi_Copy.Click += btn_Copy_Click;
             // 
             // tsmi_Paste
             // 
-            tsmi_Paste.Name = "tsmi_Paste";
             resources.ApplyResources(tsmi_Paste, "tsmi_Paste");
+            tsmi_Paste.Name = "tsmi_Paste";
             tsmi_Paste.Click += btn_Put_Click;
             // 
             // tsmi_Delete
             // 
-            tsmi_Delete.Name = "tsmi_Delete";
             resources.ApplyResources(tsmi_Delete, "tsmi_Delete");
+            tsmi_Delete.Name = "tsmi_Delete";
             tsmi_Delete.Click += tsmi_Delete_Click;
             // 
             // tsmi_SelectAll
             // 
-            tsmi_SelectAll.Name = "tsmi_SelectAll";
             resources.ApplyResources(tsmi_SelectAll, "tsmi_SelectAll");
+            tsmi_SelectAll.Name = "tsmi_SelectAll";
             tsmi_SelectAll.Click += tsmi_SelectAll_Click;
             // 
             // tsmi_Light
             // 
-            tsmi_Light.Name = "tsmi_Light";
             resources.ApplyResources(tsmi_Light, "tsmi_Light");
+            tsmi_Light.Name = "tsmi_Light";
             // 
             // tsmi_Text
             // 
-            tsmi_Text.DropDownItems.AddRange(new ToolStripItem[] { постановкаЗадачиToolStripMenuItem, грамматикаToolStripMenuItem, классификацияГрамматикиToolStripMenuItem, методАнализаToolStripMenuItem, диагностикаИToolStripMenuItem, тестовыйПримерToolStripMenuItem, списокЛитературыToolStripMenuItem, исходныйКодПрограммыToolStripMenuItem });
+            resources.ApplyResources(tsmi_Text, "tsmi_Text");
+            tsmi_Text.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Problem, tsmi_Grammar, tsmi_GrammarClass, tsmi_Analysis, tsmi_Diagnostics, tsmi_TextExample, tsmi_ListLiterature, tsmi_ProgramSource });
             tsmi_Text.ForeColor = Color.Black;
             tsmi_Text.Name = "tsmi_Text";
-            resources.ApplyResources(tsmi_Text, "tsmi_Text");
             // 
-            // постановкаЗадачиToolStripMenuItem
+            // tsmi_Problem
             // 
-            постановкаЗадачиToolStripMenuItem.Name = "постановкаЗадачиToolStripMenuItem";
-            resources.ApplyResources(постановкаЗадачиToolStripMenuItem, "постановкаЗадачиToolStripMenuItem");
+            resources.ApplyResources(tsmi_Problem, "tsmi_Problem");
+            tsmi_Problem.Name = "tsmi_Problem";
+            tsmi_Problem.Click += tsmi_Problem_Click;
             // 
-            // грамматикаToolStripMenuItem
+            // tsmi_Grammar
             // 
-            грамматикаToolStripMenuItem.Name = "грамматикаToolStripMenuItem";
-            resources.ApplyResources(грамматикаToolStripMenuItem, "грамматикаToolStripMenuItem");
+            resources.ApplyResources(tsmi_Grammar, "tsmi_Grammar");
+            tsmi_Grammar.Name = "tsmi_Grammar";
+            tsmi_Grammar.Click += tsmi_Grammar_Click;
             // 
-            // классификацияГрамматикиToolStripMenuItem
+            // tsmi_GrammarClass
             // 
-            классификацияГрамматикиToolStripMenuItem.Name = "классификацияГрамматикиToolStripMenuItem";
-            resources.ApplyResources(классификацияГрамматикиToolStripMenuItem, "классификацияГрамматикиToolStripMenuItem");
+            resources.ApplyResources(tsmi_GrammarClass, "tsmi_GrammarClass");
+            tsmi_GrammarClass.Name = "tsmi_GrammarClass";
+            tsmi_GrammarClass.Click += tsmi_GrammarClass_Click;
             // 
-            // методАнализаToolStripMenuItem
+            // tsmi_Analysis
             // 
-            методАнализаToolStripMenuItem.Name = "методАнализаToolStripMenuItem";
-            resources.ApplyResources(методАнализаToolStripMenuItem, "методАнализаToolStripMenuItem");
+            resources.ApplyResources(tsmi_Analysis, "tsmi_Analysis");
+            tsmi_Analysis.Name = "tsmi_Analysis";
+            tsmi_Analysis.Click += tsmi_Analysis_Click;
             // 
-            // диагностикаИToolStripMenuItem
+            // tsmi_Diagnostics
             // 
-            диагностикаИToolStripMenuItem.Name = "диагностикаИToolStripMenuItem";
-            resources.ApplyResources(диагностикаИToolStripMenuItem, "диагностикаИToolStripMenuItem");
+            resources.ApplyResources(tsmi_Diagnostics, "tsmi_Diagnostics");
+            tsmi_Diagnostics.Name = "tsmi_Diagnostics";
+            tsmi_Diagnostics.Click += tsmi_Diagnostics_Click;
             // 
-            // тестовыйПримерToolStripMenuItem
+            // tsmi_TextExample
             // 
-            тестовыйПримерToolStripMenuItem.Name = "тестовыйПримерToolStripMenuItem";
-            resources.ApplyResources(тестовыйПримерToolStripMenuItem, "тестовыйПримерToolStripMenuItem");
+            resources.ApplyResources(tsmi_TextExample, "tsmi_TextExample");
+            tsmi_TextExample.Name = "tsmi_TextExample";
+            tsmi_TextExample.Click += tsmi_TextExample_Click;
             // 
-            // списокЛитературыToolStripMenuItem
+            // tsmi_ListLiterature
             // 
-            списокЛитературыToolStripMenuItem.Name = "списокЛитературыToolStripMenuItem";
-            resources.ApplyResources(списокЛитературыToolStripMenuItem, "списокЛитературыToolStripMenuItem");
+            resources.ApplyResources(tsmi_ListLiterature, "tsmi_ListLiterature");
+            tsmi_ListLiterature.Name = "tsmi_ListLiterature";
+            tsmi_ListLiterature.Click += tsmi_ListLiterature_Click;
             // 
-            // исходныйКодПрограммыToolStripMenuItem
+            // tsmi_ProgramSource
             // 
-            исходныйКодПрограммыToolStripMenuItem.Name = "исходныйКодПрограммыToolStripMenuItem";
-            resources.ApplyResources(исходныйКодПрограммыToolStripMenuItem, "исходныйКодПрограммыToolStripMenuItem");
+            resources.ApplyResources(tsmi_ProgramSource, "tsmi_ProgramSource");
+            tsmi_ProgramSource.Name = "tsmi_ProgramSource";
+            tsmi_ProgramSource.Click += tsmi_ProgramSource_Click;
             // 
-            // пускToolStripMenuItem
+            // tsmi_Start
             // 
-            пускToolStripMenuItem.ForeColor = Color.Black;
-            пускToolStripMenuItem.Name = "пускToolStripMenuItem";
-            resources.ApplyResources(пускToolStripMenuItem, "пускToolStripMenuItem");
+            resources.ApplyResources(tsmi_Start, "tsmi_Start");
+            tsmi_Start.ForeColor = Color.Black;
+            tsmi_Start.Name = "tsmi_Start";
             // 
             // tsmi_Reference
             // 
+            resources.ApplyResources(tsmi_Reference, "tsmi_Reference");
             tsmi_Reference.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Help, tsmi_Info });
             tsmi_Reference.ForeColor = Color.Black;
             tsmi_Reference.Name = "tsmi_Reference";
-            resources.ApplyResources(tsmi_Reference, "tsmi_Reference");
             // 
             // tsmi_Help
             // 
-            tsmi_Help.Name = "tsmi_Help";
             resources.ApplyResources(tsmi_Help, "tsmi_Help");
+            tsmi_Help.Name = "tsmi_Help";
             tsmi_Help.Click += btn_Info_Click;
             // 
             // tsmi_Info
             // 
-            tsmi_Info.Name = "tsmi_Info";
             resources.ApplyResources(tsmi_Info, "tsmi_Info");
+            tsmi_Info.Name = "tsmi_Info";
             tsmi_Info.Click += btn_Info_Click;
             // 
             // tsmi_Localization
             // 
+            resources.ApplyResources(tsmi_Localization, "tsmi_Localization");
             tsmi_Localization.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Russian, tsmi_English });
             tsmi_Localization.ForeColor = Color.Black;
             tsmi_Localization.Name = "tsmi_Localization";
-            resources.ApplyResources(tsmi_Localization, "tsmi_Localization");
             // 
             // tsmi_Russian
             // 
-            tsmi_Russian.Name = "tsmi_Russian";
             resources.ApplyResources(tsmi_Russian, "tsmi_Russian");
+            tsmi_Russian.Name = "tsmi_Russian";
             tsmi_Russian.Click += tsmi_Russian_Click;
             // 
             // tsmi_English
             // 
-            tsmi_English.Name = "tsmi_English";
             resources.ApplyResources(tsmi_English, "tsmi_English");
+            tsmi_English.Name = "tsmi_English";
             tsmi_English.Click += tsmi_English_Click;
             // 
             // tsmi_View
             // 
+            resources.ApplyResources(tsmi_View, "tsmi_View");
             tsmi_View.DropDownItems.AddRange(new ToolStripItem[] { tsmi_FontInput, tsmi_FontOutput, tsmi_ColorFont, tsmi_ColorKeywords });
             tsmi_View.ForeColor = Color.Black;
             tsmi_View.Name = "tsmi_View";
-            resources.ApplyResources(tsmi_View, "tsmi_View");
             // 
             // tsmi_FontInput
             // 
-            tsmi_FontInput.Name = "tsmi_FontInput";
             resources.ApplyResources(tsmi_FontInput, "tsmi_FontInput");
+            tsmi_FontInput.Name = "tsmi_FontInput";
             tsmi_FontInput.Click += tsmi_Font_Click;
             // 
             // tsmi_FontOutput
             // 
-            tsmi_FontOutput.Name = "tsmi_FontOutput";
             resources.ApplyResources(tsmi_FontOutput, "tsmi_FontOutput");
+            tsmi_FontOutput.Name = "tsmi_FontOutput";
             tsmi_FontOutput.Click += tsmi_FontOutput_Click;
             // 
             // tsmi_ColorFont
             // 
-            tsmi_ColorFont.Name = "tsmi_ColorFont";
             resources.ApplyResources(tsmi_ColorFont, "tsmi_ColorFont");
+            tsmi_ColorFont.Name = "tsmi_ColorFont";
             tsmi_ColorFont.Click += tsmi_ColorFont_Click;
             // 
             // tsmi_ColorKeywords
             // 
-            tsmi_ColorKeywords.Name = "tsmi_ColorKeywords";
             resources.ApplyResources(tsmi_ColorKeywords, "tsmi_ColorKeywords");
+            tsmi_ColorKeywords.Name = "tsmi_ColorKeywords";
             tsmi_ColorKeywords.Click += tsmi_ColorKeywords_Click;
             // 
             // statusStrip1
             // 
+            resources.ApplyResources(statusStrip1, "statusStrip1");
             statusStrip1.ImageScalingSize = new Size(20, 20);
             statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabelText, toolStripStatusLabelTime, toolStripStatusLabelDate, datelabel, timelabel });
-            resources.ApplyResources(statusStrip1, "statusStrip1");
             statusStrip1.Name = "statusStrip1";
+            toolTip1.SetToolTip(statusStrip1, resources.GetString("statusStrip1.ToolTip"));
             // 
             // toolStripStatusLabelText
             // 
+            resources.ApplyResources(toolStripStatusLabelText, "toolStripStatusLabelText");
             toolStripStatusLabelText.ForeColor = Color.Black;
             toolStripStatusLabelText.Name = "toolStripStatusLabelText";
-            resources.ApplyResources(toolStripStatusLabelText, "toolStripStatusLabelText");
             // 
             // toolStripStatusLabelTime
             // 
+            resources.ApplyResources(toolStripStatusLabelTime, "toolStripStatusLabelTime");
             toolStripStatusLabelTime.ForeColor = Color.Black;
             toolStripStatusLabelTime.Name = "toolStripStatusLabelTime";
-            resources.ApplyResources(toolStripStatusLabelTime, "toolStripStatusLabelTime");
             // 
             // toolStripStatusLabelDate
             // 
+            resources.ApplyResources(toolStripStatusLabelDate, "toolStripStatusLabelDate");
             toolStripStatusLabelDate.ForeColor = Color.Black;
             toolStripStatusLabelDate.Name = "toolStripStatusLabelDate";
-            resources.ApplyResources(toolStripStatusLabelDate, "toolStripStatusLabelDate");
             // 
             // datelabel
             // 
+            resources.ApplyResources(datelabel, "datelabel");
             datelabel.ForeColor = Color.Black;
             datelabel.Name = "datelabel";
-            resources.ApplyResources(datelabel, "datelabel");
             // 
             // timelabel
             // 
+            resources.ApplyResources(timelabel, "timelabel");
             timelabel.ForeColor = Color.Black;
             timelabel.Name = "timelabel";
-            resources.ApplyResources(timelabel, "timelabel");
             // 
             // panel_Buttons
             // 
+            resources.ApplyResources(panel_Buttons, "panel_Buttons");
             panel_Buttons.BackColor = SystemColors.Control;
             panel_Buttons.Controls.Add(btn_Light);
             panel_Buttons.Controls.Add(btn_Info);
@@ -376,8 +387,8 @@
             panel_Buttons.Controls.Add(btn_Open);
             panel_Buttons.Controls.Add(btn_Create);
             panel_Buttons.ForeColor = Color.Silver;
-            resources.ApplyResources(panel_Buttons, "panel_Buttons");
             panel_Buttons.Name = "panel_Buttons";
+            toolTip1.SetToolTip(panel_Buttons, resources.GetString("panel_Buttons.ToolTip"));
             // 
             // btn_Light
             // 
@@ -401,7 +412,7 @@
             // btn_Help
             // 
             resources.ApplyResources(btn_Help, "btn_Help");
-            btn_Help.ForeColor = Color.Gainsboro;
+            btn_Help.ForeColor = Color.Transparent;
             btn_Help.Image = Properties.Resources.help;
             btn_Help.Name = "btn_Help";
             toolTip1.SetToolTip(btn_Help, resources.GetString("btn_Help.ToolTip"));
@@ -507,20 +518,23 @@
             resources.ApplyResources(tabControl, "tabControl");
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
+            toolTip1.SetToolTip(tabControl, resources.GetString("tabControl.ToolTip"));
             tabControl.SelectedIndexChanged += tabControl_SelectedIndexChanged;
             tabControl.MouseClick += TabControl_MouseClick;
             // 
             // richTextBox2
             // 
-            richTextBox2.BackColor = SystemColors.Window;
             resources.ApplyResources(richTextBox2, "richTextBox2");
+            richTextBox2.BackColor = SystemColors.Window;
             richTextBox2.Name = "richTextBox2";
             richTextBox2.ReadOnly = true;
+            toolTip1.SetToolTip(richTextBox2, resources.GetString("richTextBox2.ToolTip"));
             // 
             // richTextBox1
             // 
             resources.ApplyResources(richTextBox1, "richTextBox1");
             richTextBox1.Name = "richTextBox1";
+            toolTip1.SetToolTip(richTextBox1, resources.GetString("richTextBox1.ToolTip"));
             // 
             // timer_2
             // 
@@ -529,8 +543,8 @@
             // 
             // MainForm
             // 
-            AllowDrop = true;
             resources.ApplyResources(this, "$this");
+            AllowDrop = true;
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(tabControl);
             Controls.Add(panel_Buttons);
@@ -539,6 +553,7 @@
             ForeColor = SystemColors.Control;
             MainMenuStrip = menuStrip1;
             Name = "MainForm";
+            toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             FormClosing += MainForm_FormClosing;
             DragDrop += MainForm_DragDrop;
             DragEnter += MainForm_DragEnter;
@@ -559,7 +574,7 @@
         private ToolStripMenuItem tsmi_File;
         private ToolStripMenuItem tsmi_Correction;
         private ToolStripMenuItem tsmi_Text;
-        private ToolStripMenuItem пускToolStripMenuItem;
+        private ToolStripMenuItem tsmi_Start;
         private ToolStripMenuItem tsmi_Reference;
         private Panel panel_Buttons;
         private Button btn_Create;
@@ -589,14 +604,14 @@
         private ToolStripMenuItem tsmi_Paste;
         private ToolStripMenuItem tsmi_Delete;
         private ToolStripMenuItem tsmi_SelectAll;
-        private ToolStripMenuItem постановкаЗадачиToolStripMenuItem;
-        private ToolStripMenuItem грамматикаToolStripMenuItem;
-        private ToolStripMenuItem классификацияГрамматикиToolStripMenuItem;
-        private ToolStripMenuItem методАнализаToolStripMenuItem;
-        private ToolStripMenuItem диагностикаИToolStripMenuItem;
-        private ToolStripMenuItem тестовыйПримерToolStripMenuItem;
-        private ToolStripMenuItem списокЛитературыToolStripMenuItem;
-        private ToolStripMenuItem исходныйКодПрограммыToolStripMenuItem;
+        private ToolStripMenuItem tsmi_Problem;
+        private ToolStripMenuItem tsmi_Grammar;
+        private ToolStripMenuItem tsmi_GrammarClass;
+        private ToolStripMenuItem tsmi_Analysis;
+        private ToolStripMenuItem tsmi_Diagnostics;
+        private ToolStripMenuItem tsmi_TextExample;
+        private ToolStripMenuItem tsmi_ListLiterature;
+        private ToolStripMenuItem tsmi_ProgramSource;
         private ToolStripMenuItem tsmi_Help;
         private ToolStripMenuItem tsmi_Info;
         private ToolStripMenuItem tsmi_Localization;
