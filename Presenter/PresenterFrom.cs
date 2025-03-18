@@ -488,7 +488,7 @@ namespace Compiler.Presenter
         }
 
         // Закрыть все вкладки
-        public void CloseAllTabPages()
+        public void CloseAllTabPages(Form form)
         {
             for (int i = _tabControl.Controls.Count; i > 0; i--)
             {
@@ -499,6 +499,7 @@ namespace Compiler.Presenter
 
                 if (richTextBox.Modified)
                 {
+                    form.Activate();
                     DialogResult result = MessageBox.Show(MyString.SavingChangesFile + $"\"{tabPageToClose.Text}\"", MyString.Saving, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                     if (result == DialogResult.Yes)
@@ -516,16 +517,16 @@ namespace Compiler.Presenter
         }
 
         // Перезагрузить приложение
-        public void RestartCompilyator()
+        public void RestartCompilyator(Form form)
         {
-            CloseAllTabPages();
+            CloseAllTabPages(form);
             Application.Restart();
         }
 
         // Закрыть приложение
-        public void CLoseCompilyator()
+        public void CLoseCompilyator(Form form)
         {
-            CloseAllTabPages();
+            CloseAllTabPages(form);
         }
 
         #endregion

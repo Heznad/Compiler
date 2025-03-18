@@ -153,7 +153,7 @@ namespace Compiler
             if (sender is Button)
             {
                 Button b = (Button)sender;
-                string name = b.Text;
+                string name = b.Name;
                 AuxiliaryForm af = new(name);
                 af.ShowDialog();
             }
@@ -161,7 +161,7 @@ namespace Compiler
             {
 
                 ToolStripMenuItem t = (ToolStripMenuItem)sender;
-                string name = t.Text;
+                string name = t.Name;
                 AuxiliaryForm af = new(name);
                 af.ShowDialog();
             }
@@ -188,7 +188,7 @@ namespace Compiler
                 if (result == DialogResult.Yes)
                 {
                     _restartFlag = true;
-                    presenter.RestartCompilyator();
+                    presenter.RestartCompilyator(this);
                 }
                 tsmi_Localization.Enabled = false;
             }
@@ -210,7 +210,7 @@ namespace Compiler
                 if (result == DialogResult.Yes)
                 {
                     _restartFlag = true;
-                    presenter.RestartCompilyator();
+                    presenter.RestartCompilyator(this);
                 }
                 tsmi_Localization.Enabled = false;
             }
@@ -292,7 +292,7 @@ namespace Compiler
                 {
                     e.Cancel = true;
                 }
-                else presenter.CLoseCompilyator();
+                else presenter.CLoseCompilyator(this);
             }
         }
 
