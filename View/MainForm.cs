@@ -20,7 +20,6 @@ namespace Compiler
             presenter.UpdateUndoRedoButtonStates();
         }
 
-
         #region [ Файл ]
         private void btn_File_Click(object sender, EventArgs e)
         {
@@ -326,7 +325,11 @@ namespace Compiler
         #region [ Выбор вкладки ]
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabControl.TabPages.Count > 0) presenter.UpdateUndoRedoButtonStates();
+            if (tabControl.TabPages.Count > 0)
+            {
+                presenter.SetSelectedRichTextBox();
+                presenter.UpdateUndoRedoButtonStates();
+            }
             else
             {
                 btn_Undo.Enabled = false;
