@@ -146,6 +146,14 @@ namespace Compiler
 
         #endregion
 
+        #region [ Пуск ]
+        private void btn_Start_Click(object sender, EventArgs e)
+        {
+            presenter.Start();
+        }
+
+        #endregion
+
         #region [ Справка ]
         private void btn_Info_Click(object sender, EventArgs e)
         {
@@ -379,6 +387,6 @@ namespace Compiler
                     e.Handled = true;
                 }
             }
-        }    
+        }
     }
 }

@@ -278,9 +278,6 @@ namespace Compiler.Presenter
             messageColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewAnalyzer.Columns.Add(messageColumn);
 
-            dataGridViewAnalyzer.Rows.Add("1", @"D:\clang\project\StaticAnalyzer\StaticAnalyzer\codeTests.cpp");
-            dataGridViewAnalyzer.Rows.Add("2", @"D:\clang\project\StaticAnalyzer\StaticAnalyzer\codeTests.cpp");
-
             dataGridViewAnalyzer.AlternatingRowsDefaultCellStyle.BackColor = System.Drawing.Color.LightGray; // Чередование цветов строк
             dataGridViewAnalyzer.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.WhiteSmoke; // Цвет фона заголовков
             dataGridViewAnalyzer.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
@@ -897,6 +894,25 @@ namespace Compiler.Presenter
 
         #endregion
 
+        #region [ Пуск ]
+
+        public void Start()
+        {
+            DataGridView dataGridViewAnalyzer = GetDataGridViewAnalyzer();
+            dataGridViewAnalyzer.Rows.Clear();
+            string input = _currentRichTextBox.Text;
+            Scanner scanner = new Scanner();
+            List<Token> tokens = scanner.Scan(input);
+            string path = "";
+            if (tabPageFilePaths.ContainsKey(_tabControl.SelectedTab)) path = tabPageFilePaths[_tabControl.SelectedTab];
+            foreach (Token token in tokens)
+            {
+                dataGridViewAnalyzer.Rows.Add(dataGridViewAnalyzer.Rows.Count + 1, path, token.Line,$"{token.StartPos}-{token.EndPos}",token.ToString());
+            }
+        }
+
+        #endregion
+
         // Получение текущего текстового поля
         public RichTextBox GetSelectedRichTextBox(TabPage tabPage = null)
         {
@@ -924,6 +940,15 @@ namespace Compiler.Presenter
             TabControl TabControl = (TabControl)splitContainer.Panel2.Controls[0];
             TabPage tabPageAnalyzer = (TabPage)TabControl.Controls[0];
             return (DataGridView)tabPageAnalyzer.Controls[0];
+        }
+
+        private RichTextBox GetRichTextBoxOutput(TabPage tabPage = null)
+        {
+            if (tabPage == null) tabPage = _tabControl.SelectedTab;
+            SplitContainer splitContainer = (SplitContainer)tabPage.Controls[0];
+            TabControl TabControl = (TabControl)splitContainer.Panel2.Controls[0];
+            TabPage tabPageOutput = (TabPage)TabControl.Controls[2];
+            return (RichTextBox)tabPageOutput.Controls[0];
         }
     }
 }
