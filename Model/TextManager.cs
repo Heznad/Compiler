@@ -6,7 +6,7 @@ namespace Compiler.Model
     {
         readonly Dictionary<string, List<string>> _keywords = new Dictionary<string, List<string>>()
     {
-        { "Keywords", new List<string> { "public", "private", "class", "void", "new" } },
+        { "Keywords", new List<string> { "public", "private", "class", "void", "new", "enum" } },
         { "TypesData", new List<string> { "int", "string", "bool", "float", "double" } },
         { "Operators", new List<string> { "if", "else", "for", "while", "return" } }
     };

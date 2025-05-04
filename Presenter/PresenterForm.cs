@@ -1,3 +1,4 @@
+using System.Text;
 using System.Windows.Forms;
 using Compiler.Model;
 
@@ -212,9 +213,7 @@ namespace Compiler.Presenter
             DataGridView dataGridViewAnalyzer = InitializeDataGridView();
             tabPageAnalyzer.Controls.Add(dataGridViewAnalyzer);
 
-            TabPage tabPagePseodocode = new(MyString.Pseudocode);
-
-            TabPage tabPageOutput = new(MyString.Output);
+            /*TabPage tabPageOutput = new(MyString.Output);
             RichTextBox richTextBoxOutput = new()
             {
                 Dock = DockStyle.Fill,
@@ -223,11 +222,10 @@ namespace Compiler.Presenter
                 ForeColor = text_manager.SelectedColor,
                 Font = text_manager.SelectedFontOutput
             };
-            tabPageOutput.Controls.Add(richTextBoxOutput);
+            tabPageOutput.Controls.Add(richTextBoxOutput);*/
 
             tabControl.Controls.Add(tabPageAnalyzer);
-            tabControl.Controls.Add(tabPagePseodocode);
-            tabControl.Controls.Add(tabPageOutput);
+            //tabControl.Controls.Add(tabPageOutput);
             return tabControl;
         }
 
@@ -903,6 +901,9 @@ namespace Compiler.Presenter
             string input = _currentRichTextBox.Text;
             Scanner scanner = new Scanner();
             List<Token> tokens = scanner.Scan(input);
+            List<Token> errors = scanner.CheckEnumConstruction(tokens);
+            bool ERROR = false;
+            if (errors.Count != tokens.Count) { tokens = errors; ERROR = true; }
             string path = "";
             if (tabPageFilePaths.ContainsKey(_tabControl.SelectedTab)) path = tabPageFilePaths[_tabControl.SelectedTab];
             foreach (Token token in tokens)
