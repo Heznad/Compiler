@@ -47,15 +47,6 @@
             tsmi_Delete = new ToolStripMenuItem();
             tsmi_SelectAll = new ToolStripMenuItem();
             tsmi_Light = new ToolStripMenuItem();
-            tsmi_Text = new ToolStripMenuItem();
-            tsmi_Problem = new ToolStripMenuItem();
-            tsmi_Grammar = new ToolStripMenuItem();
-            tsmi_GrammarClass = new ToolStripMenuItem();
-            tsmi_Analysis = new ToolStripMenuItem();
-            tsmi_Diagnostics = new ToolStripMenuItem();
-            tsmi_TextExample = new ToolStripMenuItem();
-            tsmi_ListLiterature = new ToolStripMenuItem();
-            tsmi_ProgramSource = new ToolStripMenuItem();
             tsmi_Start = new ToolStripMenuItem();
             tsmi_Reference = new ToolStripMenuItem();
             tsmi_Help = new ToolStripMenuItem();
@@ -101,7 +92,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { tsmi_File, tsmi_Correction, tsmi_Text, tsmi_Start, tsmi_Reference, tsmi_Localization, tsmi_View });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { tsmi_File, tsmi_Correction, tsmi_Start, tsmi_Reference, tsmi_Localization, tsmi_View });
             resources.ApplyResources(menuStrip1, "menuStrip1");
             menuStrip1.Name = "menuStrip1";
             // 
@@ -201,66 +192,12 @@
             tsmi_Light.Name = "tsmi_Light";
             resources.ApplyResources(tsmi_Light, "tsmi_Light");
             // 
-            // tsmi_Text
-            // 
-            tsmi_Text.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Problem, tsmi_Grammar, tsmi_GrammarClass, tsmi_Analysis, tsmi_Diagnostics, tsmi_TextExample, tsmi_ListLiterature, tsmi_ProgramSource });
-            tsmi_Text.ForeColor = Color.Black;
-            tsmi_Text.Name = "tsmi_Text";
-            resources.ApplyResources(tsmi_Text, "tsmi_Text");
-            // 
-            // tsmi_Problem
-            // 
-            tsmi_Problem.Name = "tsmi_Problem";
-            resources.ApplyResources(tsmi_Problem, "tsmi_Problem");
-            tsmi_Problem.Click += tsmi_Problem_Click;
-            // 
-            // tsmi_Grammar
-            // 
-            tsmi_Grammar.Name = "tsmi_Grammar";
-            resources.ApplyResources(tsmi_Grammar, "tsmi_Grammar");
-            tsmi_Grammar.Click += tsmi_Grammar_Click;
-            // 
-            // tsmi_GrammarClass
-            // 
-            tsmi_GrammarClass.Name = "tsmi_GrammarClass";
-            resources.ApplyResources(tsmi_GrammarClass, "tsmi_GrammarClass");
-            tsmi_GrammarClass.Click += tsmi_GrammarClass_Click;
-            // 
-            // tsmi_Analysis
-            // 
-            tsmi_Analysis.Name = "tsmi_Analysis";
-            resources.ApplyResources(tsmi_Analysis, "tsmi_Analysis");
-            tsmi_Analysis.Click += tsmi_Analysis_Click;
-            // 
-            // tsmi_Diagnostics
-            // 
-            tsmi_Diagnostics.Name = "tsmi_Diagnostics";
-            resources.ApplyResources(tsmi_Diagnostics, "tsmi_Diagnostics");
-            tsmi_Diagnostics.Click += tsmi_Diagnostics_Click;
-            // 
-            // tsmi_TextExample
-            // 
-            tsmi_TextExample.Name = "tsmi_TextExample";
-            resources.ApplyResources(tsmi_TextExample, "tsmi_TextExample");
-            tsmi_TextExample.Click += tsmi_TextExample_Click;
-            // 
-            // tsmi_ListLiterature
-            // 
-            tsmi_ListLiterature.Name = "tsmi_ListLiterature";
-            resources.ApplyResources(tsmi_ListLiterature, "tsmi_ListLiterature");
-            tsmi_ListLiterature.Click += tsmi_ListLiterature_Click;
-            // 
-            // tsmi_ProgramSource
-            // 
-            tsmi_ProgramSource.Name = "tsmi_ProgramSource";
-            resources.ApplyResources(tsmi_ProgramSource, "tsmi_ProgramSource");
-            tsmi_ProgramSource.Click += tsmi_ProgramSource_Click;
-            // 
             // tsmi_Start
             // 
             tsmi_Start.ForeColor = Color.Black;
             tsmi_Start.Name = "tsmi_Start";
             resources.ApplyResources(tsmi_Start, "tsmi_Start");
+            tsmi_Start.Click += btn_Start_Click;
             // 
             // tsmi_Reference
             // 
@@ -567,7 +504,6 @@
         private StatusStrip statusStrip1;
         private ToolStripMenuItem tsmi_File;
         private ToolStripMenuItem tsmi_Correction;
-        private ToolStripMenuItem tsmi_Text;
         private ToolStripMenuItem tsmi_Start;
         private ToolStripMenuItem tsmi_Reference;
         private Panel panel_Buttons;
@@ -598,14 +534,6 @@
         private ToolStripMenuItem tsmi_Paste;
         private ToolStripMenuItem tsmi_Delete;
         private ToolStripMenuItem tsmi_SelectAll;
-        private ToolStripMenuItem tsmi_Problem;
-        private ToolStripMenuItem tsmi_Grammar;
-        private ToolStripMenuItem tsmi_GrammarClass;
-        private ToolStripMenuItem tsmi_Analysis;
-        private ToolStripMenuItem tsmi_Diagnostics;
-        private ToolStripMenuItem tsmi_TextExample;
-        private ToolStripMenuItem tsmi_ListLiterature;
-        private ToolStripMenuItem tsmi_ProgramSource;
         private ToolStripMenuItem tsmi_Help;
         private ToolStripMenuItem tsmi_Info;
         private ToolStripMenuItem tsmi_Localization;

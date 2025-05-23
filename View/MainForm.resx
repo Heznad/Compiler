@@ -214,60 +214,6 @@
   <data name="tsmi_Correction.Text" xml:space="preserve">
     <value>Правка</value>
   </data>
-  <data name="tsmi_Problem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>363, 26</value>
-  </data>
-  <data name="tsmi_Problem.Text" xml:space="preserve">
-    <value>Постановка задачи</value>
-  </data>
-  <data name="tsmi_Grammar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>363, 26</value>
-  </data>
-  <data name="tsmi_Grammar.Text" xml:space="preserve">
-    <value>Грамматика</value>
-  </data>
-  <data name="tsmi_GrammarClass.Size" type="System.Drawing.Size, System.Drawing">
-    <value>363, 26</value>
-  </data>
-  <data name="tsmi_GrammarClass.Text" xml:space="preserve">
-    <value>Классификация грамматики</value>
-  </data>
-  <data name="tsmi_Analysis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>363, 26</value>
-  </data>
-  <data name="tsmi_Analysis.Text" xml:space="preserve">
-    <value>Метод анализа</value>
-  </data>
-  <data name="tsmi_Diagnostics.Size" type="System.Drawing.Size, System.Drawing">
-    <value>363, 26</value>
-  </data>
-  <data name="tsmi_Diagnostics.Text" xml:space="preserve">
-    <value>Диагностика и нейтрализация ошибок</value>
-  </data>
-  <data name="tsmi_TextExample.Size" type="System.Drawing.Size, System.Drawing">
-    <value>363, 26</value>
-  </data>
-  <data name="tsmi_TextExample.Text" xml:space="preserve">
-    <value>Тестовый пример</value>
-  </data>
-  <data name="tsmi_ListLiterature.Size" type="System.Drawing.Size, System.Drawing">
-    <value>363, 26</value>
-  </data>
-  <data name="tsmi_ListLiterature.Text" xml:space="preserve">
-    <value>Список литературы</value>
-  </data>
-  <data name="tsmi_ProgramSource.Size" type="System.Drawing.Size, System.Drawing">
-    <value>363, 26</value>
-  </data>
-  <data name="tsmi_ProgramSource.Text" xml:space="preserve">
-    <value>Исходный код программы</value>
-  </data>
-  <data name="tsmi_Text.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 24</value>
-  </data>
-  <data name="tsmi_Text.Text" xml:space="preserve">
-    <value>Текст</value>
-  </data>
   <data name="tsmi_Start.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 24</value>
   </data>
@@ -1169,60 +1115,6 @@
     <value>tsmi_Light</value>
   </data>
   <data name="&gt;&gt;tsmi_Light.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmi_Text.Name" xml:space="preserve">
-    <value>tsmi_Text</value>
-  </data>
-  <data name="&gt;&gt;tsmi_Text.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmi_Problem.Name" xml:space="preserve">
-    <value>tsmi_Problem</value>
-  </data>
-  <data name="&gt;&gt;tsmi_Problem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmi_Grammar.Name" xml:space="preserve">
-    <value>tsmi_Grammar</value>
-  </data>
-  <data name="&gt;&gt;tsmi_Grammar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmi_GrammarClass.Name" xml:space="preserve">
-    <value>tsmi_GrammarClass</value>
-  </data>
-  <data name="&gt;&gt;tsmi_GrammarClass.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmi_Analysis.Name" xml:space="preserve">
-    <value>tsmi_Analysis</value>
-  </data>
-  <data name="&gt;&gt;tsmi_Analysis.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmi_Diagnostics.Name" xml:space="preserve">
-    <value>tsmi_Diagnostics</value>
-  </data>
-  <data name="&gt;&gt;tsmi_Diagnostics.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmi_TextExample.Name" xml:space="preserve">
-    <value>tsmi_TextExample</value>
-  </data>
-  <data name="&gt;&gt;tsmi_TextExample.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmi_ListLiterature.Name" xml:space="preserve">
-    <value>tsmi_ListLiterature</value>
-  </data>
-  <data name="&gt;&gt;tsmi_ListLiterature.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmi_ProgramSource.Name" xml:space="preserve">
-    <value>tsmi_ProgramSource</value>
-  </data>
-  <data name="&gt;&gt;tsmi_ProgramSource.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tsmi_Start.Name" xml:space="preserve">

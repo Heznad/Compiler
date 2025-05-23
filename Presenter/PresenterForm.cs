@@ -896,20 +896,27 @@ namespace Compiler.Presenter
 
         public void Start()
         {
+            string path = "";
             DataGridView dataGridViewAnalyzer = GetDataGridViewAnalyzer();
             dataGridViewAnalyzer.Rows.Clear();
             string input = _currentRichTextBox.Text;
             Scanner scanner = new Scanner();
             List<Token> tokens = scanner.Scan(input);
             List<Token> errors = scanner.CheckEnumConstruction(tokens);
-            bool ERROR = false;
-            if (errors.Count != tokens.Count) { tokens = errors; ERROR = true; }
-            string path = "";
+            //if (errors.Count != tokens.Count) { tokens = errors;}
             if (tabPageFilePaths.ContainsKey(_tabControl.SelectedTab)) path = tabPageFilePaths[_tabControl.SelectedTab];
-            foreach (Token token in tokens)
+            if (errors.Count == 0)
             {
-                dataGridViewAnalyzer.Rows.Add(dataGridViewAnalyzer.Rows.Count + 1, path, token.Line,$"{token.StartPos}-{token.EndPos}",token.ToString());
+                dataGridViewAnalyzer.Rows.Add(dataGridViewAnalyzer.Rows.Count + 1, path, "0","0", "Ошибок не обнаружено.");
+            } else
+            {
+                foreach (Token error in errors)
+                {
+                    dataGridViewAnalyzer.Rows.Add(dataGridViewAnalyzer.Rows.Count + 1, path, error.Line, $"{error.StartPos}-{error.EndPos}", error.ToString());
+                }
             }
+            
+            
         }
 
         #endregion

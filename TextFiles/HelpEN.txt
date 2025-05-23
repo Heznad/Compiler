@@ -22,17 +22,6 @@ The main application window consists of the following elements:
     *  Select all (select the entire text).
     *  Syntax highlighting
 
-  • Text: contains a reference on the topic of the chosen grammar implementation of the new programming language:
-
-    *  Setting the task.
-    * Grammar.
-    * Grammar classification.
-    * The method of analysis.
-    * Error diagnosis and neutralization.
-    *  A test case.
-    * List of references.
-    * The source code of the program.
-
   • Start: .
 
   • Help: Provides access to background information about the program:

@@ -110,7 +110,7 @@ namespace Compiler.Model
             return _tokens;
         }
 
-        public List<Token> CheckEnumConstruction(List<Token> tokens)
+        /*public List<Token> CheckEnumConstruction(List<Token> tokens)
         {
             List<Token> errors = new();
             int state = 0;
@@ -256,7 +256,6 @@ namespace Compiler.Model
                         {
                             errors.Add(token);
                             state = 0;
-                            return tokens;
                         }
                         break;
                     default:
@@ -270,7 +269,7 @@ namespace Compiler.Model
                     case 1:
                         tokenE = new Token
                         {
-                            Code = TokenCode.Space,
+                            Code = TokenCode.Error,
                             Type = "ожидался пробел",
                             Lexeme = "_",
                             StartPos = tokens[tokens.Count-1].EndPos+1,
@@ -282,7 +281,7 @@ namespace Compiler.Model
                     case 2:
                         tokenE = new Token
                         {
-                            Code = TokenCode.Space,
+                            Code = TokenCode.Error,
                             Type = "ожидалось ключевое слово",
                             Lexeme = "class",
                             StartPos = tokens[tokens.Count - 1].EndPos + 1,
@@ -294,7 +293,7 @@ namespace Compiler.Model
                     case 3:
                         tokenE = new Token
                         {
-                            Code = TokenCode.Space,
+                            Code = TokenCode.Error,
                             Type = "ожидался пробел",
                             Lexeme = "_",
                             StartPos = tokens[tokens.Count - 1].EndPos + 1,
@@ -306,7 +305,7 @@ namespace Compiler.Model
                     case 4:
                         tokenE = new Token
                         {
-                            Code = TokenCode.Identifier,
+                            Code = TokenCode.Error,
                             Type = "ожидался индетификатор",
                             Lexeme = "identificator",
                             StartPos = tokens[tokens.Count - 1].EndPos + 1,
@@ -318,7 +317,7 @@ namespace Compiler.Model
                     case 5:
                         tokenE = new Token
                         {
-                            Code = TokenCode.LBrace,
+                            Code = TokenCode.Error,
                             Type = "ожидалась левая фигурная скобочка",
                             Lexeme = "{",
                             StartPos = tokens[tokens.Count - 1].EndPos + 1,
@@ -330,7 +329,7 @@ namespace Compiler.Model
                     case 6:
                         tokenE = new Token
                         {
-                            Code = TokenCode.Identifier,
+                            Code = TokenCode.Error,
                             Type = "ожидался индетификатор",
                             Lexeme = "identificator",
                             StartPos = tokens[tokens.Count - 1].EndPos + 1,
@@ -342,7 +341,7 @@ namespace Compiler.Model
                     case 7:
                         tokenE = new Token
                         {
-                            Code = TokenCode.Identifier,
+                            Code = TokenCode.Error,
                             Type = "ожидалась запятая или правая фигурная скобочка",
                             Lexeme = ", или }",
                             StartPos = tokens[tokens.Count - 1].EndPos + 1,
@@ -354,7 +353,7 @@ namespace Compiler.Model
                     case 8:
                         tokenE = new Token
                         {
-                            Code = TokenCode.Identifier,
+                            Code = TokenCode.Error,
                             Type = "ожидалась точка с запятой",
                             Lexeme = ";",
                             StartPos = tokens[tokens.Count - 1].EndPos + 1,
@@ -363,6 +362,301 @@ namespace Compiler.Model
                         };
                         errors.Add(tokenE);
                         return errors;
+                }
+            }
+            return errors;
+        } */
+
+        public List<Token> CheckEnumConstruction(List<Token> tokens)
+        {
+            List<Token> errors = new();
+            int state = 0;
+            foreach (var token in tokens)
+            {
+                switch (state)
+                {
+                    case 0:
+                        if (token.Code != TokenCode.Enum)
+                        {                           
+                            token.Code = TokenCode.Error;
+                            token.Type = $"Встречен символ {token.Lexeme}, а ожидался";
+                            token.Lexeme = "enum";
+                            errors.Add(token);
+                            state += 2;
+                            //return errors;
+                        }
+                        else
+                        {
+                            //errors.Add(token);
+                            state++;
+                        }
+                        break;
+                    case 1:
+                        if (token.Code != TokenCode.Space)
+                        {
+                            token.Code = TokenCode.Error;
+                            token.Type = $"Встречен символ {token.Lexeme}, а ожидался";
+                            token.Lexeme = "пробел";
+                            errors.Add(token);
+                            state += 2;
+                            //return errors;
+                        }
+                        else
+                        {
+                            //errors.Add(token);
+                            state++;
+                        }
+                        break;
+                    case 2:
+                        if (token.Code != TokenCode.Class)
+                        {
+                            if (token.Code == TokenCode.Enum) state = -1;
+                            token.Code = TokenCode.Error;
+                            token.Type = $"Встречен символ {token.Lexeme}, а ожидался";
+                            token.Lexeme = "class";
+                            errors.Add(token);
+                            state += 2; 
+                            //return errors;
+                        }
+                        else
+                        {
+                            //errors.Add(token);
+                            state++;
+                        }
+                        break;
+                    case 3:
+                        if (token.Code != TokenCode.Space)
+                        {
+                            token.Code = TokenCode.Error;
+                            token.Type = $"Встречен символ {token.Lexeme}, а ожидался";
+                            token.Lexeme = "пробел";
+                            errors.Add(token);
+                            state += 1; 
+                            //return errors;
+                        }
+                        else
+                        {
+                            //errors.Add(token);
+                            state++;
+                        }
+                        break;
+                    case 4:
+                        if (token.Code != TokenCode.Identifier)
+                        {
+                            if (token.Code == TokenCode.Enum) state = 0;
+                            else if (token.Code == TokenCode.LBrace) state = 5;
+                            else if (token.Code == TokenCode.Comma) state = 7;
+                            else if (token.Code == TokenCode.RBrace) state = 7;
+                            else if (token.Code == TokenCode.Semicolon) state = 8;
+                            token.Code = TokenCode.Error;
+                            token.Code = TokenCode.Error;
+                            token.Type = $"Встречен символ {token.Lexeme}, а ожидался";
+                            token.Lexeme = "индетификатор";
+                            errors.Add(token);
+                            if(state != 8) state++;
+                            //return errors;
+                        }
+                        else
+                        {
+                            //errors.Add(token);
+                            state++;
+                        }
+                        break;
+                    case 5:
+                        if (token.Code != TokenCode.LBrace)
+                        {
+                            if (token.Code == TokenCode.Enum) state = 0;
+                            else if (token.Code == TokenCode.Identifier) state = 6;
+                            else if (token.Code == TokenCode.Comma) state = 7;
+                            else if (token.Code == TokenCode.RBrace) state = 7;
+                            else if (token.Code == TokenCode.Semicolon) state = 8;
+                            token.Code = TokenCode.Error;
+                            token.Type = $"Встречен символ {token.Lexeme}, а ожидался";
+                            token.Lexeme = "{";
+                            errors.Add(token);
+                            if(state != 8) state += 1;
+                            //return errors;
+                        }
+                        else
+                        {
+                            //errors.Add(token);
+                            state++;
+                        }
+                        break;
+                    case 6:
+                        if (token.Code != TokenCode.Identifier)
+                        {
+                            if (token.Code == TokenCode.Enum) state = 0;
+                            else if (token.Code == TokenCode.Comma) state = 7;
+                            else if (token.Code == TokenCode.RBrace) state = 7;
+                            else if (token.Code == TokenCode.Semicolon) state = 8;
+                            token.Code = TokenCode.Error;
+                            token.Type = $"Встречен символ {token.Lexeme}, а ожидался";
+                            token.Lexeme = "идентификатор";
+                            errors.Add(token);
+                            if(state != 8 ) state += 1;
+                            //return errors;
+                        }
+                        else
+                        {
+                            //errors.Add(token);
+                            state++;
+                        }
+                        break;
+                    case 7:
+                        if (token.Code != TokenCode.Comma && token.Code != TokenCode.RBrace)
+                        {
+                            if (token.Code == TokenCode.Enum) state = 0;
+                            else if (token.Code == TokenCode.Identifier) state = 6;
+                            else if (token.Code == TokenCode.Semicolon) state = 8;
+                                token.Code = TokenCode.Error;
+                            token.Type = $"Встречен символ {token.Lexeme}, а ожидался";
+                            token.Lexeme = ", или }";
+                            errors.Add(token);
+                            if(state !=8) state += 1;
+                            //return errors;
+                        }
+                        else if (token.Code == TokenCode.RBrace)
+                        {
+                            //errors.Add(token);
+                            state++;
+                        }
+                        else if (token.Code == TokenCode.Comma)
+                        {
+                            //errors.Add(token);
+                            state--;
+                        }
+                        break;
+                    case 8:
+                        if (token.Code != TokenCode.Semicolon)
+                        {
+                            if (token.Code == TokenCode.Enum) state = 1;
+                            token.Code = TokenCode.Error;
+                            token.Type = $"Встречен символ {token.Lexeme}, а ожидался";
+                            token.Lexeme = ";";
+                            errors.Add(token);
+                            if (state != 1) state = 0;
+                            //return errors;
+                        }
+                        else
+                        {
+                            //errors.Add(token);
+                            state = 0;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            Token tokenE = new();
+            if (state != 0)
+            {
+                switch (state)
+                {
+                    case 1:
+                        tokenE = new Token
+                        {
+                            Code = TokenCode.Error,
+                            Type = "ожидался пробел",
+                            Lexeme = "_",
+                            StartPos = tokens[tokens.Count - 1].EndPos + 1,
+                            EndPos = tokens[tokens.Count - 1].EndPos + 1,
+                            Line = tokens[tokens.Count - 1].Line
+                        };
+                        errors.Add(tokenE);
+                        //return errors;
+                        break;
+                    case 2:
+                        tokenE = new Token
+                        {
+                            Code = TokenCode.Error,
+                            Type = "ожидалось ключевое слово",
+                            Lexeme = "class",
+                            StartPos = tokens[tokens.Count - 1].EndPos + 1,
+                            EndPos = tokens[tokens.Count - 1].EndPos + 5,
+                            Line = tokens[tokens.Count - 1].Line
+                        };
+                        errors.Add(tokenE);
+                        //return errors;
+                        break;
+                    case 3:
+                        tokenE = new Token
+                        {
+                            Code = TokenCode.Error,
+                            Type = "ожидался пробел",
+                            Lexeme = "_",
+                            StartPos = tokens[tokens.Count - 1].EndPos + 1,
+                            EndPos = tokens[tokens.Count - 1].EndPos + 1,
+                            Line = tokens[tokens.Count - 1].Line
+                        };
+                        errors.Add(tokenE);
+                        //return errors;
+                        break;
+                    case 4:
+                        tokenE = new Token
+                        {
+                            Code = TokenCode.Error,
+                            Type = "ожидался индетификатор",
+                            Lexeme = "identificator",
+                            StartPos = tokens[tokens.Count - 1].EndPos + 1,
+                            EndPos = tokens[tokens.Count - 1].EndPos + 1,
+                            Line = tokens[tokens.Count - 1].Line
+                        };
+                        errors.Add(tokenE);
+                        //return errors;
+                        break;
+                    case 5:
+                        tokenE = new Token
+                        {
+                            Code = TokenCode.Error,
+                            Type = "ожидалась левая фигурная скобочка",
+                            Lexeme = "{",
+                            StartPos = tokens[tokens.Count - 1].EndPos + 1,
+                            EndPos = tokens[tokens.Count - 1].EndPos + 1,
+                            Line = tokens[tokens.Count - 1].Line
+                        };
+                        errors.Add(tokenE);
+                        //return errors;
+                        break;
+                    case 6:
+                        tokenE = new Token
+                        {
+                            Code = TokenCode.Error,
+                            Type = "ожидался индетификатор",
+                            Lexeme = "identificator",
+                            StartPos = tokens[tokens.Count - 1].EndPos + 1,
+                            EndPos = tokens[tokens.Count - 1].EndPos + 1,
+                            Line = tokens[tokens.Count - 1].Line
+                        };
+                        errors.Add(tokenE);
+                        //return errors;
+                        break;
+                    case 7:
+                        tokenE = new Token
+                        {
+                            Code = TokenCode.Error,
+                            Type = "ожидалась запятая или правая фигурная скобочка",
+                            Lexeme = ", или }",
+                            StartPos = tokens[tokens.Count - 1].EndPos + 1,
+                            EndPos = tokens[tokens.Count - 1].EndPos + 1,
+                            Line = tokens[tokens.Count - 1].Line
+                        };
+                        errors.Add(tokenE);
+                        //return errors;
+                        break;
+                    case 8:
+                        tokenE = new Token
+                        {
+                            Code = TokenCode.Error,
+                            Type = "ожидалась точка с запятой",
+                            Lexeme = ";",
+                            StartPos = tokens[tokens.Count - 1].EndPos + 1,
+                            EndPos = tokens[tokens.Count - 1].EndPos + 1,
+                            Line = tokens[tokens.Count - 1].Line
+                        };
+                        errors.Add(tokenE);
+                        //return errors;
+                        break;
                 }
             }
             return errors;
