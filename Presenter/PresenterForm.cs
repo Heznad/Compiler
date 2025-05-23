@@ -1,4 +1,6 @@
+using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Compiler.Model;
 
@@ -250,6 +252,7 @@ namespace Compiler.Presenter
             dataGridViewAnalyzer.AutoGenerateColumns = false;
 
             // Добавление колонок
+            #region Парсер
             /*DataGridViewTextBoxColumn lineNumberColumn = new DataGridViewTextBoxColumn();
             lineNumberColumn.HeaderText = ""; 
             lineNumberColumn.Width = 30; 
@@ -275,7 +278,9 @@ namespace Compiler.Presenter
             messageColumn.HeaderText = MyString.dgvMessage;
             messageColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewAnalyzer.Columns.Add(messageColumn);*/
-            DataGridViewTextBoxColumn filePathColumn = new DataGridViewTextBoxColumn();
+            #endregion
+            #region Тетрады
+            /*DataGridViewTextBoxColumn filePathColumn = new DataGridViewTextBoxColumn();
             filePathColumn.HeaderText = "op";
             filePathColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewAnalyzer.Columns.Add(filePathColumn);
@@ -293,7 +298,24 @@ namespace Compiler.Presenter
             DataGridViewTextBoxColumn messageColumn = new DataGridViewTextBoxColumn();
             messageColumn.HeaderText = "result";
             messageColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewAnalyzer.Columns.Add(messageColumn);
+            dataGridViewAnalyzer.Columns.Add(messageColumn);*/
+            #endregion
+            #region Регулярные выражения
+            DataGridViewTextBoxColumn filePathColumn = new DataGridViewTextBoxColumn();
+            filePathColumn.HeaderText = "Тип";
+            filePathColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewAnalyzer.Columns.Add(filePathColumn);
+
+            DataGridViewTextBoxColumn lineColumn = new DataGridViewTextBoxColumn();
+            lineColumn.HeaderText = "Найдено";
+            lineColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewAnalyzer.Columns.Add(lineColumn);
+
+            DataGridViewTextBoxColumn columnColumn = new DataGridViewTextBoxColumn();
+            columnColumn.HeaderText = "Позиция";
+            columnColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewAnalyzer.Columns.Add(columnColumn);
+            #endregion
 
             dataGridViewAnalyzer.AlternatingRowsDefaultCellStyle.BackColor = System.Drawing.Color.LightGray; // Чередование цветов строк
             dataGridViewAnalyzer.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.WhiteSmoke; // Цвет фона заголовков
@@ -919,6 +941,7 @@ namespace Compiler.Presenter
             DataGridView dataGridViewAnalyzer = GetDataGridViewAnalyzer();
             dataGridViewAnalyzer.Rows.Clear();
             string input = _currentRichTextBox.Text;
+            #region Парсер
             /*Scanner scanner = new Scanner();
             List<Token> tokens = scanner.Scan(input);
             List<Token> errors = scanner.CheckEnumConstruction(tokens);
@@ -934,7 +957,9 @@ namespace Compiler.Presenter
                     dataGridViewAnalyzer.Rows.Add(dataGridViewAnalyzer.Rows.Count + 1, path, error.Line, $"{error.StartPos}-{error.EndPos}", error.ToString());
                 }
             }*/
-            try
+            #endregion
+            #region Тетрады
+            /*try
             {
                 if (string.IsNullOrEmpty(input))
                 {
@@ -964,9 +989,30 @@ namespace Compiler.Presenter
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка разбора", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }*/
+            #endregion
+            #region Регулярные выражения
+            // 1. Поиск почтовых индексов
+            FindMatches(input, @"\b\d{3}\s?\d{3}\b", "Почтовый индекс");
+
+            // 2. Поиск ФИО (Фамилия И.О.)
+            FindMatches(input, @"\b[А-ЯЁ][а-яё]+(?:\s[А-ЯЁ](?:\s*\.\s*[А-ЯЁ])?\s*\.?|\s[А-ЯЁ]\s*\.\s*[А-ЯЁ]\s*\.)\b", "ФИО");
+
+            // 3. Поиск URL (http, https, ftp)
+            FindMatches(input, @"\b(https?|ftp):\/\/[a-z0-9\-]+(\.[a-z0-9\-]+)*(:[0-9]+)?(\/[^\s]*)?\b", "URL");
+            #endregion
+        }
+        private void FindMatches(string text, string pattern, string matchType)
+        {
+            DataGridView dataGridViewAnalyzer = GetDataGridViewAnalyzer();
+            Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
+            MatchCollection matches = regex.Matches(text);
+
+            foreach (Match match in matches)
+            {
+                dataGridViewAnalyzer.Rows.Add(matchType, match.Value, match.Index);
             }
         }
-
         #endregion
 
         // Получение текущего текстового поля
