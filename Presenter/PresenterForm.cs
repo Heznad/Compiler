@@ -250,7 +250,7 @@ namespace Compiler.Presenter
             dataGridViewAnalyzer.AutoGenerateColumns = false;
 
             // Добавление колонок
-            DataGridViewTextBoxColumn lineNumberColumn = new DataGridViewTextBoxColumn();
+            /*DataGridViewTextBoxColumn lineNumberColumn = new DataGridViewTextBoxColumn();
             lineNumberColumn.HeaderText = ""; 
             lineNumberColumn.Width = 30; 
             lineNumberColumn.ReadOnly = true; 
@@ -273,6 +273,25 @@ namespace Compiler.Presenter
 
             DataGridViewTextBoxColumn messageColumn = new DataGridViewTextBoxColumn();
             messageColumn.HeaderText = MyString.dgvMessage;
+            messageColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewAnalyzer.Columns.Add(messageColumn);*/
+            DataGridViewTextBoxColumn filePathColumn = new DataGridViewTextBoxColumn();
+            filePathColumn.HeaderText = "op";
+            filePathColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewAnalyzer.Columns.Add(filePathColumn);
+
+            DataGridViewTextBoxColumn lineColumn = new DataGridViewTextBoxColumn();
+            lineColumn.HeaderText = "arg1";
+            lineColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewAnalyzer.Columns.Add(lineColumn);
+
+            DataGridViewTextBoxColumn columnColumn = new DataGridViewTextBoxColumn();
+            columnColumn.HeaderText = "arg2";
+            columnColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewAnalyzer.Columns.Add(columnColumn);
+
+            DataGridViewTextBoxColumn messageColumn = new DataGridViewTextBoxColumn();
+            messageColumn.HeaderText = "result";
             messageColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewAnalyzer.Columns.Add(messageColumn);
 
@@ -900,7 +919,7 @@ namespace Compiler.Presenter
             DataGridView dataGridViewAnalyzer = GetDataGridViewAnalyzer();
             dataGridViewAnalyzer.Rows.Clear();
             string input = _currentRichTextBox.Text;
-            Scanner scanner = new Scanner();
+            /*Scanner scanner = new Scanner();
             List<Token> tokens = scanner.Scan(input);
             List<Token> errors = scanner.CheckEnumConstruction(tokens);
             //if (errors.Count != tokens.Count) { tokens = errors;}
@@ -914,9 +933,38 @@ namespace Compiler.Presenter
                 {
                     dataGridViewAnalyzer.Rows.Add(dataGridViewAnalyzer.Rows.Count + 1, path, error.Line, $"{error.StartPos}-{error.EndPos}", error.ToString());
                 }
+            }*/
+            try
+            {
+                if (string.IsNullOrEmpty(input))
+                {
+                    MessageBox.Show("Введите выражение для анализа", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Обработка присваивания
+                string[] parts = input.Split(new[] { '=' }, 2);
+                if (parts.Length != 2)
+                {
+                    throw new Exception("Отсутствует оператор присваивания '='");
+                }
+
+                string leftPart = parts[0].Trim();
+                string rightPart = parts[1].Trim();
+
+                var tetrads = new List<Tetrad>();
+                CompilerTetrads compilerTetrads = new();
+                string result =  compilerTetrads.ParseExpression(rightPart, tetrads);
+                tetrads.Add(new Tetrad("=", result, null, leftPart));
+                foreach (var tetrad in tetrads)
+                {
+                    dataGridViewAnalyzer.Rows.Add(tetrad.Op, tetrad.Arg1, tetrad.Arg2, tetrad.Result);
+                }
             }
-            
-            
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка разбора", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         #endregion
