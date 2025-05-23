@@ -106,5 +106,11 @@
 ![image](https://github.com/user-attachments/assets/1d109f4d-2332-4835-9a10-293b04fa27cb)
 
 ## Тестовые примеры
+Пример с корректной структурой:
+![1](https://github.com/user-attachments/assets/8374f94d-0dbd-407a-80be-4fcab19dc0e5)
+Примеры с ошибками:
+![2](https://github.com/user-attachments/assets/5504d25c-74ce-4b9a-8bb0-89a4ba7bb021)
+![3](https://github.com/user-attachments/assets/e885c482-e82a-48bd-86d3-b2150951d32e)
+
 </details>
 
