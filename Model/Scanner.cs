@@ -398,7 +398,6 @@ namespace Compiler.Model
                             token.Type = $"Встречен символ {token.Lexeme}, а ожидался";
                             token.Lexeme = "пробел";
                             errors.Add(token);
-                            state += 2;
                             //return errors;
                         }
                         else
@@ -431,7 +430,6 @@ namespace Compiler.Model
                             token.Type = $"Встречен символ {token.Lexeme}, а ожидался";
                             token.Lexeme = "пробел";
                             errors.Add(token);
-                            state += 1; 
                             //return errors;
                         }
                         else
@@ -684,7 +682,8 @@ namespace Compiler.Model
             while (!IsEnd())
             {
                 c = CurrentChar();
-                if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || char.IsDigit(c) || c == '_')
+                if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || char.IsDigit(c) || c == '_' || c == '!' || c == '#' || c == '@' || c == '$' ||
+                    c == '%' || c == '&' || c == '*' || c == '?' || c == '№' || c == '!' || c ==';' || c == ':' || c == '^' || c == '(' || c == ')' || c == '`' || c == '"')
                 {
                     sb.Append(c);
                     Advance();
@@ -696,17 +695,24 @@ namespace Compiler.Model
             }
 
             string lexeme = sb.ToString();
-            switch (lexeme)
-            {
-                case "enum":
-                    AddToken(TokenCode.Enum, "ключевое слово", lexeme, startPos, _linePos - 1, _line);
-                    break;
-                case "class":
-                    AddToken(TokenCode.Class, "ключевое слово", lexeme, startPos, _linePos - 1, _line);
-                    break;
-                default:
-                    AddToken(TokenCode.Identifier, "идентификатор", lexeme, startPos, _linePos - 1, _line);
-                    break;
+            if (lexeme.Contains('!') || lexeme.Contains('#') || lexeme.Contains('@') || lexeme.Contains('$') || lexeme.Contains('%') || lexeme.Contains('&') ||
+                lexeme.Contains('*') || lexeme.Contains('?') || lexeme.Contains('№') || lexeme.Contains('!') || lexeme.Contains(';') || lexeme.Contains(':') ||
+                lexeme.Contains('^') || lexeme.Contains('(') || lexeme.Contains(')') || lexeme.Contains('`') || lexeme.Contains('"')){
+                AddToken(TokenCode.Error, "идентификатор с спецсимволами", lexeme, startPos, _linePos - 1, _line);
+            }
+            else {
+                switch (lexeme)
+                {
+                    case "enum":
+                        AddToken(TokenCode.Enum, "ключевое слово", lexeme, startPos, _linePos - 1, _line);
+                        break;
+                    case "class":
+                        AddToken(TokenCode.Class, "ключевое слово", lexeme, startPos, _linePos - 1, _line);
+                        break;
+                    default:
+                        AddToken(TokenCode.Identifier, "идентификатор", lexeme, startPos, _linePos - 1, _line);
+                        break;
+                }
             }
         }
 

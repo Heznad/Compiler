@@ -990,18 +990,36 @@ namespace Compiler.Presenter
             {
                 MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка разбора", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }*/
-            #endregion
-            #region Регулярные выражения
-            // 1. Поиск почтовых индексов
-            FindMatches(input, @"\b\d{3}\s?\d{3}\b", "Почтовый индекс");
-
-            // 2. Поиск ФИО (Фамилия И.О.)
-            FindMatches(input, @"\b[А-ЯЁ][а-яё]+(?:\s[А-ЯЁ](?:\s*\.\s*[А-ЯЁ])?\s*\.?|\s[А-ЯЁ]\s*\.\s*[А-ЯЁ]\s*\.)\b", "ФИО");
-
-            // 3. Поиск URL (http, https, ftp)
-            FindMatches(input, @"\b(https?|ftp):\/\/[a-z0-9\-]+(\.[a-z0-9\-]+)*(:[0-9]+)?(\/[^\s]*)?\b", "URL");
-            #endregion
+            #endregion       
         }
+        #region Регулярные выражения
+        public void StartPochta()
+        {
+            DataGridView dataGridViewAnalyzer = GetDataGridViewAnalyzer();
+            dataGridViewAnalyzer.Rows.Clear();
+            string input = _currentRichTextBox.Text;
+            // 1. Поиск почтовых индексов
+            FindMatches(input, @"\d{3}\s?\d{3}", "Почтовый индекс");
+        }
+
+        public void StartFIO()
+        {
+            DataGridView dataGridViewAnalyzer = GetDataGridViewAnalyzer();
+            dataGridViewAnalyzer.Rows.Clear();
+            string input = _currentRichTextBox.Text;
+            // 2. Поиск ФИО (Фамилия И.О.)
+            FindMatches(input, @"[А-ЯЁ][а-яё]+(?:\s[А-ЯЁ](?:\s*\.\s*[А-ЯЁ])?\s*\.?|\s[А-ЯЁ]\s*\.\s*[А-ЯЁ]\s*\.)", "ФИО");
+        }
+
+        public void StartURL()
+        {
+            DataGridView dataGridViewAnalyzer = GetDataGridViewAnalyzer();
+            dataGridViewAnalyzer.Rows.Clear();
+            string input = _currentRichTextBox.Text;
+            // 3. Поиск URL (http, https, ftp)
+            FindMatches(input, @"(https?|ftp):\/\/[a-z0-9\-]+(\.[a-z0-9\-]+)*(:[0-9]+)?(\/[^\s]*)?", "URL");
+        }
+
         private void FindMatches(string text, string pattern, string matchType)
         {
             DataGridView dataGridViewAnalyzer = GetDataGridViewAnalyzer();
@@ -1013,6 +1031,21 @@ namespace Compiler.Presenter
                 dataGridViewAnalyzer.Rows.Add(matchType, match.Value, match.Index);
             }
         }
+
+        public void FindUrlMatches()
+        {
+            string input = _currentRichTextBox.Text;
+            AvtomatURL avtomat = new();
+            DataGridView dataGridViewAnalyzer = GetDataGridViewAnalyzer();
+            dataGridViewAnalyzer.Rows.Clear();
+            List<UrlMatch> urlMatches = avtomat.FindUrlsWithAutomaton(input);
+
+            foreach (var match in urlMatches)
+            {
+                dataGridViewAnalyzer.Rows.Add("URL", match.Url, match.Position);
+            }
+        }
+        #endregion
         #endregion
 
         // Получение текущего текстового поля

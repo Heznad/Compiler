@@ -51,14 +51,14 @@
             tsmi_Reference = new ToolStripMenuItem();
             tsmi_Help = new ToolStripMenuItem();
             tsmi_Info = new ToolStripMenuItem();
-            tsmi_Localization = new ToolStripMenuItem();
-            tsmi_Russian = new ToolStripMenuItem();
-            tsmi_English = new ToolStripMenuItem();
             tsmi_View = new ToolStripMenuItem();
             tsmi_FontInput = new ToolStripMenuItem();
             tsmi_FontOutput = new ToolStripMenuItem();
             tsmi_ColorFont = new ToolStripMenuItem();
             tsmi_ColorKeywords = new ToolStripMenuItem();
+            tsmi_Localization = new ToolStripMenuItem();
+            tsmi_Russian = new ToolStripMenuItem();
+            tsmi_English = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
             toolStripStatusLabelText = new ToolStripStatusLabel();
             toolStripStatusLabelTime = new ToolStripStatusLabel();
@@ -66,6 +66,10 @@
             datelabel = new ToolStripStatusLabel();
             timelabel = new ToolStripStatusLabel();
             panel_Buttons = new Panel();
+            btn_URLavto = new Button();
+            btn_URL = new Button();
+            btn_FIO = new Button();
+            btn_Pochta = new Button();
             btn_Light = new Button();
             btn_Info = new Button();
             btn_Help = new Button();
@@ -92,7 +96,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { tsmi_File, tsmi_Correction, tsmi_Start, tsmi_Reference, tsmi_Localization, tsmi_View });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { tsmi_File, tsmi_Correction, tsmi_Start, tsmi_Reference, tsmi_View, tsmi_Localization });
             resources.ApplyResources(menuStrip1, "menuStrip1");
             menuStrip1.Name = "menuStrip1";
             // 
@@ -218,25 +222,6 @@
             resources.ApplyResources(tsmi_Info, "tsmi_Info");
             tsmi_Info.Click += btn_Info_Click;
             // 
-            // tsmi_Localization
-            // 
-            tsmi_Localization.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Russian, tsmi_English });
-            tsmi_Localization.ForeColor = Color.Black;
-            tsmi_Localization.Name = "tsmi_Localization";
-            resources.ApplyResources(tsmi_Localization, "tsmi_Localization");
-            // 
-            // tsmi_Russian
-            // 
-            tsmi_Russian.Name = "tsmi_Russian";
-            resources.ApplyResources(tsmi_Russian, "tsmi_Russian");
-            tsmi_Russian.Click += tsmi_Russian_Click;
-            // 
-            // tsmi_English
-            // 
-            tsmi_English.Name = "tsmi_English";
-            resources.ApplyResources(tsmi_English, "tsmi_English");
-            tsmi_English.Click += tsmi_English_Click;
-            // 
             // tsmi_View
             // 
             tsmi_View.DropDownItems.AddRange(new ToolStripItem[] { tsmi_FontInput, tsmi_FontOutput, tsmi_ColorFont, tsmi_ColorKeywords });
@@ -267,6 +252,25 @@
             tsmi_ColorKeywords.Name = "tsmi_ColorKeywords";
             resources.ApplyResources(tsmi_ColorKeywords, "tsmi_ColorKeywords");
             tsmi_ColorKeywords.Click += tsmi_ColorKeywords_Click;
+            // 
+            // tsmi_Localization
+            // 
+            tsmi_Localization.DropDownItems.AddRange(new ToolStripItem[] { tsmi_Russian, tsmi_English });
+            tsmi_Localization.ForeColor = Color.Black;
+            tsmi_Localization.Name = "tsmi_Localization";
+            resources.ApplyResources(tsmi_Localization, "tsmi_Localization");
+            // 
+            // tsmi_Russian
+            // 
+            tsmi_Russian.Name = "tsmi_Russian";
+            resources.ApplyResources(tsmi_Russian, "tsmi_Russian");
+            tsmi_Russian.Click += tsmi_Russian_Click;
+            // 
+            // tsmi_English
+            // 
+            tsmi_English.Name = "tsmi_English";
+            resources.ApplyResources(tsmi_English, "tsmi_English");
+            tsmi_English.Click += tsmi_English_Click;
             // 
             // statusStrip1
             // 
@@ -308,6 +312,10 @@
             // panel_Buttons
             // 
             panel_Buttons.BackColor = SystemColors.Control;
+            panel_Buttons.Controls.Add(btn_URLavto);
+            panel_Buttons.Controls.Add(btn_URL);
+            panel_Buttons.Controls.Add(btn_FIO);
+            panel_Buttons.Controls.Add(btn_Pochta);
             panel_Buttons.Controls.Add(btn_Light);
             panel_Buttons.Controls.Add(btn_Info);
             panel_Buttons.Controls.Add(btn_Help);
@@ -323,6 +331,38 @@
             panel_Buttons.ForeColor = Color.Silver;
             resources.ApplyResources(panel_Buttons, "panel_Buttons");
             panel_Buttons.Name = "panel_Buttons";
+            // 
+            // btn_URLavto
+            // 
+            resources.ApplyResources(btn_URLavto, "btn_URLavto");
+            btn_URLavto.ForeColor = Color.Black;
+            btn_URLavto.Name = "btn_URLavto";
+            btn_URLavto.UseVisualStyleBackColor = true;
+            btn_URLavto.Click += btn_URLavto_Click;
+            // 
+            // btn_URL
+            // 
+            resources.ApplyResources(btn_URL, "btn_URL");
+            btn_URL.ForeColor = Color.Black;
+            btn_URL.Name = "btn_URL";
+            btn_URL.UseVisualStyleBackColor = true;
+            btn_URL.Click += btn_URL_Click;
+            // 
+            // btn_FIO
+            // 
+            resources.ApplyResources(btn_FIO, "btn_FIO");
+            btn_FIO.ForeColor = Color.Black;
+            btn_FIO.Name = "btn_FIO";
+            btn_FIO.UseVisualStyleBackColor = true;
+            btn_FIO.Click += btn_FIO_Click;
+            // 
+            // btn_Pochta
+            // 
+            resources.ApplyResources(btn_Pochta, "btn_Pochta");
+            btn_Pochta.ForeColor = Color.Black;
+            btn_Pochta.Name = "btn_Pochta";
+            btn_Pochta.UseVisualStyleBackColor = true;
+            btn_Pochta.Click += btn_Pochta_Click;
             // 
             // btn_Light
             // 
@@ -554,5 +594,9 @@
         private System.Windows.Forms.Timer timer_2;
         private Button btn_Light;
         private ToolStripMenuItem tsmi_Light;
+        private Button btn_Pochta;
+        private Button btn_FIO;
+        private Button btn_URL;
+        private Button btn_URLavto;
     }
 }

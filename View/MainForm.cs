@@ -320,5 +320,25 @@ namespace Compiler
                 }
             }
         }
+
+        private void btn_Pochta_Click(object sender, EventArgs e)
+        {
+            presenter.StartPochta();
+        }
+
+        private void btn_FIO_Click(object sender, EventArgs e)
+        {
+            presenter.StartFIO();
+        }
+
+        private void btn_URL_Click(object sender, EventArgs e)
+        {
+            presenter.StartURL();
+        }
+
+        private void btn_URLavto_Click(object sender, EventArgs e)
+        {
+            presenter.FindUrlMatches();
+        }
     }
 }
