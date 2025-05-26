@@ -215,19 +215,14 @@ namespace Compiler.Presenter
             DataGridView dataGridViewAnalyzer = InitializeDataGridView();
             tabPageAnalyzer.Controls.Add(dataGridViewAnalyzer);
 
-            /*TabPage tabPageOutput = new(MyString.Output);
-            RichTextBox richTextBoxOutput = new()
-            {
-                Dock = DockStyle.Fill,
-                ReadOnly = true,
-                BackColor = Color.White,
-                ForeColor = text_manager.SelectedColor,
-                Font = text_manager.SelectedFontOutput
-            };
-            tabPageOutput.Controls.Add(richTextBoxOutput);*/
+            #region Рекурсивный спуск
+            TabPage tabPageParser = new(MyString.Output);
+            DataGridView dataGridViewParser = InitializeDataGridView();
+            tabPageParser.Controls.Add(dataGridViewParser);
+            tabControl.Controls.Add(tabPageParser);
+            #endregion
 
             tabControl.Controls.Add(tabPageAnalyzer);
-            //tabControl.Controls.Add(tabPageOutput);
             return tabControl;
         }
 
@@ -301,7 +296,7 @@ namespace Compiler.Presenter
             dataGridViewAnalyzer.Columns.Add(messageColumn);*/
             #endregion
             #region Регулярные выражения
-            DataGridViewTextBoxColumn filePathColumn = new DataGridViewTextBoxColumn();
+            /*DataGridViewTextBoxColumn filePathColumn = new DataGridViewTextBoxColumn();
             filePathColumn.HeaderText = "Тип";
             filePathColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewAnalyzer.Columns.Add(filePathColumn);
@@ -314,13 +309,12 @@ namespace Compiler.Presenter
             DataGridViewTextBoxColumn columnColumn = new DataGridViewTextBoxColumn();
             columnColumn.HeaderText = "Позиция";
             columnColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewAnalyzer.Columns.Add(columnColumn);
+            dataGridViewAnalyzer.Columns.Add(columnColumn);*/
             #endregion
 
             dataGridViewAnalyzer.AlternatingRowsDefaultCellStyle.BackColor = System.Drawing.Color.LightGray; // Чередование цветов строк
             dataGridViewAnalyzer.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.WhiteSmoke; // Цвет фона заголовков
             dataGridViewAnalyzer.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            filePathColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             return dataGridViewAnalyzer;
         }
 
@@ -940,7 +934,7 @@ namespace Compiler.Presenter
             string path = "";
             DataGridView dataGridViewAnalyzer = GetDataGridViewAnalyzer();
             dataGridViewAnalyzer.Rows.Clear();
-            string input = _currentRichTextBox.Text;
+            //string input = _currentRichTextBox.Text;
             #region Парсер
             /*Scanner scanner = new Scanner();
             List<Token> tokens = scanner.Scan(input);
@@ -990,7 +984,43 @@ namespace Compiler.Presenter
             {
                 MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка разбора", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }*/
-            #endregion       
+            #endregion
+            #region Рекурсивный спуск
+            DataGridView dataGridViewParser = GetDataGridViewParser();
+            // Установка колонок
+            dataGridViewAnalyzer.Columns.Clear();
+            dataGridViewAnalyzer.Columns.Add("TypeColumn", "Тип токена");
+            dataGridViewAnalyzer.Columns.Add("ValueColumn", "Значение");
+            dataGridViewAnalyzer.Columns.Add("PositionColumn", "Позиция");
+
+            dataGridViewParser.Columns.Clear();
+            dataGridViewParser.Columns.Add("StepColumn", "Шаг");
+            dataGridViewParser.Columns.Add("RuleColumn", "Правило");
+            dataGridViewParser.Columns.Add("ResultColumn", "Результат");
+
+            string input = _currentRichTextBox.Text.Trim();
+
+            try
+            {
+                var (tokensData, parseStepsData) = SyntaxAnalyzer.AnalyzeExpression(input);
+
+                // Заполнение таблицы токенов
+                foreach (var token in tokensData)
+                {
+                    dataGridViewAnalyzer.Rows.Add(token.Type, token.Value, token.Position);
+                }
+
+                // Заполнение таблицы шагов разбора
+                foreach (var step in parseStepsData)
+                {
+                    dataGridViewParser.Rows.Add(step.StepNumber, step.Rule, step.Result);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка анализа: {ex.Message}");
+            }
+            #endregion
         }
         #region Регулярные выражения
         public void StartPochta()
@@ -1077,13 +1107,14 @@ namespace Compiler.Presenter
             return (DataGridView)tabPageAnalyzer.Controls[0];
         }
 
-        private RichTextBox GetRichTextBoxOutput(TabPage tabPage = null)
+        private DataGridView GetDataGridViewParser(TabPage tabPage = null)
         {
             if (tabPage == null) tabPage = _tabControl.SelectedTab;
             SplitContainer splitContainer = (SplitContainer)tabPage.Controls[0];
             TabControl TabControl = (TabControl)splitContainer.Panel2.Controls[0];
-            TabPage tabPageOutput = (TabPage)TabControl.Controls[2];
-            return (RichTextBox)tabPageOutput.Controls[0];
+            TabPage tabPageAnalyzer = (TabPage)TabControl.Controls[1];
+            return (DataGridView)tabPageAnalyzer.Controls[0];
         }
+
     }
 }

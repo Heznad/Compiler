@@ -27,7 +27,7 @@ namespace Compiler.Model
         public override string ToString()
         {
             
-            return $"({Code}) {Type} : '{Lexeme}'";
+            return $"({Code}) {Type} {Lexeme}";
         }
     }
 
@@ -442,11 +442,11 @@ namespace Compiler.Model
                         if (token.Code != TokenCode.Identifier)
                         {
                             if (token.Code == TokenCode.Enum) state = 0;
+                            else if (token.Code == TokenCode.Class) state = 2;
                             else if (token.Code == TokenCode.LBrace) state = 5;
                             else if (token.Code == TokenCode.Comma) state = 7;
                             else if (token.Code == TokenCode.RBrace) state = 7;
                             else if (token.Code == TokenCode.Semicolon) state = 8;
-                            token.Code = TokenCode.Error;
                             token.Code = TokenCode.Error;
                             token.Type = $"Встречен символ {token.Lexeme}, а ожидался";
                             token.Lexeme = "индетификатор";
@@ -464,7 +464,7 @@ namespace Compiler.Model
                         if (token.Code != TokenCode.LBrace)
                         {
                             if (token.Code == TokenCode.Enum) state = 0;
-                            else if (token.Code == TokenCode.Identifier) state = 6;
+                            else if (token.Code == TokenCode.Identifier) state = 4;
                             else if (token.Code == TokenCode.Comma) state = 7;
                             else if (token.Code == TokenCode.RBrace) state = 7;
                             else if (token.Code == TokenCode.Semicolon) state = 8;
@@ -485,7 +485,7 @@ namespace Compiler.Model
                         if (token.Code != TokenCode.Identifier)
                         {
                             if (token.Code == TokenCode.Enum) state = 0;
-                            else if (token.Code == TokenCode.Comma) state = 7;
+                            //else if (token.Code == TokenCode.Comma) state = 7;
                             else if (token.Code == TokenCode.RBrace) state = 7;
                             else if (token.Code == TokenCode.Semicolon) state = 8;
                             token.Code = TokenCode.Error;
@@ -529,11 +529,14 @@ namespace Compiler.Model
                         if (token.Code != TokenCode.Semicolon)
                         {
                             if (token.Code == TokenCode.Enum) state = 1;
-                            token.Code = TokenCode.Error;
+                            else if (token.Code == TokenCode.Identifier) state = 6;
+                            else if (token.Code == TokenCode.Comma || token.Code == TokenCode.RBrace) state = 7; 
+                                token.Code = TokenCode.Error;
                             token.Type = $"Встречен символ {token.Lexeme}, а ожидался";
                             token.Lexeme = ";";
                             errors.Add(token);
                             if (state != 1) state = 0;
+                            
                             //return errors;
                         }
                         else
@@ -660,6 +663,7 @@ namespace Compiler.Model
             return errors;
         }
 
+       
         /// <summary>
         /// Считывание идентификатора или ключевого слова
         /// </summary>
