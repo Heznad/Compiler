@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data;
-using System.Threading.Tasks;
 
 namespace Compiler.Model
 {
@@ -75,6 +71,21 @@ namespace Compiler.Model
                 _position = 0;
             }
 
+            private bool IsEnglishLetter(char c)
+            {
+                return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+            }
+
+            private bool IsRussianLetter(char c)
+            {
+                return (c >= 'а' && c <= 'я') || (c >= 'А' && c <= 'Я');
+            }
+
+            private bool IsAllowedSymbol(char c)
+            {
+                return char.IsDigit(c) || IsEnglishLetter(c) || "+-*/()".Contains(c);
+            }
+
             public List<Token> Tokenize()
             {
                 Tokens.Clear();
@@ -90,26 +101,34 @@ namespace Compiler.Model
                         continue;
                     }
 
+                    if (IsRussianLetter(current))
+                    {
+                        throw new Exception($"Русские буквы не допускаются: '{current}' в позиции {_position}");
+                    }
+
+                    if (!IsAllowedSymbol(current))
+                    {
+                        throw new Exception($"Недопустимый символ: '{current}' в позиции {_position}");
+                    }
+
                     if (char.IsDigit(current))
                     {
                         ReadNumber();
                         continue;
                     }
 
-                    if (char.IsLetter(current))
+                    if (IsEnglishLetter(current))
                     {
                         ReadIdentifier();
                         continue;
                     }
 
-                    if (current == '+' || current == '-' || current == '*' || current == '/' || current == '(' || current == ')')
+                    if ("+-*/()".Contains(current))
                     {
                         Tokens.Add(new Token("Оператор", current.ToString(), _position));
                         _position++;
                         continue;
                     }
-
-                    throw new Exception($"Неизвестный символ '{current}' в позиции {_position}");
                 }
 
                 return Tokens;
@@ -129,7 +148,8 @@ namespace Compiler.Model
             private void ReadIdentifier()
             {
                 int start = _position;
-                while (_position < _input.Length && (char.IsLetterOrDigit(_input[_position])))
+                while (_position < _input.Length &&
+                      (IsEnglishLetter(_input[_position]) || char.IsDigit(_input[_position])))
                 {
                     _position++;
                 }
@@ -211,12 +231,12 @@ namespace Compiler.Model
 
                 var currentToken = _tokens[_currentTokenIndex];
 
-                if (currentToken.Type == "NUMBER")
+                if (currentToken.Type == "Число")
                 {
                     _parseSteps.Add(new ParseStep("O → num", $"O-num({currentToken.Value})"));
                     _currentTokenIndex++;
                 }
-                else if (currentToken.Type == "IDENTIFIER")
+                else if (currentToken.Type == "Идентификатор")
                 {
                     _parseSteps.Add(new ParseStep("O → id", $"O-id({currentToken.Value})"));
                     _currentTokenIndex++;
