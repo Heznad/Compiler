@@ -5,8 +5,9 @@
 [Лабораторная работа №2](#лабораторная-работа-2)  
 [Лабораторная работа №3-4](#лабораторная-работа-3-4)  
 [Лабораторная работа №5](#лабораторная-работа-5)  
-[Лабораторная работа №6](#лабораторная-работа-6)
- 
+[Лабораторная работа №6](#лабораторная-работа-6)  
+[Лабораторная работа №8](#лабораторная-работа-8)
+
 ## Лабораторная работа №1
 <details>
   <summary>
@@ -186,4 +187,50 @@
 Граф автомата:  
 ![image](https://github.com/user-attachments/assets/bc1f3959-a167-4bda-8a89-c2e00686a275)
 
+</details>
+
+## Лабораторная работа №8
+<details>
+  <summary>
+    Реализация метода рекурсивного спуска для синтаксического анализа.
+  </summary>
+Грамматика: 
+G[E]: 
+1. E → TA 
+2. A → ε | + TA | - TA  
+3. T → ОВ 
+4. В → ε | *ОВ | /ОВ 
+5. О → num | id | (E) 
+num – числовая константа Ц{Ц}, 
+id – идентификатор Б{Б|Ц}, 
+Б – {a, b, c, ...z, A, B, …, Z}, 
+Ц – {0, 1, …, 9} 
+
+Язык: 
+![image](https://github.com/user-attachments/assets/f3ba0d5f-8930-4521-b129-91bf5718ce11)
+
+Классификация грамматики:
+Контекстно-свободная
+
+Схема вызова функций: 
+
+
+## Тестовые примеры 
+![image](https://github.com/user-attachments/assets/d488e432-9b86-4372-9a72-fb7ec25884fb) 
+![image](https://github.com/user-attachments/assets/8d63c6b2-1521-4cd0-bf9b-96eb7370de9a)
+
+## Дополнительное задание 
+Реализовать для своего варианта задания в данной лабораторной работе алгоритм лексического анализа (лексемная декомпозиция и поиск лексических ошибок). 
+
+Диаграмма сканера:
+
+Тестовые примеры: 
+Корректный ввод:
+![image](https://github.com/user-attachments/assets/1e2d50c5-579d-4f9d-be9d-f1d9c2e62f98)
+![image](https://github.com/user-attachments/assets/9813d57f-b71e-4f9b-a38a-29e5d2199e5d)
+
+Ошибки:
+![image](https://github.com/user-attachments/assets/82c70661-9a60-424a-8dcf-a7071889c7ec)
+![image](https://github.com/user-attachments/assets/e2568007-f022-4be3-a834-0a0a41a0c6bf)
+![image](https://github.com/user-attachments/assets/c41fab8d-e50a-407b-8e02-564e1124bf71)
 </details>
