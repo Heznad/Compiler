@@ -83,7 +83,7 @@ namespace Compiler.Model
 
             private bool IsAllowedSymbol(char c)
             {
-                return char.IsDigit(c) || IsEnglishLetter(c) || "+-*/()".Contains(c);
+                return char.IsDigit(c) || IsEnglishLetter(c) || "+-*/".Contains(c);
             }
 
             public List<Token> Tokenize()
@@ -123,7 +123,7 @@ namespace Compiler.Model
                         continue;
                     }
 
-                    if ("+-*/()".Contains(current))
+                    if ("+-*/".Contains(current))
                     {
                         Tokens.Add(new Token("Оператор", current.ToString(), _position));
                         _position++;
@@ -239,16 +239,6 @@ namespace Compiler.Model
                 else if (currentToken.Type == "Идентификатор")
                 {
                     _parseSteps.Add(new ParseStep("O → id", $"O-id({currentToken.Value})"));
-                    _currentTokenIndex++;
-                }
-                else if (currentToken.Value == "(")
-                {
-                    _parseSteps.Add(new ParseStep("O → (E)", "O-("));
-                    _currentTokenIndex++;
-                    ParseE();
-                    if (_currentTokenIndex >= _tokens.Count || _tokens[_currentTokenIndex].Value != ")")
-                        throw new Exception("Ожидалась закрывающая скобка ')'");
-                    _parseSteps.Add(new ParseStep("", "O-)"));
                     _currentTokenIndex++;
                 }
                 else

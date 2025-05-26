@@ -198,8 +198,6 @@ namespace Compiler.Model
             Fail
         }
 
-        
-
         private bool IsDomainChar(char c)
         {
             return char.IsLetterOrDigit(c) || c == '-' || c == '_';
