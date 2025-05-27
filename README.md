@@ -212,9 +212,6 @@ id – идентификатор Б{Б|Ц},
 Классификация грамматики:
 Контекстно-свободная
 
-Схема вызова функций: 
-
-
 ## Тестовые примеры 
 ![image](https://github.com/user-attachments/assets/d488e432-9b86-4372-9a72-fb7ec25884fb) 
 ![image](https://github.com/user-attachments/assets/8d63c6b2-1521-4cd0-bf9b-96eb7370de9a)
