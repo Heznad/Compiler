@@ -225,11 +225,11 @@ id – идентификатор Б{Б|Ц},
 Диаграмма сканера:
 
 Тестовые примеры: 
-Корректный ввод:
-![image](https://github.com/user-attachments/assets/1e2d50c5-579d-4f9d-be9d-f1d9c2e62f98)
-![image](https://github.com/user-attachments/assets/9813d57f-b71e-4f9b-a38a-29e5d2199e5d)
+Корректный ввод:  
+![image](https://github.com/user-attachments/assets/1e2d50c5-579d-4f9d-be9d-f1d9c2e62f98)  
+![image](https://github.com/user-attachments/assets/9813d57f-b71e-4f9b-a38a-29e5d2199e5d)  
 
-Ошибки:
+Ошибки:  
 ![image](https://github.com/user-attachments/assets/82c70661-9a60-424a-8dcf-a7071889c7ec)
 ![image](https://github.com/user-attachments/assets/e2568007-f022-4be3-a834-0a0a41a0c6bf)
 ![image](https://github.com/user-attachments/assets/c41fab8d-e50a-407b-8e02-564e1124bf71)
