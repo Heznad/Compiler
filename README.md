@@ -214,21 +214,27 @@ id – идентификатор Б{Б|Ц},
 Контекстно-свободная
 
 ## Тестовые примеры 
-![image](https://github.com/user-attachments/assets/d488e432-9b86-4372-9a72-fb7ec25884fb) 
-![image](https://github.com/user-attachments/assets/8d63c6b2-1521-4cd0-bf9b-96eb7370de9a)
+Корректный ввод:  
+![image](https://github.com/user-attachments/assets/b8764f78-4cf5-4e99-8b48-f19ce5b6aa02)
+![image](https://github.com/user-attachments/assets/ba03e7ca-7357-40fd-a07d-59d50f5b0c65)
+
+Некорректный ввод:
+![image](https://github.com/user-attachments/assets/e9764da3-3e37-4d1d-a531-c19ff0601e57)
+![image](https://github.com/user-attachments/assets/6a4892a2-d578-46f9-875f-ebc40f5a77ee)
 
 ## Дополнительное задание 
 Реализовать для своего варианта задания в данной лабораторной работе алгоритм лексического анализа (лексемная декомпозиция и поиск лексических ошибок). 
 
 Диаграмма сканера:
+![image](https://github.com/user-attachments/assets/b3aed9b0-f8b2-433e-ad93-babf58301734)
 
 Тестовые примеры: 
 Корректный ввод:  
-![image](https://github.com/user-attachments/assets/1e2d50c5-579d-4f9d-be9d-f1d9c2e62f98)  
-![image](https://github.com/user-attachments/assets/9813d57f-b71e-4f9b-a38a-29e5d2199e5d)  
+![image](https://github.com/user-attachments/assets/c124b71d-7dbc-4b75-b42a-72e8fd9e9736)
+![image](https://github.com/user-attachments/assets/6984bb8f-b95c-45fb-accf-d9d4bd56e06c)
 
 Ошибки:  
-![image](https://github.com/user-attachments/assets/82c70661-9a60-424a-8dcf-a7071889c7ec)
-![image](https://github.com/user-attachments/assets/e2568007-f022-4be3-a834-0a0a41a0c6bf)
-![image](https://github.com/user-attachments/assets/c41fab8d-e50a-407b-8e02-564e1124bf71)
+![image](https://github.com/user-attachments/assets/0326ca8b-5581-4195-8888-ceff7c29d803)
+![image](https://github.com/user-attachments/assets/229925b3-0c40-4620-bcac-dcd3bc97fdf2)
+
 </details>
