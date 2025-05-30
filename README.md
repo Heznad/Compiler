@@ -210,31 +210,31 @@ id – идентификатор Б{Б|Ц},
 Язык:   
 ![image](https://github.com/user-attachments/assets/f3ba0d5f-8930-4521-b129-91bf5718ce11)
 
-Классификация грамматики:  
+Классификация грамматики:    
 Контекстно-свободная
 
 ## Тестовые примеры 
 Корректный ввод:  
-![image](https://github.com/user-attachments/assets/b8764f78-4cf5-4e99-8b48-f19ce5b6aa02)
-![image](https://github.com/user-attachments/assets/ba03e7ca-7357-40fd-a07d-59d50f5b0c65)
+![image](https://github.com/user-attachments/assets/b8764f78-4cf5-4e99-8b48-f19ce5b6aa02)  
+![image](https://github.com/user-attachments/assets/ba03e7ca-7357-40fd-a07d-59d50f5b0c65)  
 
-Некорректный ввод:
-![image](https://github.com/user-attachments/assets/e9764da3-3e37-4d1d-a531-c19ff0601e57)
+Некорректный ввод:  
+![image](https://github.com/user-attachments/assets/e9764da3-3e37-4d1d-a531-c19ff0601e57)  
 ![image](https://github.com/user-attachments/assets/6a4892a2-d578-46f9-875f-ebc40f5a77ee)
 
 ## Дополнительное задание 
 Реализовать для своего варианта задания в данной лабораторной работе алгоритм лексического анализа (лексемная декомпозиция и поиск лексических ошибок). 
 
-Диаграмма сканера:
+Диаграмма сканера:  
 ![image](https://github.com/user-attachments/assets/b3aed9b0-f8b2-433e-ad93-babf58301734)
 
-Тестовые примеры: 
+## Тестовые примеры   
 Корректный ввод:  
-![image](https://github.com/user-attachments/assets/c124b71d-7dbc-4b75-b42a-72e8fd9e9736)
+![image](https://github.com/user-attachments/assets/c124b71d-7dbc-4b75-b42a-72e8fd9e9736)  
 ![image](https://github.com/user-attachments/assets/6984bb8f-b95c-45fb-accf-d9d4bd56e06c)
 
 Ошибки:  
-![image](https://github.com/user-attachments/assets/0326ca8b-5581-4195-8888-ceff7c29d803)
+![image](https://github.com/user-attachments/assets/0326ca8b-5581-4195-8888-ceff7c29d803)  
 ![image](https://github.com/user-attachments/assets/229925b3-0c40-4620-bcac-dcd3bc97fdf2)
 
 </details>
